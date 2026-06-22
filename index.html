@@ -5,218 +5,1004 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
 <title>LoR 모험의 길 · 유물 검색표 + 챔피언 티어표</title>
 <style>
-:root{--bg:#0b0f18;--panel:#111827;--panel2:#0f172a;--text:#e5e7eb;--muted:#94a3b8;--line:#243044;--epic:#b266ff;--rare:#4fc3f7;--common:#43a047;--gold:#f6c453;--ss:#ffb86b;--s:#f6c453;--a:#a5b4fc;--b:#94a3b8;--c:#64748b;--ok:#78e08f;--danger:#fb7185}
-*{box-sizing:border-box} html{scroll-behavior:smooth} body{margin:0;background:linear-gradient(180deg,#080b12,#0b0f18 32%,#101726);color:var(--text);font-family:Inter,Apple SD Gothic Neo,Noto Sans KR,system-ui,sans-serif;-webkit-text-size-adjust:100%;}
-header{position:sticky;top:0;z-index:20;background:rgba(8,11,18,.95);backdrop-filter:blur(10px);border-bottom:1px solid var(--line);transition:transform .22s ease,box-shadow .22s ease}header.headerHidden{transform:translateY(-105%);box-shadow:none;pointer-events:none}header.headerShown{transform:translateY(0);box-shadow:0 10px 30px rgba(0,0,0,.24)}
-.wrap{max-width:1480px;margin:0 auto;padding:18px 20px} main{max-width:1480px;margin:0 auto;padding:18px 20px 54px}
-h1{font-size:24px;margin:0 0 8px;font-weight:850;letter-spacing:-.03em}.note{font-size:13px;color:var(--muted);line-height:1.55}.tabs{display:flex;gap:8px;flex-wrap:wrap;margin-top:14px}.tab{background:#0f172a;color:#cbd5e1;border:1px solid #334155;border-radius:999px;padding:10px 14px;cursor:pointer;font-weight:700;white-space:nowrap}.tab.active{border-color:#7c3aed;color:#fff;background:#1e1b4b}.controls{display:grid;grid-template-columns:1.4fr repeat(5,minmax(100px,.38fr));gap:10px;margin-top:14px}input,select,button{background:#0f172a;color:var(--text);border:1px solid #334155;border-radius:10px;padding:11px 12px;font-size:14px;outline:none}input[type="search"]{-webkit-appearance:none}button{cursor:pointer}button:hover{border-color:#64748b}.summary{display:flex;gap:10px;flex-wrap:wrap;margin-top:12px}.badge{display:inline-flex;align-items:center;gap:6px;border:1px solid #334155;background:#0f172a;border-radius:999px;padding:7px 10px;font-size:12px;color:#cbd5e1}.badge.epic{border-color:#6d28d9;color:#e9d5ff}.badge.rare{border-color:#0369a1;color:#bae6fd}.badge.common{border-color:#166534;color:#bbf7d0}.badge.ss{border-color:#f97316;color:#fed7aa}.badge.s{border-color:#f59e0b;color:#fef3c7}.badge.a{border-color:#6366f1;color:#e0e7ff}.badge.b{border-color:#64748b;color:#d1d5db}
-.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(294px,1fr));gap:14px}.card{background:linear-gradient(180deg,rgba(17,24,39,.96),rgba(15,23,42,.96));border:1px solid var(--line);border-radius:16px;padding:14px;box-shadow:0 10px 25px rgba(0,0,0,.18)}.relicCard{display:grid;grid-template-columns:72px 1fr;gap:12px;min-height:174px}.icon{width:72px;height:72px;border-radius:13px;object-fit:contain;background:#070b12;border:1px solid #1f2937}.tinyIcon{width:24px;height:24px;border-radius:7px;object-fit:contain;background:#060912;border:1px solid #243044;vertical-align:middle}.noimg{width:72px;height:72px;display:flex;align-items:center;justify-content:center;border-radius:13px;background:#111827;border:1px solid #334155;color:#94a3b8;font-size:12px;text-align:center}.title{font-size:16px;font-weight:850;line-height:1.25;word-break:keep-all}.en{font-size:12px;color:#a5b4fc;margin-top:2px;word-break:break-word}.meta{display:flex;gap:6px;flex-wrap:wrap;margin:8px 0}.rarity,.tierPill,.chip{font-size:12px;padding:4px 8px;border-radius:999px;border:1px solid #334155;background:#0b1220}.rarity.Epic{color:#ead6ff;border-color:#7c3aed}.rarity.Rare{color:#bae6fd;border-color:#0284c7}.rarity.Common{color:#bbf7d0;border-color:#15803d}.tierPill.SS{color:#fed7aa;border-color:#f97316}.tierPill.S{color:#fef3c7;border-color:#f59e0b}.tierPill.A{color:#e0e7ff;border-color:#6366f1}.tierPill.B,.tierPill.B\+{color:#d1d5db;border-color:#64748b}.tierPill.C{color:#cbd5e1;border-color:#475569}.small{font-size:12.5px;color:#cbd5e1;line-height:1.45;margin:5px 0}.label{color:#94a3b8}.hidden{display:none!important}.tableWrap{display:none;overflow:auto;border:1px solid var(--line);border-radius:14px;background:#0f172a}table{border-collapse:collapse;width:100%;font-size:13px;min-width:1160px}th,td{padding:10px;border-bottom:1px solid #243044;text-align:left;vertical-align:top}th{position:sticky;top:0;background:#111827;color:#cbd5e1}td img{width:44px;height:44px;object-fit:contain}.sectionTitle{display:flex;align-items:center;justify-content:space-between;gap:12px;margin:6px 0 14px}.sectionTitle h2{margin:0;font-size:20px;letter-spacing:-.02em}.champCard{position:relative;min-height:250px}.champCard.flash{outline:2px solid #7c3aed;box-shadow:0 0 0 7px rgba(124,58,237,.18),0 10px 25px rgba(0,0,0,.18)}.champHead{display:flex;align-items:flex-start;justify-content:space-between;gap:12px;border-bottom:1px solid #243044;padding-bottom:10px;margin-bottom:10px}.champName{font-size:18px;font-weight:900;letter-spacing:-.02em;background:transparent;border:0;padding:0;color:#fff;text-align:left;cursor:pointer}.champName:hover{text-decoration:underline}.champLink{display:inline;padding:0;border:0;background:transparent;color:#93c5fd;text-decoration:underline;text-underline-offset:3px;font-size:inherit}.champLink:hover{color:#bfdbfe}.role{font-size:12px;color:#a5b4fc;margin-top:2px}.setBox{border:1px solid #263247;background:#0b1220;border-radius:12px;padding:10px;margin-top:8px}.setTop{display:flex;gap:7px;align-items:center;flex-wrap:wrap;margin-bottom:7px}.rank{background:#1e1b4b;border:1px solid #6366f1;color:#e0e7ff;border-radius:999px;padding:3px 8px;font-size:12px;font-weight:800}.relicChip{display:inline-flex;align-items:center;gap:5px;border:1px solid #334155;background:#0f172a;border-radius:999px;padding:4px 8px;margin:2px 4px 2px 0;font-size:12px;white-space:nowrap}.relicChip.Epic{border-color:#7c3aed;color:#ead6ff}.relicChip.Rare{border-color:#0284c7;color:#bae6fd}.relicChip.Common{border-color:#15803d;color:#bbf7d0}.relicChip.missing{color:#cbd5e1}.champOps{font-size:12.5px;color:#cbd5e1;line-height:1.55;margin-top:6px}.modalBg{display:none;position:fixed;inset:0;background:rgba(0,0,0,.67);z-index:50;padding:26px;overflow:auto}.modal{max-width:980px;margin:0 auto;background:#0f172a;border:1px solid #334155;border-radius:18px;box-shadow:0 30px 80px rgba(0,0,0,.55);padding:18px}.modalTop{display:flex;justify-content:space-between;gap:16px;align-items:flex-start;border-bottom:1px solid #243044;padding-bottom:12px;margin-bottom:14px}.close{background:#111827;border:1px solid #334155;border-radius:10px;padding:8px 10px}.modal h3{margin:0;font-size:22px}.modal h4{margin:16px 0 8px;font-size:15px;color:#e2e8f0}.tierGroups{display:grid;grid-template-columns:repeat(auto-fit,minmax(210px,1fr));gap:10px;margin-bottom:16px}.tierGroup{border:1px solid #243044;background:#0f172a;border-radius:14px;padding:12px}.tierGroup b{font-size:15px}.tierNames{font-size:12.5px;color:#cbd5e1;line-height:1.6;margin-top:6px}.empty{border:1px dashed #475569;border-radius:14px;padding:20px;color:#94a3b8;text-align:center}.sourceNote{margin-top:16px;padding:12px;border:1px solid #243044;background:#0f172a;border-radius:14px;color:#94a3b8;font-size:12.5px;line-height:1.55}.paidCard{display:flex;flex-direction:column;gap:9px}.paidTop{display:flex;align-items:flex-start;justify-content:space-between;gap:12px;border-bottom:1px solid #243044;padding-bottom:10px}.paidRank{font-size:13px;font-weight:900;color:#fed7aa;background:#431407;border:1px solid #f97316;border-radius:999px;padding:5px 9px;white-space:nowrap}.priceLine{border:1px solid #334155;background:#0b1220;border-radius:12px;padding:9px;font-size:12.5px;color:#dbeafe;line-height:1.45}.warn{color:#fecdd3}.mobileHint{display:none;color:#94a3b8;font-size:12px;margin-top:8px}.linkBtn{background:#111827;border:1px solid #334155;border-radius:10px;padding:8px 10px;font-size:12px;color:#cbd5e1}.detailBtns{display:flex;gap:8px;flex-wrap:wrap;margin-top:10px}.detailBtn{background:#1e1b4b;border:1px solid #6366f1;color:#e0e7ff;border-radius:10px;padding:9px 11px;font-size:12px;font-weight:800}.detailBtn.secondary{background:#0b1220;border-color:#334155;color:#cbd5e1}.relicChip{cursor:pointer}.champLink{cursor:pointer}
-@media(max-width:1000px){.controls{grid-template-columns:1fr 1fr 1fr}.controls input{grid-column:1/-1}.grid{grid-template-columns:repeat(auto-fill,minmax(260px,1fr))}}
-@media(max-width:720px){header{position:sticky}.wrap{padding:12px 12px 10px}main{padding:14px 12px 54px}h1{font-size:18px;line-height:1.2;margin-bottom:6px}.note{font-size:12px}.wrap>.note{display:none}.tabs{margin-top:8px;overflow-x:auto;flex-wrap:nowrap;padding-bottom:2px;scrollbar-width:none}.tabs::-webkit-scrollbar{display:none}.tab{padding:9px 12px;font-size:13px}.controls{grid-template-columns:1fr 1fr;gap:8px;margin-top:10px}.controls input{grid-column:1/-1;font-size:16px;padding:12px}.controls select,.controls button{font-size:13px;padding:10px}.summary{gap:6px;margin-top:8px;overflow-x:auto;flex-wrap:nowrap;padding-bottom:2px;scrollbar-width:none}.summary::-webkit-scrollbar{display:none}.badge{font-size:11px;padding:6px 8px;white-space:nowrap}.sectionTitle{align-items:flex-start;flex-direction:column;margin-top:2px}.sectionTitle h2{font-size:17px}.grid{grid-template-columns:1fr;gap:10px}.card{border-radius:14px;padding:12px}.relicCard{grid-template-columns:56px 1fr;min-height:auto;gap:10px}.icon,.noimg{width:56px;height:56px;border-radius:11px}.title{font-size:15px}.small{font-size:12px}.meta{margin:6px 0}.tableWrap{border-radius:12px}.mobileHint{display:block}.tierGroups{grid-template-columns:1fr;gap:8px}.setBox{padding:9px}.relicChip{font-size:11px;white-space:normal}.tinyIcon{width:20px;height:20px}.modalBg{padding:8px}.modal{border-radius:14px;padding:13px}.modal h3{font-size:18px}.modalTop{position:sticky;top:0;background:#0f172a;z-index:1}.paidTop{gap:8px}.paidRank{font-size:12px}.priceLine{font-size:12px}}
-@media(max-width:380px){.controls{grid-template-columns:1fr}.controls input{grid-column:auto}.relicCard{grid-template-columns:1fr}.icon,.noimg{width:64px;height:64px}.paidTop{flex-direction:column}.summary{display:none}}
+/* =========================================================
+   1. 색상 변수 / 기본 리셋
+   ========================================================= */
+:root {
+  --bg: #0b0f18;
+  --panel: #111827;
+  --panel2: #0f172a;
+  --text: #e5e7eb;
+  --muted: #94a3b8;
+  --line: #243044;
+  --epic: #b266ff;
+  --rare: #4fc3f7;
+  --common: #43a047;
+  --gold: #f6c453;
+  --ss: #ffb86b;
+  --s: #f6c453;
+  --a: #a5b4fc;
+  --b: #94a3b8;
+  --c: #64748b;
+  --ok: #78e08f;
+  --danger: #fb7185;
+}
+
+* { box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+body {
+  margin: 0;
+  background: linear-gradient(180deg, #080b12, #0b0f18 32%, #101726);
+  color: var(--text);
+  font-family: Inter, "Apple SD Gothic Neo", "Noto Sans KR", system-ui, sans-serif;
+  -webkit-text-size-adjust: 100%;
+}
+
+/* =========================================================
+   2. 헤더 (검색/필터 영역, 스크롤 시 자동 숨김)
+   ========================================================= */
+header {
+  position: sticky;
+  top: 0;
+  z-index: 20;
+  background: rgba(8, 11, 18, .95);
+  backdrop-filter: blur(10px);
+  border-bottom: 1px solid var(--line);
+  transition: transform .22s ease, box-shadow .22s ease;
+}
+header.headerHidden { transform: translateY(-105%); box-shadow: none; pointer-events: none; }
+header.headerShown   { transform: translateY(0); box-shadow: 0 10px 30px rgba(0,0,0,.24); }
+
+.wrap { max-width: 1480px; margin: 0 auto; padding: 18px 20px; }
+main  { max-width: 1480px; margin: 0 auto; padding: 18px 20px 54px; }
+
+h1 { font-size: 24px; margin: 0 0 8px; font-weight: 850; letter-spacing: -.03em; }
+.note { font-size: 13px; color: var(--muted); line-height: 1.55; }
+
+.tabs { display: flex; gap: 8px; flex-wrap: wrap; margin-top: 14px; }
+.tab {
+  background: #0f172a; color: #cbd5e1; border: 1px solid #334155;
+  border-radius: 999px; padding: 10px 14px; cursor: pointer;
+  font-weight: 700; white-space: nowrap;
+}
+.tab.active { border-color: #7c3aed; color: #fff; background: #1e1b4b; }
+
+.controls {
+  display: grid;
+  grid-template-columns: 1.4fr repeat(5, minmax(100px, .38fr));
+  gap: 10px;
+  margin-top: 14px;
+}
+input, select, button {
+  background: #0f172a; color: var(--text); border: 1px solid #334155;
+  border-radius: 10px; padding: 11px 12px; font-size: 14px; outline: none;
+}
+input[type="search"] { -webkit-appearance: none; }
+button { cursor: pointer; }
+button:hover { border-color: #64748b; }
+
+.summary { display: flex; gap: 10px; flex-wrap: wrap; margin-top: 12px; }
+.badge {
+  display: inline-flex; align-items: center; gap: 6px;
+  border: 1px solid #334155; background: #0f172a;
+  border-radius: 999px; padding: 7px 10px; font-size: 12px; color: #cbd5e1;
+}
+.badge.epic   { border-color: #6d28d9; color: #e9d5ff; }
+.badge.rare   { border-color: #0369a1; color: #bae6fd; }
+.badge.common { border-color: #166534; color: #bbf7d0; }
+.badge.ss { border-color: #f97316; color: #fed7aa; }
+.badge.s  { border-color: #f59e0b; color: #fef3c7; }
+.badge.a  { border-color: #6366f1; color: #e0e7ff; }
+.badge.b  { border-color: #64748b; color: #d1d5db; }
+
+/* =========================================================
+   3. 카드 그리드 공통
+   ========================================================= */
+.grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(294px, 1fr));
+  gap: 14px;
+}
+.card {
+  background: linear-gradient(180deg, rgba(17,24,39,.96), rgba(15,23,42,.96));
+  border: 1px solid var(--line);
+  border-radius: 16px;
+  padding: 14px;
+  box-shadow: 0 10px 25px rgba(0,0,0,.18);
+}
+
+/* 유물 카드 */
+.relicCard { display: grid; grid-template-columns: 72px 1fr; gap: 12px; min-height: 174px; }
+.icon {
+  width: 72px; height: 72px; border-radius: 13px; object-fit: contain;
+  background: #070b12; border: 1px solid #1f2937;
+}
+.tinyIcon {
+  width: 24px; height: 24px; border-radius: 7px; object-fit: contain;
+  background: #060912; border: 1px solid #243044; vertical-align: middle;
+}
+.noimg {
+  width: 72px; height: 72px; display: flex; align-items: center; justify-content: center;
+  border-radius: 13px; background: #111827; border: 1px solid #334155;
+  color: #94a3b8; font-size: 12px; text-align: center;
+}
+.title { font-size: 16px; font-weight: 850; line-height: 1.25; word-break: keep-all; }
+.en { font-size: 12px; color: #a5b4fc; margin-top: 2px; word-break: break-word; }
+.meta { display: flex; gap: 6px; flex-wrap: wrap; margin: 8px 0; }
+.rarity, .tierPill, .chip {
+  font-size: 12px; padding: 4px 8px; border-radius: 999px;
+  border: 1px solid #334155; background: #0b1220;
+}
+.rarity.Epic   { color: #ead6ff; border-color: #7c3aed; }
+.rarity.Rare   { color: #bae6fd; border-color: #0284c7; }
+.rarity.Common { color: #bbf7d0; border-color: #15803d; }
+.tierPill.SS { color: #fed7aa; border-color: #f97316; }
+.tierPill.S  { color: #fef3c7; border-color: #f59e0b; }
+.tierPill.A  { color: #e0e7ff; border-color: #6366f1; }
+.tierPill.B, .tierPill.B\+ { color: #d1d5db; border-color: #64748b; }
+.tierPill.C  { color: #cbd5e1; border-color: #475569; }
+.small { font-size: 12.5px; color: #cbd5e1; line-height: 1.45; margin: 5px 0; }
+.label { color: #94a3b8; }
+.hidden { display: none !important; }
+
+/* 표 보기 */
+.tableWrap {
+  display: none; overflow: auto;
+  border: 1px solid var(--line); border-radius: 14px; background: #0f172a;
+}
+table { border-collapse: collapse; width: 100%; font-size: 13px; min-width: 1160px; }
+th, td { padding: 10px; border-bottom: 1px solid #243044; text-align: left; vertical-align: top; }
+th { position: sticky; top: 0; background: #111827; color: #cbd5e1; }
+td img { width: 44px; height: 44px; object-fit: contain; }
+
+.sectionTitle {
+  display: flex; align-items: center; justify-content: space-between;
+  gap: 12px; margin: 6px 0 14px;
+}
+.sectionTitle h2 { margin: 0; font-size: 20px; letter-spacing: -.02em; }
+
+/* 챔피언 카드 */
+.champCard { position: relative; min-height: 250px; }
+.champCard.flash {
+  outline: 2px solid #7c3aed;
+  box-shadow: 0 0 0 7px rgba(124,58,237,.18), 0 10px 25px rgba(0,0,0,.18);
+}
+.champHead {
+  display: flex; align-items: flex-start; justify-content: space-between; gap: 12px;
+  border-bottom: 1px solid #243044; padding-bottom: 10px; margin-bottom: 10px;
+}
+.champName {
+  font-size: 18px; font-weight: 900; letter-spacing: -.02em;
+  background: transparent; border: 0; padding: 0; color: #fff;
+  text-align: left; cursor: pointer;
+}
+.champName:hover { text-decoration: underline; }
+.champLink {
+  display: inline; padding: 0; border: 0; background: transparent;
+  color: #93c5fd; text-decoration: underline; text-underline-offset: 3px; font-size: inherit;
+}
+.champLink:hover { color: #bfdbfe; }
+.role { font-size: 12px; color: #a5b4fc; margin-top: 2px; }
+
+.setBox { border: 1px solid #263247; background: #0b1220; border-radius: 12px; padding: 10px; margin-top: 8px; }
+.setTop { display: flex; gap: 7px; align-items: center; flex-wrap: wrap; margin-bottom: 7px; }
+.rank {
+  background: #1e1b4b; border: 1px solid #6366f1; color: #e0e7ff;
+  border-radius: 999px; padding: 3px 8px; font-size: 12px; font-weight: 800;
+}
+.relicChip {
+  display: inline-flex; align-items: center; gap: 5px;
+  border: 1px solid #334155; background: #0f172a;
+  border-radius: 999px; padding: 4px 8px; margin: 2px 4px 2px 0;
+  font-size: 12px; white-space: nowrap; cursor: pointer;
+}
+.relicChip.Epic    { border-color: #7c3aed; color: #ead6ff; }
+.relicChip.Rare    { border-color: #0284c7; color: #bae6fd; }
+.relicChip.Common  { border-color: #15803d; color: #bbf7d0; }
+.relicChip.missing { color: #cbd5e1; }
+.champOps { font-size: 12.5px; color: #cbd5e1; line-height: 1.55; margin-top: 6px; }
+.champLink { cursor: pointer; }
+
+/* 모달 */
+.modalBg {
+  display: none; position: fixed; inset: 0;
+  background: rgba(0,0,0,.67); z-index: 50; padding: 26px; overflow: auto;
+}
+.modal {
+  max-width: 980px; margin: 0 auto; background: #0f172a;
+  border: 1px solid #334155; border-radius: 18px;
+  box-shadow: 0 30px 80px rgba(0,0,0,.55); padding: 18px;
+}
+.modalTop {
+  display: flex; justify-content: space-between; gap: 16px; align-items: flex-start;
+  border-bottom: 1px solid #243044; padding-bottom: 12px; margin-bottom: 14px;
+}
+.close { background: #111827; border: 1px solid #334155; border-radius: 10px; padding: 8px 10px; }
+.modal h3 { margin: 0; font-size: 22px; }
+.modal h4 { margin: 16px 0 8px; font-size: 15px; color: #e2e8f0; }
+
+.tierGroups {
+  display: grid; grid-template-columns: repeat(auto-fit, minmax(210px, 1fr));
+  gap: 10px; margin-bottom: 16px;
+}
+.tierGroup { border: 1px solid #243044; background: #0f172a; border-radius: 14px; padding: 12px; }
+.tierGroup b { font-size: 15px; }
+.tierNames { font-size: 12.5px; color: #cbd5e1; line-height: 1.6; margin-top: 6px; }
+
+.empty { border: 1px dashed #475569; border-radius: 14px; padding: 20px; color: #94a3b8; text-align: center; }
+.sourceNote {
+  margin-top: 16px; padding: 12px; border: 1px solid #243044;
+  background: #0f172a; border-radius: 14px; color: #94a3b8;
+  font-size: 12.5px; line-height: 1.55;
+}
+
+/* 과금 상품 카드 */
+.paidCard { display: flex; flex-direction: column; gap: 9px; }
+.paidTop {
+  display: flex; align-items: flex-start; justify-content: space-between;
+  gap: 12px; border-bottom: 1px solid #243044; padding-bottom: 10px;
+}
+.paidRank {
+  font-size: 13px; font-weight: 900; color: #fed7aa; background: #431407;
+  border: 1px solid #f97316; border-radius: 999px; padding: 5px 9px; white-space: nowrap;
+}
+.priceLine {
+  border: 1px solid #334155; background: #0b1220; border-radius: 12px;
+  padding: 9px; font-size: 12.5px; color: #dbeafe; line-height: 1.45;
+}
+.warn { color: #fecdd3; }
+.mobileHint { display: none; color: #94a3b8; font-size: 12px; margin-top: 8px; }
+.linkBtn { background: #111827; border: 1px solid #334155; border-radius: 10px; padding: 8px 10px; font-size: 12px; color: #cbd5e1; }
+.detailBtns { display: flex; gap: 8px; flex-wrap: wrap; margin-top: 10px; }
+.detailBtn {
+  background: #1e1b4b; border: 1px solid #6366f1; color: #e0e7ff;
+  border-radius: 10px; padding: 9px 11px; font-size: 12px; font-weight: 800;
+}
+.detailBtn.secondary { background: #0b1220; border-color: #334155; color: #cbd5e1; }
+
+/* =========================================================
+   4. 반응형 (태블릿 / 모바일)
+   ========================================================= */
+@media (max-width: 1000px) {
+  .controls { grid-template-columns: 1fr 1fr 1fr; }
+  .controls input { grid-column: 1 / -1; }
+  .grid { grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); }
+}
+
+@media (max-width: 720px) {
+  header { position: sticky; }
+  .wrap { padding: 12px 12px 10px; }
+  main { padding: 14px 12px 54px; }
+  h1 { font-size: 18px; line-height: 1.2; margin-bottom: 6px; }
+  .note { font-size: 12px; }
+  .wrap > .note { display: none; }
+  .tabs {
+    margin-top: 8px; overflow-x: auto; flex-wrap: nowrap;
+    padding-bottom: 2px; scrollbar-width: none;
+  }
+  .tabs::-webkit-scrollbar { display: none; }
+  .tab { padding: 9px 12px; font-size: 13px; }
+  .controls { grid-template-columns: 1fr 1fr; gap: 8px; margin-top: 10px; }
+  .controls input { grid-column: 1 / -1; font-size: 16px; padding: 12px; }
+  .controls select, .controls button { font-size: 13px; padding: 10px; }
+  .summary {
+    gap: 6px; margin-top: 8px; overflow-x: auto; flex-wrap: nowrap;
+    padding-bottom: 2px; scrollbar-width: none;
+  }
+  .summary::-webkit-scrollbar { display: none; }
+  .badge { font-size: 11px; padding: 6px 8px; white-space: nowrap; }
+  .sectionTitle { align-items: flex-start; flex-direction: column; margin-top: 2px; }
+  .sectionTitle h2 { font-size: 17px; }
+  .grid { grid-template-columns: 1fr; gap: 10px; }
+  .card { border-radius: 14px; padding: 12px; }
+  .relicCard { grid-template-columns: 56px 1fr; min-height: auto; gap: 10px; }
+  .icon, .noimg { width: 56px; height: 56px; border-radius: 11px; }
+  .title { font-size: 15px; }
+  .small { font-size: 12px; }
+  .meta { margin: 6px 0; }
+  .tableWrap { border-radius: 12px; }
+  .mobileHint { display: block; }
+  .tierGroups { grid-template-columns: 1fr; gap: 8px; }
+  .setBox { padding: 9px; }
+  .relicChip { font-size: 11px; white-space: normal; }
+  .tinyIcon { width: 20px; height: 20px; }
+  .modalBg { padding: 8px; }
+  .modal { border-radius: 14px; padding: 13px; }
+  .modal h3 { font-size: 18px; }
+  .modalTop { position: sticky; top: 0; background: #0f172a; z-index: 1; }
+  .paidTop { gap: 8px; }
+  .paidRank { font-size: 12px; }
+  .priceLine { font-size: 12px; }
+}
+
+@media (max-width: 380px) {
+  .controls { grid-template-columns: 1fr; }
+  .controls input { grid-column: auto; }
+  .relicCard { grid-template-columns: 1fr; }
+  .icon, .noimg { width: 64px; height: 64px; }
+  .paidTop { flex-direction: column; }
+  .summary { display: none; }
+}
 </style>
 </head>
 <body>
+
 <header><div class="wrap">
-<h1>레전드 오브 룬테라 · 모험의 길 유물/챔피언 검색표</h1>
-<div class="note">모바일 카드형 검색에 맞춰 재구성했습니다. 유물의 추천 챔피언 이름을 누르면 챔피언 티어표로 이동합니다. 아이콘은 원격으로 불러오므로 인터넷 연결이 필요합니다.</div>
-<div class="tabs"><button class="tab active" id="tabRelics">유물 검색</button><button class="tab" id="tabChamps">챔피언 티어표</button><button class="tab" id="tabPaid">과금 상품 순위</button></div>
-<div class="controls">
-  <input id="q" type="search" placeholder="검색: 피들스틱, 공포, 악몽, 장난꾼, 버섯, 스웨인, 금 성물함, Echoing..." />
-  <select id="rarity"><option value="">전체 등급</option><option>Epic</option><option>Rare</option><option>Common</option></select>
-  <select id="tier"><option value="">전체 티어</option><option>SS</option><option>S</option><option>A</option><option>B+</option><option>B</option><option>C</option></select>
-  <select id="source"><option value="">전체 획득처</option><option value="금 성물함">금 성물함</option><option value="은 성물함">은 성물함</option><option value="동 성물함">동 성물함</option><option value="2성 캠페인">2성 캠페인</option><option value="상점">상점</option><option value="번들">번들</option></select>
-  <button id="toggle">표 보기</button>
-  <button id="reset">초기화</button>
-</div>
-<div class="summary"><span class="badge epic">🟪 서사 Epic</span><span class="badge rare">🟦 희귀 Rare</span><span class="badge common">🟩 일반 Common</span><span class="badge ss">SS 최우선</span><span class="badge s">S 상위권</span><span class="badge a">A 실전권</span><span class="badge b">B 후순위</span><span class="badge" id="count"></span></div>
-<div class="mobileHint">모바일 팁: 검색창에 챔피언명이나 유물명을 입력하면 현재 탭 안에서 바로 필터링됩니다.</div>
+  <h1>레전드 오브 룬테라 · 모험의 길 유물/챔피언 검색표</h1>
+  <div class="note">모바일 카드형 검색에 맞춰 재구성했습니다. 유물의 추천 챔피언 이름을 누르면 챔피언 티어표로 이동합니다. 아이콘은 원격으로 불러오므로 인터넷 연결이 필요합니다.</div>
+
+  <div class="tabs">
+    <button class="tab active" id="tabRelics">유물 검색</button>
+    <button class="tab" id="tabChamps">챔피언 티어표</button>
+    <button class="tab" id="tabPaid">과금 상품 순위</button>
+  </div>
+
+  <div class="controls">
+    <input id="q" type="search" placeholder="검색: 피들스틱, 공포, 악몽, 장난꾼, 버섯, 스웨인, 금 성물함, Echoing..." />
+    <select id="rarity">
+      <option value="">전체 등급</option>
+      <option>Epic</option><option>Rare</option><option>Common</option>
+    </select>
+    <select id="tier">
+      <option value="">전체 티어</option>
+      <option>SS</option><option>S</option><option>A</option><option>B+</option><option>B</option><option>C</option>
+    </select>
+    <select id="source">
+      <option value="">전체 획득처</option>
+      <option value="금 성물함">금 성물함</option>
+      <option value="은 성물함">은 성물함</option>
+      <option value="동 성물함">동 성물함</option>
+      <option value="2성 캠페인">2성 캠페인</option>
+      <option value="상점">상점</option>
+      <option value="번들">번들</option>
+    </select>
+    <button id="toggle">표 보기</button>
+    <button id="reset">초기화</button>
+  </div>
+
+  <div class="summary">
+    <span class="badge epic">🟪 서사 Epic</span>
+    <span class="badge rare">🟦 희귀 Rare</span>
+    <span class="badge common">🟩 일반 Common</span>
+    <span class="badge ss">SS 최우선</span>
+    <span class="badge s">S 상위권</span>
+    <span class="badge a">A 실전권</span>
+    <span class="badge b">B 후순위</span>
+    <span class="badge" id="count"></span>
+  </div>
+
+  <div class="mobileHint">모바일 팁: 검색창에 챔피언명이나 유물명을 입력하면 현재 탭 안에서 바로 필터링됩니다.</div>
 </div></header>
+
 <main>
-<section id="relicSection">
-  <div class="sectionTitle"><h2>유물 리스트</h2><span class="note">검색 대상: 한글명, 영문명, 효과, 추천 챔피언, 획득처. 추천 챔피언 이름 클릭 시 챔피언 티어표로 이동.</span></div>
-  <section id="grid" class="grid"></section>
-  <section id="tableWrap" class="tableWrap"><table><thead><tr><th>이미지</th><th>한글명</th><th>영문명</th><th>등급</th><th>티어</th><th>효과 요약</th><th>추천 챔피언</th><th>획득처</th></tr></thead><tbody id="tbody"></tbody></table></section>
-</section>
-<section id="champSection" class="hidden">
-  <div class="sectionTitle"><h2>챔피언 티어표 + 유물 세트</h2><span class="note">챔피언 이름을 누르면 기본 운영법과 세트별 운영법이 열립니다.</span></div>
-  <div id="tierGroups" class="tierGroups"></div>
-  <section id="champGrid" class="grid"></section>
-  <div class="sourceNote">추천 세트는 보유 유물, 성급, 별자리, 패치에 따라 달라질 수 있습니다. B 티어는 투자 후순위라 범용/대체 세트 중심으로 넣었습니다.</div>
-</section>
-<section id="paidSection" class="hidden">
-  <div class="sectionTitle"><h2>과금 상품 순위표</h2><span class="note">가격은 인게임 표시가 기준입니다. 아래 가격선은 “이 정도 코인대면 살 만한가”를 비교하기 위한 판단표입니다.</span></div>
-  <section id="paidGrid" class="grid"></section>
-  <section id="paidTableWrap" class="tableWrap"><table><thead><tr><th>순위</th><th>상품/유물</th><th>티어</th><th>범용성</th><th>추천 가격선</th><th>주요 사용처</th><th>판단</th></tr></thead><tbody id="paidTbody"></tbody></table></section>
-  <div class="sourceNote">과금 상품은 상점 로테이션, 번들 구성, 지역별 코인 가격에 따라 달라집니다. 3,000코인 이상 대형 번들은 유물 하나만 보고 사기엔 효율이 낮으므로, 챔피언 파편·별 수정·노바 파편까지 필요한 경우에만 고려하는 쪽이 안전합니다.</div>
-</section>
+  <section id="relicSection">
+    <div class="sectionTitle">
+      <h2>유물 리스트</h2>
+      <span class="note">검색 대상: 한글명, 영문명, 효과, 추천 챔피언, 획득처. 추천 챔피언 이름 클릭 시 챔피언 티어표로 이동.</span>
+    </div>
+    <section id="grid" class="grid"></section>
+    <section id="tableWrap" class="tableWrap">
+      <table>
+        <thead>
+          <tr><th>이미지</th><th>한글명</th><th>영문명</th><th>등급</th><th>티어</th><th>효과 요약</th><th>추천 챔피언</th><th>획득처</th></tr>
+        </thead>
+        <tbody id="tbody"></tbody>
+      </table>
+    </section>
+  </section>
+
+  <section id="champSection" class="hidden">
+    <div class="sectionTitle">
+      <h2>챔피언 티어표 + 유물 세트</h2>
+      <span class="note">챔피언 이름을 누르면 기본 운영법과 세트별 운영법이 열립니다.</span>
+    </div>
+    <div id="tierGroups" class="tierGroups"></div>
+    <section id="champGrid" class="grid"></section>
+    <div class="sourceNote">추천 세트는 보유 유물, 성급, 별자리, 패치에 따라 달라질 수 있습니다. B 티어는 투자 후순위라 범용/대체 세트 중심으로 넣었습니다.</div>
+  </section>
+
+  <section id="paidSection" class="hidden">
+    <div class="sectionTitle">
+      <h2>과금 상품 순위표</h2>
+      <span class="note">가격은 인게임 표시가 기준입니다. 아래 가격선은 "이 정도 코인대면 살 만한가"를 비교하기 위한 판단표입니다.</span>
+    </div>
+    <section id="paidGrid" class="grid"></section>
+    <section id="paidTableWrap" class="tableWrap">
+      <table>
+        <thead>
+          <tr><th>순위</th><th>상품/유물</th><th>티어</th><th>범용성</th><th>추천 가격선</th><th>주요 사용처</th><th>판단</th></tr>
+        </thead>
+        <tbody id="paidTbody"></tbody>
+      </table>
+    </section>
+    <div class="sourceNote">과금 상품은 상점 로테이션, 번들 구성, 지역별 코인 가격에 따라 달라집니다. 3,000코인 이상 대형 번들은 유물 하나만 보고 사기엔 효율이 낮으므로, 챔피언 파편·별 수정·노바 파편까지 필요한 경우에만 고려하는 쪽이 안전합니다.</div>
+  </section>
 </main>
+
 <div class="modalBg" id="modalBg"><div class="modal" id="modal"></div></div>
+
 <script>
+// =============================================================
+// 데이터 정의 (DATA: 유물, CHAMPS: 챔피언, PAID_PRODUCTS: 과금 상품)
+// 원본 데이터 그대로 유지 — 구조를 바꾸면 위 HTML과 아래 렌더링 로직이 깨집니다.
+// =============================================================
 const DATA = [{"en": "Big Guns", "ko": "대형 화기", "rarity": "Epic", "tier": "S", "use": "벡스, 진, 케이틀린, 애니, 스킬 피해 덱", "effect": "내 주문과 스킬 피해 +1.", "source": "금 성물함", "img": "https://lorrelics.com/assets/icons/relics/BigGuns-6mSp_sr.webp", "tags": "big guns 대형 화기 epic s 내 주문과 스킬 피해 +1. 벡스, 진, 케이틀린, 애니, 스킬 피해 덱 금 성물함"}, {"en": "Black Shield", "ko": "칠흑의 방패", "rarity": "Epic", "tier": "S", "use": "카이사, 워윅, 애쉬, 레오나, 보호가 필요한 덱", "effect": "아군을 소환할 때 주문 방어막 부여.", "source": "금 성물함", "img": "https://lorrelics.com/assets/icons/relics/BlackShield-Br5m1Sv.webp", "tags": "black shield 칠흑의 방패 epic s 아군을 소환할 때 주문 방어막 부여. 카이사, 워윅, 애쉬, 레오나, 보호가 필요한 덱 금 성물함"}, {"en": "Chosen by the Stars", "ko": "별에게 선택받은 자", "rarity": "Epic", "tier": "S", "use": "카이사, 유미, 케일, 워윅", "effect": "운명/증강. 강화 10: 압도, 재생, 도전자.", "source": "금 성물함", "img": "https://lorrelics.com/assets/icons/relics/ChosenbytheStars-IjJfI6w.webp", "tags": "chosen by the stars 별에게 선택받은 자 epic s 운명/증강. 강화 10: 압도, 재생, 도전자. 카이사, 유미, 케일, 워윅 금 성물함"}, {"en": "Echoing Spirit", "ko": "메아리치는 영혼", "rarity": "Epic", "tier": "S", "use": "아리, 릴리아, 모르가나, 에코, 빅토르", "effect": "게임 시작: 내 복사본 7장 생성. 챔피언 주문 비용 -1.", "source": "금 성물함", "img": "https://lorrelics.com/assets/icons/relics/EchoingSpirit-lGDNpAW.webp", "tags": "echoing spirit 메아리치는 영혼 epic s 게임 시작: 내 복사본 7장 생성. 챔피언 주문 비용 -1. 아리, 릴리아, 모르가나, 에코, 빅토르 금 성물함"}, {"en": "Harmless Scarecrow", "ko": "무해한 허수아비", "rarity": "Epic", "tier": "S", "use": "피들스틱, 티모, 덱 파괴/함정 덱", "effect": "3+ 비용 카드를 쓰면 공포 선사 1. 적 덱 15장 이하이면 아군 +2|+2 및 압도.", "source": "금 성물함 / 상점 / 번들·영광 상점 여부 확인", "img": "https://lorrelics.com/assets/icons/relics/HarmlessScarecrow-n7VcxCm.webp", "tags": "harmless scarecrow 무해한 허수아비 epic s 3+ 비용 카드를 쓰면 공포 선사 1. 적 덱 15장 이하이면 아군 +2|+2 및 압도. 피들스틱, 티모, 덱 파괴/함정 덱 금 성물함 / 상점 / 번들·영광 상점 여부 확인"}, {"en": "Mischiefmaker's Flute", "ko": "장난꾼의 피리", "rarity": "Epic", "tier": "S", "use": "영혼의 꽃 티모, 티모, 피해/버섯 덱", "effect": "주문 방어막. 내가 피해를 주면 그 피해량만큼 적 덱에 독버섯 설치.", "source": "영혼의 꽃 티모 번들/상점 로테이션", "img": "https://lorrelics.com/assets/icons/relics/MischiefmakersFlute-FVRu5YK.webp", "tags": "mischiefmaker's flute 장난꾼의 피리 epic s 주문 방어막. 내가 피해를 주면 그 피해량만큼 적 덱에 독버섯 설치. 영혼의 꽃 티모, 티모, 피해/버섯 덱 영혼의 꽃 티모 번들/상점 로테이션"}, {"en": "Packed Powder", "ko": "장전된 화약", "rarity": "Epic", "tier": "S", "use": "스웨인, 아리, 사미라, 징크스", "effect": "약탈: 비용 -2. 적 넥서스 피해를 준 라운드 수만큼 +1|+1.", "source": "금 성물함", "img": "https://lorrelics.com/assets/icons/relics/PackedPowder-DXpu0z5.webp", "tags": "packed powder 장전된 화약 epic s 약탈: 비용 -2. 적 넥서스 피해를 준 라운드 수만큼 +1|+1. 스웨인, 아리, 사미라, 징크스 금 성물함"}, {"en": "Perfect Hex Core", "ko": "완성형 마공학 핵", "rarity": "Epic", "tier": "S", "use": "빅토르, 카이사, 다이애나, 주문/키워드 덱", "effect": "라운드 시작: 마공학 업그레이드 생성. 업그레이드가 아무 아군 강화 가능.", "source": "금 성물함 / 상점 / 번들·영광 상점 여부 확인", "img": "https://lorrelics.com/assets/icons/relics/PerfectHexCore-c9zi31P.webp", "tags": "perfect hex core 완성형 마공학 핵 epic s 라운드 시작: 마공학 업그레이드 생성. 업그레이드가 아무 아군 강화 가능. 빅토르, 카이사, 다이애나, 주문/키워드 덱 금 성물함 / 상점 / 번들·영광 상점 여부 확인"}, {"en": "Ranger's Command", "ko": "레인저의 명령", "rarity": "Epic", "tier": "S", "use": "미스 포츈, 암베사, 카이사, 정찰/공격 횟수 덱", "effect": "공격 토큰/정찰/공격 횟수 기반 덱 보조.", "source": "상점/유물 풀 로테이션", "img": "https://lorrelics.com/assets/icons/relics/RangersCommand-tMvC0T9.webp", "tags": "ranger's command 레인저의 명령 epic s 공격 토큰/정찰/공격 횟수 기반 덱 보조. 미스 포츈, 암베사, 카이사, 정찰/공격 횟수 덱 상점/유물 풀 로테이션"}, {"en": "Shock & Awe", "ko": "충격과 공포", "rarity": "Epic", "tier": "S", "use": "피들스틱, 미스 포츈, 아지르, 토큰 공격 덱", "effect": "1코 이하 아군이 공격하면 적 넥서스에 1 피해.", "source": "번들/상점 로테이션", "img": "https://lorrelics.com/assets/icons/relics/Shock%26Awe-h9_cS_k.webp", "tags": "shock & awe 충격과 공포 epic s 1코 이하 아군이 공격하면 적 넥서스에 1 피해. 피들스틱, 미스 포츈, 아지르, 토큰 공격 덱 번들/상점 로테이션"}, {"en": "Spectral Scissors", "ko": "유령 가위", "rarity": "Epic", "tier": "S", "use": "비에고, 일라오이, 그웬", "effect": "+2|+0. 지원한 추종자를 하루살이 공격 복사본으로 소환.", "source": "금 성물함", "img": "https://lorrelics.com/assets/icons/relics/SpectralScissors-Lxmr96R.webp", "tags": "spectral scissors 유령 가위 epic s +2|+0. 지원한 추종자를 하루살이 공격 복사본으로 소환. 비에고, 일라오이, 그웬 금 성물함"}, {"en": "Spirit of the Buhru", "ko": "부흐루의 영혼", "rarity": "Epic", "tier": "S", "use": "피들스틱, 미스 포츈, 일라오이, 아지르", "effect": "1코 이하 아군에게 압도, 선제공격, 분노 부여.", "source": "금 성물함", "img": "https://lorrelics.com/assets/icons/relics/SpiritoftheBuhru-NieLaGI.webp", "tags": "spirit of the buhru 부흐루의 영혼 epic s 1코 이하 아군에게 압도, 선제공격, 분노 부여. 피들스틱, 미스 포츈, 일라오이, 아지르 금 성물함"}, {"en": "Starforged Gauntlets", "ko": "별벼림 건틀릿", "rarity": "Epic", "tier": "S", "use": "아우렐리온 솔, 엘더 드래곤, 거대 챔피언", "effect": "거대 유닛이면 시작 마나 +1. 발현/초월에서 레벨 2 챔피언 발견 가능.", "source": "상점/번들/코인 로테이션", "img": "https://lorrelics.com/assets/icons/relics/StarforgedGauntlets-QcKFTW7.webp", "tags": "starforged gauntlets 별벼림 건틀릿 epic s 거대 유닛이면 시작 마나 +1. 발현/초월에서 레벨 2 챔피언 발견 가능. 아우렐리온 솔, 엘더 드래곤, 거대 챔피언 상점/번들/코인 로테이션"}, {"en": "Swain's Raven Army", "ko": "스웨인의 까마귀 군대", "rarity": "Epic", "tier": "S", "use": "스웨인, 약탈/넥서스 피해 덱", "effect": "게임 시작: 적 넥서스에서 5 흡수. 스웨인 플레이 시 주문 마나 회복.", "source": "스웨인 번들/상점 로테이션", "img": "https://lorrelics.com/assets/icons/relics/SwainsRavenArmy-4aedYka.webp", "tags": "swain's raven army 스웨인의 까마귀 군대 epic s 게임 시작: 적 넥서스에서 5 흡수. 스웨인 플레이 시 주문 마나 회복. 스웨인, 약탈/넥서스 피해 덱 스웨인 번들/상점 로테이션"}, {"en": "The Beast Within", "ko": "내면의 야수", "rarity": "Epic", "tier": "S", "use": "빅토르, 카이사, 아지르, 케일", "effect": "아군 압도. 하위 타입이 있으면 +1|+1.", "source": "금 성물함", "img": "https://lorrelics.com/assets/icons/relics/TheBeastWithin-2qo9hHt.webp", "tags": "the beast within 내면의 야수 epic s 아군 압도. 하위 타입이 있으면 +1|+1. 빅토르, 카이사, 아지르, 케일 금 성물함"}, {"en": "Attendant Spirits", "ko": "시종 영혼", "rarity": "Epic", "tier": "A", "use": "영혼의 꽃 계열, 영혼/여우불 덱", "effect": "영혼/소환 계열 보조. 영혼의 꽃 계열에서 사용.", "source": "금 성물함 / 상점 / 번들·영광 상점 여부 확인", "img": "https://lorrelics.com/assets/icons/relics/AttendantSpirits-cDoJNne.webp", "tags": "attendant spirits 시종 영혼 epic a 영혼/소환 계열 보조. 영혼의 꽃 계열에서 사용. 영혼의 꽃 계열, 영혼/여우불 덱 금 성물함 / 상점 / 번들·영광 상점 여부 확인"}, {"en": "Azir's Staff of Office", "ko": "아지르의 직무 지팡이", "rarity": "Epic", "tier": "A", "use": "아지르, 초월체/태양 원판 덱", "effect": "+1|+1. 초월체라면 비용 감소, 플레이 시 태양 원판을 앞당김.", "source": "금 성물함 / 상점 / 번들·영광 상점 여부 확인", "img": "https://lorrelics.com/assets/icons/relics/AzirsStaffofOffice-vT1sN53.webp", "tags": "azir's staff of office 아지르의 직무 지팡이 epic a +1|+1. 초월체라면 비용 감소, 플레이 시 태양 원판을 앞당김. 아지르, 초월체/태양 원판 덱 금 성물함 / 상점 / 번들·영광 상점 여부 확인"}, {"en": "Death's Foil", "ko": "죽음의 항거", "rarity": "Epic", "tier": "A", "use": "그웬, 릴리아, 공격 생존 덱", "effect": "+1|+0. 공격 중 피해를 받거나 죽지 않음.", "source": "금 성물함", "img": "https://lorrelics.com/assets/icons/relics/DeathsFoil-vnKUJP3.webp", "tags": "death's foil 죽음의 항거 epic a +1|+0. 공격 중 피해를 받거나 죽지 않음. 그웬, 릴리아, 공격 생존 덱 금 성물함"}, {"en": "Disciple of Shadows", "ko": "그림자의 사도", "rarity": "Epic", "tier": "A", "use": "비에고, 그웬, 모데카이저, 희생 덱", "effect": "필드 아군 수만큼 비용 감소. 플레이: 다른 아군에게 3 피해.", "source": "금 성물함", "img": "https://lorrelics.com/assets/icons/relics/DiscipleofShadows-QFiE_wo.webp", "tags": "disciple of shadows 그림자의 사도 epic a 필드 아군 수만큼 비용 감소. 플레이: 다른 아군에게 3 피해. 비에고, 그웬, 모데카이저, 희생 덱 금 성물함"}, {"en": "Frost Breath", "ko": "서늘한 숨결", "rarity": "Epic", "tier": "A", "use": "애쉬, 애니비아, 프렐요드 제어", "effect": "동상/프렐요드 제어 보조.", "source": "금 성물함 / 상점 / 번들·영광 상점 여부 확인", "img": "https://lorrelics.com/assets/icons/relics/FrostBreath-XaxyvBu.webp", "tags": "frost breath 서늘한 숨결 epic a 동상/프렐요드 제어 보조. 애쉬, 애니비아, 프렐요드 제어 금 성물함 / 상점 / 번들·영광 상점 여부 확인"}, {"en": "Hextech Rifle", "ko": "마공학 소총", "rarity": "Epic", "tier": "A", "use": "케이틀린, 티모, 함정 덱", "effect": "게임 시작: 적 덱 위쪽에 섬광탄 설치. 빗나간 함정 재식재.", "source": "금 성물함 / 상점 / 번들·영광 상점 여부 확인", "img": "https://lorrelics.com/assets/icons/relics/HextechRifle-XKgTSdO.webp", "tags": "hextech rifle 마공학 소총 epic a 게임 시작: 적 덱 위쪽에 섬광탄 설치. 빗나간 함정 재식재. 케이틀린, 티모, 함정 덱 금 성물함 / 상점 / 번들·영광 상점 여부 확인"}, {"en": "Hidden Tome", "ko": "숨겨진 고서", "rarity": "Epic", "tier": "A", "use": "아리, 암베사, 럭스, 주문 마나 덱", "effect": "챔피언을 내거나 레벨업하면 주문 마나 회복.", "source": "금 성물함", "img": "https://lorrelics.com/assets/icons/relics/HiddenTome-x8GBbLM.webp", "tags": "hidden tome 숨겨진 고서 epic a 챔피언을 내거나 레벨업하면 주문 마나 회복. 아리, 암베사, 럭스, 주문 마나 덱 금 성물함"}, {"en": "Icon of Valhir", "ko": "발히르의 상징", "rarity": "Epic", "tier": "A", "use": "볼리베어, 애니비아, 원소 덱", "effect": "원소 주문과 스킬 피해 +2.", "source": "금 성물함 / 상점 / 번들·영광 상점 여부 확인", "img": "https://lorrelics.com/assets/icons/relics/IconofValhir-8oLejvZ.webp", "tags": "icon of valhir 발히르의 상징 epic a 원소 주문과 스킬 피해 +2. 볼리베어, 애니비아, 원소 덱 금 성물함 / 상점 / 번들·영광 상점 여부 확인"}, {"en": "Jayce's Hextech Battery", "ko": "제이스의 마공학 배터리", "rarity": "Epic", "tier": "A", "use": "제이스", "effect": "+1|+2. 레벨업 시 마나 회복, 제이스면 더 많이 회복.", "source": "금 성물함 / 상점 / 번들·영광 상점 여부 확인", "img": "https://lorrelics.com/assets/icons/relics/JaycesHextechBattery-M69C3Gp.webp", "tags": "jayce's hextech battery 제이스의 마공학 배터리 epic a +1|+2. 레벨업 시 마나 회복, 제이스면 더 많이 회복. 제이스 금 성물함 / 상점 / 번들·영광 상점 여부 확인"}, {"en": "Lux's Incandescent Baton", "ko": "럭스의 백열 지휘봉", "rarity": "Epic", "tier": "A", "use": "럭스 계열", "effect": "럭스면 시작 마나 +1. 게임 시작 저코스트 추종자 드로우/강화.", "source": "금 성물함 / 상점 / 번들·영광 상점 여부 확인", "img": "https://lorrelics.com/assets/icons/relics/LuxsIncandescentBaton-pAV86zc.webp", "tags": "lux's incandescent baton 럭스의 백열 지휘봉 epic a 럭스면 시작 마나 +1. 게임 시작 저코스트 추종자 드로우/강화. 럭스 계열 금 성물함 / 상점 / 번들·영광 상점 여부 확인"}, {"en": "Norra's Portal Accelerator", "ko": "노라의 차원문 가속기", "rarity": "Epic", "tier": "A", "use": "노라, 생성 유닛 덱", "effect": "노라면 시작 마나 +1. 생성 아군을 소환하면 임팩트 부여.", "source": "금 성물함 / 상점 / 번들·영광 상점 여부 확인", "img": "https://lorrelics.com/assets/icons/relics/NorrasPortalAccelerator-kYaRCmk.webp", "tags": "norra's portal accelerator 노라의 차원문 가속기 epic a 노라면 시작 마나 +1. 생성 아군을 소환하면 임팩트 부여. 노라, 생성 유닛 덱 금 성물함 / 상점 / 번들·영광 상점 여부 확인"}, {"en": "Oath of the Guardians", "ko": "수호자의 서약", "rarity": "Epic", "tier": "A", "use": "아우렐리온 솔, 릴리아, 랜덤 챔피언 밸류", "effect": "플레이: 레벨 2 챔피언 5장을 섞고 스탯 2배, 1장 드로우.", "source": "금 성물함", "img": "https://lorrelics.com/assets/icons/relics/OathoftheGuardians-bts0NxP.webp", "tags": "oath of the guardians 수호자의 서약 epic a 플레이: 레벨 2 챔피언 5장을 섞고 스탯 2배, 1장 드로우. 아우렐리온 솔, 릴리아, 랜덤 챔피언 밸류 금 성물함"}, {"en": "Scales of Judgment", "ko": "심판의 저울", "rarity": "Epic", "tier": "A", "use": "케일, 타곤 성장 덱", "effect": "성장/심판 계열 보조.", "source": "금 성물함 / 상점 / 번들·영광 상점 여부 확인", "img": "https://lorrelics.com/assets/icons/relics/ScalesofJudgment-Q4nHdax.webp", "tags": "scales of judgment 심판의 저울 epic a 성장/심판 계열 보조. 케일, 타곤 성장 덱 금 성물함 / 상점 / 번들·영광 상점 여부 확인"}, {"en": "Searing Brilliance", "ko": "타오르는 광휘", "rarity": "Epic", "tier": "A", "use": "멜, 빅토르, 주문 엔진 덱", "effect": "주문 엔진/할인/복사형 고점 유물.", "source": "금 성물함 / 상점 / 번들·영광 상점 여부 확인", "img": "https://lorrelics.com/assets/icons/relics/SearingBrilliance-TT4332a.webp", "tags": "searing brilliance 타오르는 광휘 epic a 주문 엔진/할인/복사형 고점 유물. 멜, 빅토르, 주문 엔진 덱 금 성물함 / 상점 / 번들·영광 상점 여부 확인"}, {"en": "Secret Technique", "ko": "비밀 기술", "rarity": "Epic", "tier": "A", "use": "일라오이, 바루스, 리 신, 버프 주문 덱", "effect": "주문으로 스탯을 얻을 때 증가량 2배.", "source": "금 성물함", "img": "https://lorrelics.com/assets/icons/relics/SecretTechnique-CYeQBbq.webp", "tags": "secret technique 비밀 기술 epic a 주문으로 스탯을 얻을 때 증가량 2배. 일라오이, 바루스, 리 신, 버프 주문 덱 금 성물함"}, {"en": "Shield of Daybreak", "ko": "새벽의 방패", "rarity": "Epic", "tier": "A", "use": "레오나, 일광/스턴 덱", "effect": "일광/스턴/레오나 계열 보조.", "source": "금 성물함 / 상점 / 번들·영광 상점 여부 확인", "img": "https://lorrelics.com/assets/icons/relics/ShieldofDaybreak-_FjbJcN.webp", "tags": "shield of daybreak 새벽의 방패 epic a 일광/스턴/레오나 계열 보조. 레오나, 일광/스턴 덱 금 성물함 / 상점 / 번들·영광 상점 여부 확인"}, {"en": "Siphoned Sorrow", "ko": "흡수된 슬픔", "rarity": "Epic", "tier": "A", "use": "비에고, 모데카이저, 사망/희생 덱", "effect": "사망/흡수/그림자 군도 보조.", "source": "금 성물함 / 상점 / 번들·영광 상점 여부 확인", "img": "https://lorrelics.com/assets/icons/relics/SiphonedSorrow-dPDFFyi.webp", "tags": "siphoned sorrow 흡수된 슬픔 epic a 사망/흡수/그림자 군도 보조. 비에고, 모데카이저, 사망/희생 덱 금 성물함 / 상점 / 번들·영광 상점 여부 확인"}, {"en": "Soul Lantern", "ko": "영혼 등불", "rarity": "Epic", "tier": "A", "use": "쓰레쉬, 사망/부활 덱", "effect": "영혼/사망/부활 보조.", "source": "금 성물함 / 상점 / 번들·영광 상점 여부 확인", "img": "https://lorrelics.com/assets/icons/relics/SoulLantern-hb7xBzM.webp", "tags": "soul lantern 영혼 등불 epic a 영혼/사망/부활 보조. 쓰레쉬, 사망/부활 덱 금 성물함 / 상점 / 번들·영광 상점 여부 확인"}, {"en": "Spirit Glove", "ko": "영혼 장갑", "rarity": "Epic", "tier": "A", "use": "영혼의 꽃 계열", "effect": "영혼의 꽃/정령 계열 보조.", "source": "금 성물함 / 상점 / 번들·영광 상점 여부 확인", "img": "https://lorrelics.com/assets/icons/relics/SpiritGlove-Tsq_NPp.webp", "tags": "spirit glove 영혼 장갑 epic a 영혼의 꽃/정령 계열 보조. 영혼의 꽃 계열 금 성물함 / 상점 / 번들·영광 상점 여부 확인"}, {"en": "Starfire Spellblade", "ko": "별불꽃 주문검", "rarity": "Epic", "tier": "A", "use": "럭스, 멜, 주문 피니셔 덱", "effect": "주문 기반 피니시 보조.", "source": "금 성물함", "img": "https://lorrelics.com/assets/icons/relics/StarfireSpellblade-IPPm2hd.webp", "tags": "starfire spellblade 별불꽃 주문검 epic a 주문 기반 피니시 보조. 럭스, 멜, 주문 피니셔 덱 금 성물함"}, {"en": "The Darkin Blade", "ko": "다르킨의 검", "rarity": "Epic", "tier": "A", "use": "아트록스, 장비 덱", "effect": "아트록스/다르킨/장비 계열 보조.", "source": "금 성물함 / 상점 / 번들·영광 상점 여부 확인", "img": "https://lorrelics.com/assets/icons/relics/TheDarkinBlade-RrwksLO.webp", "tags": "the darkin blade 다르킨의 검 epic a 아트록스/다르킨/장비 계열 보조. 아트록스, 장비 덱 금 성물함 / 상점 / 번들·영광 상점 여부 확인"}, {"en": "The Hand Of Noxus", "ko": "녹서스의 손", "rarity": "Epic", "tier": "A", "use": "다리우스, 녹서스 어그로", "effect": "녹서스 고공격/어그로 보조.", "source": "금 성물함 / 상점 / 번들·영광 상점 여부 확인", "img": "https://lorrelics.com/assets/icons/relics/TheHandOfNoxus-Pdcl9nA.webp", "tags": "the hand of noxus 녹서스의 손 epic a 녹서스 고공격/어그로 보조. 다리우스, 녹서스 어그로 금 성물함 / 상점 / 번들·영광 상점 여부 확인"}, {"en": "The Taker's Bow", "ko": "거두는 자의 활", "rarity": "Epic", "tier": "A", "use": "르블랑, 영혼의 꽃 이블린/킨드레드, 하루살이 공격 덱", "effect": "공격 중 하루살이 아군이 피해를 받거나 죽지 않음.", "source": "금 성물함 / 상점 / 번들·영광 상점 여부 확인", "img": "https://lorrelics.com/assets/icons/relics/TheTakersBow-DSaErhG.webp", "tags": "the taker's bow 거두는 자의 활 epic a 공격 중 하루살이 아군이 피해를 받거나 죽지 않음. 르블랑, 영혼의 꽃 이블린/킨드레드, 하루살이 공격 덱 금 성물함 / 상점 / 번들·영광 상점 여부 확인"}, {"en": "Twin Drakehounds", "ko": "쌍둥이 드레이크하운드", "rarity": "Epic", "tier": "A", "use": "암베사, 녹서스 전투 덱", "effect": "암베사/녹서스 전투 보조.", "source": "금 성물함 / 상점 / 번들·영광 상점 여부 확인", "img": "https://lorrelics.com/assets/icons/relics/TwinDrakehounds-OMm5XMm.webp", "tags": "twin drakehounds 쌍둥이 드레이크하운드 epic a 암베사/녹서스 전투 보조. 암베사, 녹서스 전투 덱 금 성물함 / 상점 / 번들·영광 상점 여부 확인"}, {"en": "Warlord's Helmet", "ko": "전쟁군주의 투구", "rarity": "Epic", "tier": "A", "use": "다리우스, 세트, 고스탯 챔피언", "effect": "고스탯/전투형 챔피언 보조.", "source": "금 성물함 / 상점 / 번들·영광 상점 여부 확인", "img": "https://lorrelics.com/assets/icons/relics/WarlordsHelmet-BeT6qjZ.webp", "tags": "warlord's helmet 전쟁군주의 투구 epic a 고스탯/전투형 챔피언 보조. 다리우스, 세트, 고스탯 챔피언 금 성물함 / 상점 / 번들·영광 상점 여부 확인"}, {"en": "Whisper", "ko": "속삭임", "rarity": "Epic", "tier": "A", "use": "진", "effect": "진/스킬-주문 기반 운영 보조.", "source": "금 성물함 / 상점 / 번들·영광 상점 여부 확인", "img": "https://lorrelics.com/assets/icons/relics/Whisper-KhTYYM8.webp", "tags": "whisper 속삭임 epic a 진/스킬-주문 기반 운영 보조. 진 금 성물함 / 상점 / 번들·영광 상점 여부 확인"}, {"en": "Yasuo's Windblade", "ko": "야스오의 바람검", "rarity": "Epic", "tier": "A", "use": "야스오", "effect": "야스오면 시작 마나 +1. 적 리콜 시 비용 +2.", "source": "금 성물함 / 상점 / 번들·영광 상점 여부 확인", "img": "https://lorrelics.com/assets/icons/relics/YasuosWindblade-t6QE-FT.webp", "tags": "yasuo's windblade 야스오의 바람검 epic a 야스오면 시작 마나 +1. 적 리콜 시 비용 +2. 야스오 금 성물함 / 상점 / 번들·영광 상점 여부 확인"}, {"en": "Cease and Desist", "ko": "정지 명령", "rarity": "Epic", "tier": "B", "use": "테마·전용 빌드 / 애정픽용", "effect": "임팩트 3. 10공 이상이면 방어막 후 최강 적에게 자유 공격.", "source": "금 성물함 / 상점 / 번들·영광 상점 여부 확인", "img": "https://lorrelics.com/assets/icons/relics/CeaseandDesist-hgW8O0i.webp", "tags": "cease and desist 정지 명령 epic b 임팩트 3. 10공 이상이면 방어막 후 최강 적에게 자유 공격. 테마·전용 빌드 / 애정픽용 금 성물함 / 상점 / 번들·영광 상점 여부 확인"}, {"en": "Celestial Star", "ko": "천체의 별", "rarity": "Epic", "tier": "B", "use": "테마·전용 빌드 / 애정픽용", "effect": "천체/타곤 계열 보조.", "source": "금 성물함 / 상점 / 번들·영광 상점 여부 확인", "img": "https://lorrelics.com/assets/icons/relics/CelestialStaff-JiRaqEm.webp", "tags": "celestial star 천체의 별 epic b 천체/타곤 계열 보조. 테마·전용 빌드 / 애정픽용 금 성물함 / 상점 / 번들·영광 상점 여부 확인"}, {"en": "Champion's Purse", "ko": "챔피언의 지갑", "rarity": "Epic", "tier": "B", "use": "테마·전용 빌드 / 애정픽용", "effect": "+2|+0 및 압도. 전투 처치 시 동전 생성.", "source": "금 성물함 / 상점 / 번들·영광 상점 여부 확인", "img": "https://lorrelics.com/assets/icons/relics/ChampionsPurse-ugzIvyq.webp", "tags": "champion's purse 챔피언의 지갑 epic b +2|+0 및 압도. 전투 처치 시 동전 생성. 테마·전용 빌드 / 애정픽용 금 성물함 / 상점 / 번들·영광 상점 여부 확인"}, {"en": "Cruel Experiments", "ko": "잔혹한 실험", "rarity": "Epic", "tier": "B", "use": "테마·전용 빌드 / 애정픽용", "effect": "체력 2+ 아군을 낼 때 피해를 주고 압도/임팩트 부여.", "source": "금 성물함 / 상점 / 번들·영광 상점 여부 확인", "img": "https://lorrelics.com/assets/icons/relics/CruelExperiments-vhwPF07.webp", "tags": "cruel experiments 잔혹한 실험 epic b 체력 2+ 아군을 낼 때 피해를 주고 압도/임팩트 부여. 테마·전용 빌드 / 애정픽용 금 성물함 / 상점 / 번들·영광 상점 여부 확인"}, {"en": "Deadly Harpoon", "ko": "치명적 작살", "rarity": "Epic", "tier": "B", "use": "테마·전용 빌드 / 애정픽용", "effect": "+2|+0 및 도전자. 게임 시작 시 특정 주문을 덱에 섞음.", "source": "금 성물함 / 상점 / 번들·영광 상점 여부 확인", "img": "https://lorrelics.com/assets/icons/relics/DeadlyHarpoon-vCQxSOp.webp", "tags": "deadly harpoon 치명적 작살 epic b +2|+0 및 도전자. 게임 시작 시 특정 주문을 덱에 섞음. 테마·전용 빌드 / 애정픽용 금 성물함 / 상점 / 번들·영광 상점 여부 확인"}, {"en": "Deck of Destiny", "ko": "운명의 덱", "rarity": "Epic", "tier": "B", "use": "테마·전용 빌드 / 애정픽용", "effect": "+1|+1. 덱 장수에 따라 와일드 카드 생성.", "source": "금 성물함 / 상점 / 번들·영광 상점 여부 확인", "img": "https://lorrelics.com/assets/icons/relics/DeckofDestiny-D5q_F2-.webp", "tags": "deck of destiny 운명의 덱 epic b +1|+1. 덱 장수에 따라 와일드 카드 생성. 테마·전용 빌드 / 애정픽용 금 성물함 / 상점 / 번들·영광 상점 여부 확인"}, {"en": "Defense Spending", "ko": "방위비 지출", "rarity": "Epic", "tier": "B", "use": "테마·전용 빌드 / 애정픽용", "effect": "내 넥서스가 강인함을 얻음. Tech 태그.", "source": "금 성물함 / 상점 / 번들·영광 상점 여부 확인", "img": "https://lorrelics.com/assets/icons/relics/DefenseSpending-eAO96m0.webp", "tags": "defense spending 방위비 지출 epic b 내 넥서스가 강인함을 얻음. tech 태그. 테마·전용 빌드 / 애정픽용 금 성물함 / 상점 / 번들·영광 상점 여부 확인"}, {"en": "Draconic Runes", "ko": "용의 룬", "rarity": "Epic", "tier": "B", "use": "테마·전용 빌드 / 애정픽용", "effect": "용/고비용 계열 보조.", "source": "금 성물함 / 상점 / 번들·영광 상점 여부 확인", "img": "https://lorrelics.com/assets/icons/relics/DraconicRunes-oXBZ5Nv.webp", "tags": "draconic runes 용의 룬 epic b 용/고비용 계열 보조. 테마·전용 빌드 / 애정픽용 금 성물함 / 상점 / 번들·영광 상점 여부 확인"}, {"en": "Emotional Support Bear", "ko": "정서 지원 곰", "rarity": "Epic", "tier": "B", "use": "테마·전용 빌드 / 애정픽용", "effect": "소환/곰/지원형 테마 보조.", "source": "금 성물함 / 상점 / 번들·영광 상점 여부 확인", "img": "https://lorrelics.com/assets/icons/relics/EmotionalSupportBear-ataKRqn.webp", "tags": "emotional support bear 정서 지원 곰 epic b 소환/곰/지원형 테마 보조. 테마·전용 빌드 / 애정픽용 금 성물함 / 상점 / 번들·영광 상점 여부 확인"}, {"en": "Essence Theft", "ko": "본질 강탈", "rarity": "Epic", "tier": "B", "use": "테마·전용 빌드 / 애정픽용", "effect": "다른 유닛을 리콜할 때 내 공격력 증가. 게임 시작에 귀환 주문 생성.", "source": "금 성물함 / 상점 / 번들·영광 상점 여부 확인", "img": "https://lorrelics.com/assets/icons/relics/EssenceTheft-9kMkE19.webp", "tags": "essence theft 본질 강탈 epic b 다른 유닛을 리콜할 때 내 공격력 증가. 게임 시작에 귀환 주문 생성. 테마·전용 빌드 / 애정픽용 금 성물함 / 상점 / 번들·영광 상점 여부 확인"}, {"en": "Fear-Cleaving Axe", "ko": "공포를 가르는 도끼", "rarity": "Epic", "tier": "B", "use": "테마·전용 빌드 / 애정픽용", "effect": "영혼 공격: 모든 유닛 부스트.", "source": "금 성물함", "img": "https://lorrelics.com/assets/icons/relics/FearCleavingAxe-8YL97zJ.webp", "tags": "fear-cleaving axe 공포를 가르는 도끼 epic b 영혼 공격: 모든 유닛 부스트. 테마·전용 빌드 / 애정픽용 금 성물함"}, {"en": "Found Fortune", "ko": "찾아낸 행운", "rarity": "Epic", "tier": "B", "use": "테마·전용 빌드 / 애정픽용", "effect": "플레이: 내 기본 비용보다 낮은 최고 비용 카드 드로우, 서사 아이템 부여, 비용 0.", "source": "금 성물함", "img": "https://lorrelics.com/assets/icons/relics/FoundFortune-5M2VepT.webp", "tags": "found fortune 찾아낸 행운 epic b 플레이: 내 기본 비용보다 낮은 최고 비용 카드 드로우, 서사 아이템 부여, 비용 0. 테마·전용 빌드 / 애정픽용 금 성물함"}, {"en": "Frozen Tomb", "ko": "얼어붙은 무덤", "rarity": "Epic", "tier": "B", "use": "테마·전용 빌드 / 애정픽용", "effect": "게임 시작: 카운트다운 랜드마크로 나를 소환.", "source": "금 성물함", "img": "https://lorrelics.com/assets/icons/relics/FrozenTomb-paBrX5f.webp", "tags": "frozen tomb 얼어붙은 무덤 epic b 게임 시작: 카운트다운 랜드마크로 나를 소환. 테마·전용 빌드 / 애정픽용 금 성물함"}, {"en": "Full Build", "ko": "풀 빌드", "rarity": "Epic", "tier": "B", "use": "테마·전용 빌드 / 애정픽용", "effect": "도전자, 강인함, 압도.", "source": "아우렐리온 솔 업적/퀘스트", "img": "https://lorrelics.com/assets/icons/relics/FullBuild-sspDrVy.webp", "tags": "full build 풀 빌드 epic b 도전자, 강인함, 압도. 테마·전용 빌드 / 애정픽용 아우렐리온 솔 업적/퀘스트"}, {"en": "Great Talons", "ko": "거대한 발톱", "rarity": "Epic", "tier": "B", "use": "테마·전용 빌드 / 애정픽용", "effect": "6+ 비용 유닛을 내면 적 전체와 넥서스에 피해.", "source": "금 성물함 / 상점 / 번들·영광 상점 여부 확인", "img": "https://lorrelics.com/assets/icons/relics/GreatTalons-4aiC6Yb.webp", "tags": "great talons 거대한 발톱 epic b 6+ 비용 유닛을 내면 적 전체와 넥서스에 피해. 테마·전용 빌드 / 애정픽용 금 성물함 / 상점 / 번들·영광 상점 여부 확인"}, {"en": "Harsh Lesson", "ko": "가혹한 교훈", "rarity": "Epic", "tier": "B", "use": "테마·전용 빌드 / 애정픽용", "effect": "전투/피해 기반 보조.", "source": "금 성물함 / 상점 / 번들·영광 상점 여부 확인", "img": "", "tags": "harsh lesson 가혹한 교훈 epic b 전투/피해 기반 보조. 테마·전용 빌드 / 애정픽용 금 성물함 / 상점 / 번들·영광 상점 여부 확인"}, {"en": "Innervating Locket", "ko": "활력의 로켓", "rarity": "Epic", "tier": "B", "use": "테마·전용 빌드 / 애정픽용", "effect": "마나/회복형 주문 보조.", "source": "금 성물함 / 상점 / 번들·영광 상점 여부 확인", "img": "https://lorrelics.com/assets/icons/relics/InnervatingLocket-PKJKYNn.webp", "tags": "innervating locket 활력의 로켓 epic b 마나/회복형 주문 보조. 테마·전용 빌드 / 애정픽용 금 성물함 / 상점 / 번들·영광 상점 여부 확인"}, {"en": "Living Weapon", "ko": "살아있는 무기", "rarity": "Epic", "tier": "B", "use": "테마·전용 빌드 / 애정픽용", "effect": "플레이/공격/라운드 시작: 나를 제련.", "source": "금 성물함", "img": "https://lorrelics.com/assets/icons/relics/LivingWeapon-Nct_bqs.webp", "tags": "living weapon 살아있는 무기 epic b 플레이/공격/라운드 시작: 나를 제련. 테마·전용 빌드 / 애정픽용 금 성물함"}, {"en": "Loaded Dice", "ko": "사기 주사위", "rarity": "Epic", "tier": "B", "use": "테마·전용 빌드 / 애정픽용", "effect": "+3 리롤. 서사 파워/아이템 발견 확률 증가.", "source": "금 성물함", "img": "https://lorrelics.com/assets/icons/relics/LoadedDice-kuzuFlP.webp", "tags": "loaded dice 사기 주사위 epic b +3 리롤. 서사 파워/아이템 발견 확률 증가. 테마·전용 빌드 / 애정픽용 금 성물함"}, {"en": "Portal Pals", "ko": "차원문 친구들", "rarity": "Epic", "tier": "B", "use": "테마·전용 빌드 / 애정픽용", "effect": "소환 시 내 지역의 7+ 비용 유닛 2장 생성 및 비용 감소.", "source": "금 성물함", "img": "https://lorrelics.com/assets/icons/relics/PortalPals-HlzxfFl.webp", "tags": "portal pals 차원문 친구들 epic b 소환 시 내 지역의 7+ 비용 유닛 2장 생성 및 비용 감소. 테마·전용 빌드 / 애정픽용 금 성물함"}, {"en": "Price of Retribution", "ko": "복수의 대가", "rarity": "Epic", "tier": "B", "use": "테마·전용 빌드 / 애정픽용", "effect": "피해/복수 조건형 전투 보조.", "source": "금 성물함 / 상점 / 번들·영광 상점 여부 확인", "img": "https://lorrelics.com/assets/icons/relics/PriceofRetribution-JBVtutD.webp", "tags": "price of retribution 복수의 대가 epic b 피해/복수 조건형 전투 보조. 테마·전용 빌드 / 애정픽용 금 성물함 / 상점 / 번들·영광 상점 여부 확인"}, {"en": "Protectors of Demacia", "ko": "데마시아의 수호자들", "rarity": "Epic", "tier": "B", "use": "테마·전용 빌드 / 애정픽용", "effect": "데마시아 넓은 필드/보호 보조.", "source": "금 성물함 / 상점 / 번들·영광 상점 여부 확인", "img": "https://lorrelics.com/assets/icons/relics/ProtectorsofDemacia-OcK9LcJ.webp", "tags": "protectors of demacia 데마시아의 수호자들 epic b 데마시아 넓은 필드/보호 보조. 테마·전용 빌드 / 애정픽용 금 성물함 / 상점 / 번들·영광 상점 여부 확인"}, {"en": "Queen's Embrace", "ko": "여왕의 포옹", "rarity": "Epic", "tier": "B", "use": "테마·전용 빌드 / 애정픽용", "effect": "거미/토큰/여왕 계열 보조.", "source": "금 성물함 / 상점 / 번들·영광 상점 여부 확인", "img": "https://lorrelics.com/assets/icons/relics/QueensEmbrace-04fUpyo.webp", "tags": "queen's embrace 여왕의 포옹 epic b 거미/토큰/여왕 계열 보조. 테마·전용 빌드 / 애정픽용 금 성물함 / 상점 / 번들·영광 상점 여부 확인"}, {"en": "Renewing Power", "ko": "재생하는 힘", "rarity": "Epic", "tier": "B", "use": "테마·전용 빌드 / 애정픽용", "effect": "회복/재생 계열 보조.", "source": "금 성물함 / 상점 / 번들·영광 상점 여부 확인", "img": "https://lorrelics.com/assets/icons/relics/RenewingPower-RYlRtLH.webp", "tags": "renewing power 재생하는 힘 epic b 회복/재생 계열 보조. 테마·전용 빌드 / 애정픽용 금 성물함 / 상점 / 번들·영광 상점 여부 확인"}, {"en": "Rhythms of Despair", "ko": "절망의 리듬", "rarity": "Epic", "tier": "B", "use": "테마·전용 빌드 / 애정픽용", "effect": "우울/디버프 계열 보조.", "source": "금 성물함 / 상점 / 번들·영광 상점 여부 확인", "img": "https://lorrelics.com/assets/icons/relics/RhythmsofDespair-kmr4Vuj.webp", "tags": "rhythms of despair 절망의 리듬 epic b 우울/디버프 계열 보조. 테마·전용 빌드 / 애정픽용 금 성물함 / 상점 / 번들·영광 상점 여부 확인"}, {"en": "Royal Nibbles", "ko": "왕실 한입", "rarity": "Epic", "tier": "B", "use": "테마·전용 빌드 / 애정픽용", "effect": "+1|+1, 재생. 포로 아군 수에 따라 비용 감소.", "source": "금 성물함 / 상점 / 번들·영광 상점 여부 확인", "img": "https://lorrelics.com/assets/icons/relics/RoyalNibbles-ALOETXY.webp", "tags": "royal nibbles 왕실 한입 epic b +1|+1, 재생. 포로 아군 수에 따라 비용 감소. 테마·전용 빌드 / 애정픽용 금 성물함 / 상점 / 번들·영광 상점 여부 확인"}, {"en": "Scoundrel Hunter", "ko": "악당 사냥꾼", "rarity": "Epic", "tier": "B", "use": "테마·전용 빌드 / 애정픽용", "effect": "악당/제거형 보조.", "source": "금 성물함 / 상점 / 번들·영광 상점 여부 확인", "img": "https://lorrelics.com/assets/icons/relics/ScoundrelHunter-os6UgMU.webp", "tags": "scoundrel hunter 악당 사냥꾼 epic b 악당/제거형 보조. 테마·전용 빌드 / 애정픽용 금 성물함 / 상점 / 번들·영광 상점 여부 확인"}, {"en": "Sentinel's Plate", "ko": "감시자의 판금갑", "rarity": "Epic", "tier": "B", "use": "테마·전용 빌드 / 애정픽용", "effect": "데마시아/감시자 계열 공격형 보조.", "source": "금 성물함 / 상점 / 번들·영광 상점 여부 확인", "img": "https://lorrelics.com/assets/icons/relics/SentinelsPlate-hoEijCk.webp", "tags": "sentinel's plate 감시자의 판금갑 epic b 데마시아/감시자 계열 공격형 보조. 테마·전용 빌드 / 애정픽용 금 성물함 / 상점 / 번들·영광 상점 여부 확인"}, {"en": "Siren's Call", "ko": "사이렌의 부름", "rarity": "Epic", "tier": "B", "use": "테마·전용 빌드 / 애정픽용", "effect": "빌지워터 주문/공격 보조.", "source": "금 성물함 / 상점 / 번들·영광 상점 여부 확인", "img": "https://lorrelics.com/assets/icons/relics/SirensCall-69RuXc_.webp", "tags": "siren's call 사이렌의 부름 epic b 빌지워터 주문/공격 보조. 테마·전용 빌드 / 애정픽용 금 성물함 / 상점 / 번들·영광 상점 여부 확인"}, {"en": "Spellweaver's Symphony", "ko": "주문직공의 교향곡", "rarity": "Epic", "tier": "B", "use": "테마·전용 빌드 / 애정픽용", "effect": "공격 토큰 획득 시 0코 일회성 2코 주문 생성.", "source": "금 성물함", "img": "https://lorrelics.com/assets/icons/relics/SpellweaversSymphony-iBO_1o1.webp", "tags": "spellweaver's symphony 주문직공의 교향곡 epic b 공격 토큰 획득 시 0코 일회성 2코 주문 생성. 테마·전용 빌드 / 애정픽용 금 성물함"}, {"en": "Stacked Deck", "ko": "쌓인 덱", "rarity": "Epic", "tier": "B", "use": "테마·전용 빌드 / 애정픽용", "effect": "시작 골드 +200. 덱 장수에 따라 아군 +1|+1.", "source": "금 성물함", "img": "https://lorrelics.com/assets/icons/relics/StackedDeck-lL2qhZ2.webp", "tags": "stacked deck 쌓인 덱 epic b 시작 골드 +200. 덱 장수에 따라 아군 +1|+1. 테마·전용 빌드 / 애정픽용 금 성물함"}, {"en": "Strength of Stone", "ko": "돌의 힘", "rarity": "Epic", "tier": "B", "use": "테마·전용 빌드 / 애정픽용", "effect": "+0|+2. 아군 소환 시 +0|+1 및 강인함 계열 부여.", "source": "금 성물함", "img": "https://lorrelics.com/assets/icons/relics/StrengthofStone-MGfA7DN.webp", "tags": "strength of stone 돌의 힘 epic b +0|+2. 아군 소환 시 +0|+1 및 강인함 계열 부여. 테마·전용 빌드 / 애정픽용 금 성물함"}, {"en": "Timehonored Blade", "ko": "시간을 품은 검", "rarity": "Epic", "tier": "B", "use": "테마·전용 빌드 / 애정픽용", "effect": "마스터 이/아이오니아 검객 계열 보조.", "source": "금 성물함 / 상점 / 번들·영광 상점 여부 확인", "img": "https://lorrelics.com/assets/icons/relics/TimehonoredBlade-1pEdLhx.webp", "tags": "timehonored blade 시간을 품은 검 epic b 마스터 이/아이오니아 검객 계열 보조. 테마·전용 빌드 / 애정픽용 금 성물함 / 상점 / 번들·영광 상점 여부 확인"}, {"en": "Treasures of the Deep", "ko": "심해의 보물", "rarity": "Epic", "tier": "B", "use": "테마·전용 빌드 / 애정픽용", "effect": "심해/노틸러스 계열 보조.", "source": "금 성물함 / 상점 / 번들·영광 상점 여부 확인", "img": "https://lorrelics.com/assets/icons/relics/TreasuresoftheDeep-nrpuMOW.webp", "tags": "treasures of the deep 심해의 보물 epic b 심해/노틸러스 계열 보조. 테마·전용 빌드 / 애정픽용 금 성물함 / 상점 / 번들·영광 상점 여부 확인"}, {"en": "Whirling Blade", "ko": "소용돌이 검", "rarity": "Epic", "tier": "B", "use": "테마·전용 빌드 / 애정픽용", "effect": "공격/전투 트릭형 보조.", "source": "금 성물함 / 상점 / 번들·영광 상점 여부 확인", "img": "https://lorrelics.com/assets/icons/relics/WhirlingBlade-FHGi-2i.webp", "tags": "whirling blade 소용돌이 검 epic b 공격/전투 트릭형 보조. 테마·전용 빌드 / 애정픽용 금 성물함 / 상점 / 번들·영광 상점 여부 확인"}, {"en": "Yeti Spotting Guide", "ko": "눈사람 발견 안내서", "rarity": "Epic", "tier": "B", "use": "테마·전용 빌드 / 애정픽용", "effect": "예티/누누 계열 보조.", "source": "금 성물함 / 상점 / 번들·영광 상점 여부 확인", "img": "https://lorrelics.com/assets/icons/relics/YetiSpottingGuide-4ZBDvmK.webp", "tags": "yeti spotting guide 눈사람 발견 안내서 epic b 예티/누누 계열 보조. 테마·전용 빌드 / 애정픽용 금 성물함 / 상점 / 번들·영광 상점 여부 확인"}, {"en": "Chemtech Duplicator", "ko": "켐테크 복제기", "rarity": "Rare", "tier": "A", "use": "모르가나, 에코, 애쉬, 주문 복사 덱", "effect": "6+ 마나 보석 상태에서 주문을 쓰면 같은 대상으로 복사.", "source": "은 성물함 / 2성 캠페인 / 상점", "img": "https://lorrelics.com/assets/icons/relics/ChemtechDuplicator-quMgx3a.webp", "tags": "chemtech duplicator 켐테크 복제기 rare a 6+ 마나 보석 상태에서 주문을 쓰면 같은 대상으로 복사. 모르가나, 에코, 애쉬, 주문 복사 덱 은 성물함 / 2성 캠페인 / 상점"}, {"en": "Corrupted Star Fragment", "ko": "타락한 별조각", "rarity": "Rare", "tier": "A", "use": "비에고, 그웬, 유미, 큰 유닛 흡수 덱", "effect": "지원: 지원한 아군을 처치하고 능력치/키워드를 흡수.", "source": "은 성물함 / 2성 캠페인 / 상점", "img": "https://lorrelics.com/assets/icons/relics/CorruptedStarFragment-bokRL1J.webp", "tags": "corrupted star fragment 타락한 별조각 rare a 지원: 지원한 아군을 처치하고 능력치/키워드를 흡수. 비에고, 그웬, 유미, 큰 유닛 흡수 덱 은 성물함 / 2성 캠페인 / 상점"}, {"en": "Galeforce", "ko": "돌풍", "rarity": "Rare", "tier": "A", "use": "티모, 유미, 정찰/재공격 덱", "effect": "정찰. 라운드 종료 시 나를 덱에 섞음.", "source": "은 성물함 / 2성 캠페인 / 상점", "img": "https://lorrelics.com/assets/icons/relics/Galeforce-uvqKL8z.webp", "tags": "galeforce 돌풍 rare a 정찰. 라운드 종료 시 나를 덱에 섞음. 티모, 유미, 정찰/재공격 덱 은 성물함 / 2성 캠페인 / 상점"}, {"en": "Guardian's Orb", "ko": "수호자의 보주", "rarity": "Rare", "tier": "A", "use": "릴리아, 에코, 니코, 반복 소환 덱", "effect": "소환 시 덱의 무작위 카드 3장에 서사 아이템 부여.", "source": "은 성물함 / 2성 캠페인 / 상점", "img": "https://lorrelics.com/assets/icons/relics/GuardiansOrb-QggeZ1Z.webp", "tags": "guardian's orb 수호자의 보주 rare a 소환 시 덱의 무작위 카드 3장에 서사 아이템 부여. 릴리아, 에코, 니코, 반복 소환 덱 은 성물함 / 2성 캠페인 / 상점"}, {"en": "Luden's Tempest", "ko": "루덴의 폭풍", "rarity": "Rare", "tier": "A", "use": "진, 벡스, 케이틀린, 스킬 피해 덱", "effect": "내 주문과 스킬 피해 +1.", "source": "럭스 2성 캠페인", "img": "https://lorrelics.com/assets/icons/relics/LudensTempest-9wszs5J.webp", "tags": "luden's tempest 루덴의 폭풍 rare a 내 주문과 스킬 피해 +1. 진, 벡스, 케이틀린, 스킬 피해 덱 럭스 2성 캠페인"}, {"en": "Riptide Battery", "ko": "역조 포대", "rarity": "Rare", "tier": "A", "use": "스웨인, 진, 징크스", "effect": "약탈: 내 비용만큼 포격 주문 발동.", "source": "야스오 2성 캠페인", "img": "https://lorrelics.com/assets/icons/relics/RiptideBattery-F_Jlsmf.webp", "tags": "riptide battery 역조 포대 rare a 약탈: 내 비용만큼 포격 주문 발동. 스웨인, 진, 징크스 야스오 2성 캠페인"}, {"en": "Stalker's Blade", "ko": "추적자의 검", "rarity": "Rare", "tier": "A", "use": "비에고, 제거기 필요한 챔피언", "effect": "소환 시 최약 적을 타격.", "source": "징크스 2성 캠페인", "img": "https://lorrelics.com/assets/icons/relics/StalkersBlade-Kq3mHRc.webp", "tags": "stalker's blade 추적자의 검 rare a 소환 시 최약 적을 타격. 비에고, 제거기 필요한 챔피언 징크스 2성 캠페인"}, {"en": "Star Gem", "ko": "별보석", "rarity": "Rare", "tier": "A", "use": "아우렐리온 솔, 수호자의 서약 빌드", "effect": "아군 챔피언 +1|+1 및 비용 -2.", "source": "은 성물함 / 2성 캠페인 / 상점", "img": "https://lorrelics.com/assets/icons/relics/StarGem-u98A93t.webp", "tags": "star gem 별보석 rare a 아군 챔피언 +1|+1 및 비용 -2. 아우렐리온 솔, 수호자의 서약 빌드 은 성물함 / 2성 캠페인 / 상점"}, {"en": "Tempest Blade", "ko": "폭풍의 검", "rarity": "Rare", "tier": "A", "use": "야스오, 레오나, 이블린", "effect": "내가 레벨업하면 모든 적 기절.", "source": "미스 포츈 2성 캠페인", "img": "https://lorrelics.com/assets/icons/relics/TempestBlade-iGMtbFq.webp", "tags": "tempest blade 폭풍의 검 rare a 내가 레벨업하면 모든 적 기절. 야스오, 레오나, 이블린 미스 포츈 2성 캠페인"}, {"en": "The Grand General's Counterplan", "ko": "대장군의 대책", "rarity": "Rare", "tier": "A", "use": "야스오, 애쉬, 레오나, 진, 챔피언 주문 반복", "effect": "라운드 시작: 내 일회성 복사본 생성.", "source": "바이 2성 캠페인", "img": "https://lorrelics.com/assets/icons/relics/TheGrandGeneralsCounterplan-GrvBUHb.webp", "tags": "the grand general's counterplan 대장군의 대책 rare a 라운드 시작: 내 일회성 복사본 생성. 야스오, 애쉬, 레오나, 진, 챔피언 주문 반복 바이 2성 캠페인"}, {"en": "The Loose Cannon's Payload", "ko": "난폭한 말괄량이의 폭발력", "rarity": "Rare", "tier": "A", "use": "징크스 핵심", "effect": "소환 시 손패를 버리고 그 수만큼 폭탄 생성.", "source": "가렌 2성 캠페인", "img": "https://lorrelics.com/assets/icons/relics/TheLooseCannonsPayload-vpCol8Z.webp", "tags": "the loose cannon's payload 난폭한 말괄량이의 폭발력 rare a 소환 시 손패를 버리고 그 수만큼 폭탄 생성. 징크스 핵심 가렌 2성 캠페인"}, {"en": "Arcane Comet", "ko": "신비한 혜성", "rarity": "Rare", "tier": "B", "use": "특정 챔피언/월간 도전 보조", "effect": "라운드 시작: 일회성 고비용 주문을 생성.", "source": "은 성물함 / 2성 캠페인 / 상점", "img": "https://lorrelics.com/assets/icons/relics/ArcaneComet-eeL7EK8.webp", "tags": "arcane comet 신비한 혜성 rare b 라운드 시작: 일회성 고비용 주문을 생성. 특정 챔피언/월간 도전 보조 은 성물함 / 2성 캠페인 / 상점"}, {"en": "Archangel's Staff", "ko": "대천사의 지팡이", "rarity": "Rare", "tier": "B", "use": "특정 챔피언/월간 도전 보조", "effect": "라운드 시작: 주문 마나를 회복.", "source": "진 2성 캠페인", "img": "https://lorrelics.com/assets/icons/relics/ArchangelsStaff-KQ7wzpq.webp", "tags": "archangel's staff 대천사의 지팡이 rare b 라운드 시작: 주문 마나를 회복. 특정 챔피언/월간 도전 보조 진 2성 캠페인"}, {"en": "Blood Brand", "ko": "피의 낙인", "rarity": "Rare", "tier": "B", "use": "특정 챔피언/월간 도전 보조", "effect": "피해/흡혈/사망 테마 보조.", "source": "은 성물함 / 2성 캠페인 / 상점", "img": "https://lorrelics.com/assets/icons/relics/BloodBrand-1vH8VGT.webp", "tags": "blood brand 피의 낙인 rare b 피해/흡혈/사망 테마 보조. 특정 챔피언/월간 도전 보조 은 성물함 / 2성 캠페인 / 상점"}, {"en": "Caulfield's Warhammer", "ko": "콜필드의 전투망치", "rarity": "Rare", "tier": "B", "use": "특정 챔피언/월간 도전 보조", "effect": "+2|+1.", "source": "은 성물함 / 2성 캠페인 / 상점", "img": "https://lorrelics.com/assets/icons/relics/CaulfieldsWarhammer-w_tTJCj.webp", "tags": "caulfield's warhammer 콜필드의 전투망치 rare b +2|+1. 특정 챔피언/월간 도전 보조 은 성물함 / 2성 캠페인 / 상점"}, {"en": "Condenser", "ko": "응축기", "rarity": "Rare", "tier": "B", "use": "특정 챔피언/월간 도전 보조", "effect": "지원: 지원한 아군의 1코 1|1 복사본 생성.", "source": "은 성물함 / 2성 캠페인 / 상점", "img": "https://lorrelics.com/assets/icons/relics/Condenser-F7ydHh1.webp", "tags": "condenser 응축기 rare b 지원: 지원한 아군의 1코 1|1 복사본 생성. 특정 챔피언/월간 도전 보조 은 성물함 / 2성 캠페인 / 상점"}, {"en": "Crownguard Inheritance", "ko": "크라운가드 유산", "rarity": "Rare", "tier": "B", "use": "특정 챔피언/월간 도전 보조", "effect": "내가 레벨업하면 결집.", "source": "다리우스 2성 캠페인", "img": "https://lorrelics.com/assets/icons/relics/CrownguardInheritance-9ZS65NW.webp", "tags": "crownguard inheritance 크라운가드 유산 rare b 내가 레벨업하면 결집. 특정 챔피언/월간 도전 보조 다리우스 2성 캠페인"}, {"en": "Dreadway Chase Gun", "ko": "드레드웨이 추격포", "rarity": "Rare", "tier": "B", "use": "특정 챔피언/월간 도전 보조", "effect": "소환 시 저코스트 포격 주문 2장 생성.", "source": "은 성물함 / 2성 캠페인 / 상점", "img": "https://lorrelics.com/assets/icons/relics/DreadwayChaseGun-xquwQPj.webp", "tags": "dreadway chase gun 드레드웨이 추격포 rare b 소환 시 저코스트 포격 주문 2장 생성. 특정 챔피언/월간 도전 보조 은 성물함 / 2성 캠페인 / 상점"}, {"en": "Fate's Hand", "ko": "운명의 손", "rarity": "Rare", "tier": "B", "use": "특정 챔피언/월간 도전 보조", "effect": "카드 뽑기/운명 계열 보조.", "source": "은 성물함 / 2성 캠페인 / 상점", "img": "https://lorrelics.com/assets/icons/relics/FatesHand-wY5KIkw.webp", "tags": "fate's hand 운명의 손 rare b 카드 뽑기/운명 계열 보조. 특정 챔피언/월간 도전 보조 은 성물함 / 2성 캠페인 / 상점"}, {"en": "Golden Spatula", "ko": "황금 뒤집개", "rarity": "Rare", "tier": "B", "use": "특정 챔피언/월간 도전 보조", "effect": "소환 시 덱 장수에 따라 스탯/키워드 획득.", "source": "은 성물함 / 2성 캠페인 / 상점", "img": "https://lorrelics.com/assets/icons/relics/GoldenSpatula-vWUr_JB.webp", "tags": "golden spatula 황금 뒤집개 rare b 소환 시 덱 장수에 따라 스탯/키워드 획득. 특정 챔피언/월간 도전 보조 은 성물함 / 2성 캠페인 / 상점"}, {"en": "Greenglade Shadeleaf", "ko": "녹림 그림자잎", "rarity": "Rare", "tier": "B", "use": "특정 챔피언/월간 도전 보조", "effect": "지원: 지원한 아군에게 포착불가 부여.", "source": "애니 2성 캠페인", "img": "https://lorrelics.com/assets/icons/relics/GreengladeShadeleaf-k4VUjfw.webp", "tags": "greenglade shadeleaf 녹림 그림자잎 rare b 지원: 지원한 아군에게 포착불가 부여. 특정 챔피언/월간 도전 보조 애니 2성 캠페인"}, {"en": "Guardian Angel", "ko": "수호천사", "rarity": "Rare", "tier": "B", "use": "특정 챔피언/월간 도전 보조", "effect": "부활 +1. 첫 사망 시 1체력으로 부활.", "source": "은 성물함 / 2성 캠페인 / 상점", "img": "https://lorrelics.com/assets/icons/relics/GuardianAngel-3Tpslzi.webp", "tags": "guardian angel 수호천사 rare b 부활 +1. 첫 사망 시 1체력으로 부활. 특정 챔피언/월간 도전 보조 은 성물함 / 2성 캠페인 / 상점"}, {"en": "Guardian's Trinket", "ko": "수호자의 장신구", "rarity": "Rare", "tier": "B", "use": "특정 챔피언/월간 도전 보조", "effect": "모험 시작: 무작위 챔피언 2장과 서사 아이템 추가.", "source": "은 성물함 / 2성 캠페인 / 상점", "img": "https://lorrelics.com/assets/icons/relics/GuardiansTrinket-eSmQ3Rw.webp", "tags": "guardian's trinket 수호자의 장신구 rare b 모험 시작: 무작위 챔피언 2장과 서사 아이템 추가. 특정 챔피언/월간 도전 보조 은 성물함 / 2성 캠페인 / 상점"}, {"en": "Heart of Gold", "ko": "황금 심장", "rarity": "Rare", "tier": "B", "use": "특정 챔피언/월간 도전 보조", "effect": "모험 중 골드 획득량 증가.", "source": "은 성물함 / 2성 캠페인 / 상점", "img": "https://lorrelics.com/assets/icons/relics/HeartofGold-_AC3uRL.webp", "tags": "heart of gold 황금 심장 rare b 모험 중 골드 획득량 증가. 특정 챔피언/월간 도전 보조 은 성물함 / 2성 캠페인 / 상점"}, {"en": "Hymn of Valor", "ko": "용맹의 찬가", "rarity": "Rare", "tier": "B", "use": "특정 챔피언/월간 도전 보조", "effect": "소환 시 버프 주문 생성.", "source": "바드 2성 캠페인", "img": "https://lorrelics.com/assets/icons/relics/HymnofValor-SlUYRK9.webp", "tags": "hymn of valor 용맹의 찬가 rare b 소환 시 버프 주문 생성. 특정 챔피언/월간 도전 보조 바드 2성 캠페인"}, {"en": "Jaurim's Fist", "ko": "자우림의 주먹", "rarity": "Rare", "tier": "B", "use": "특정 챔피언/월간 도전 보조", "effect": "+1|+2.", "source": "은 성물함 / 2성 캠페인 / 상점", "img": "https://lorrelics.com/assets/icons/relics/JaurimsFist-fkY7tR_.webp", "tags": "jaurim's fist 자우림의 주먹 rare b +1|+2. 특정 챔피언/월간 도전 보조 은 성물함 / 2성 캠페인 / 상점"}, {"en": "Laurent Bladerack", "ko": "로렌트 검대", "rarity": "Rare", "tier": "B", "use": "특정 챔피언/월간 도전 보조", "effect": "아군 전체 도전자.", "source": "은 성물함 / 2성 캠페인 / 상점", "img": "https://lorrelics.com/assets/icons/relics/LaurentBladerack-UHX3XRP.webp", "tags": "laurent bladerack 로렌트 검대 rare b 아군 전체 도전자. 특정 챔피언/월간 도전 보조 은 성물함 / 2성 캠페인 / 상점"}, {"en": "Luminous Orb", "ko": "빛나는 구체", "rarity": "Rare", "tier": "B", "use": "특정 챔피언/월간 도전 보조", "effect": "+0|+3 및 예리한 시야.", "source": "은 성물함 / 2성 캠페인 / 상점", "img": "https://lorrelics.com/assets/icons/relics/LuminousOrb-BoIb6XU.webp", "tags": "luminous orb 빛나는 구체 rare b +0|+3 및 예리한 시야. 특정 챔피언/월간 도전 보조 은 성물함 / 2성 캠페인 / 상점"}, {"en": "Makeshift Mayhem", "ko": "급조된 대혼란", "rarity": "Rare", "tier": "B", "use": "특정 챔피언/월간 도전 보조", "effect": "생성/버리기/혼란형 보조.", "source": "은 성물함 / 2성 캠페인 / 상점", "img": "https://lorrelics.com/assets/icons/relics/MakeshiftMayhem-tXOTmPE.webp", "tags": "makeshift mayhem 급조된 대혼란 rare b 생성/버리기/혼란형 보조. 특정 챔피언/월간 도전 보조 은 성물함 / 2성 캠페인 / 상점"}, {"en": "Pack-A-Punch", "ko": "팩 어 펀치", "rarity": "Rare", "tier": "B", "use": "특정 챔피언/월간 도전 보조", "effect": "공격력 펌핑/전투형 보조.", "source": "은 성물함 / 2성 캠페인 / 상점", "img": "https://lorrelics.com/assets/icons/relics/PackAPunch-PwuAK0X.webp", "tags": "pack-a-punch 팩 어 펀치 rare b 공격력 펌핑/전투형 보조. 특정 챔피언/월간 도전 보조 은 성물함 / 2성 캠페인 / 상점"}, {"en": "Succubus's Brand", "ko": "서큐버스의 낙인", "rarity": "Rare", "tier": "B", "use": "특정 챔피언/월간 도전 보조", "effect": "+1|+1. 처치 시 무작위 허스크 소환.", "source": "은 성물함 / 2성 캠페인 / 상점", "img": "https://lorrelics.com/assets/icons/relics/SuccubussBrand-TaAmfgA.webp", "tags": "succubus's brand 서큐버스의 낙인 rare b +1|+1. 처치 시 무작위 허스크 소환. 특정 챔피언/월간 도전 보조 은 성물함 / 2성 캠페인 / 상점"}, {"en": "The Berserker's Buckle", "ko": "광전사의 죔쇠", "rarity": "Rare", "tier": "B", "use": "특정 챔피언/월간 도전 보조", "effect": "피해를 받고 생존하면 +2|+2.", "source": "은 성물함 / 2성 캠페인 / 상점", "img": "https://lorrelics.com/assets/icons/relics/TheBerserkersBuckle-7VteFqJ.webp", "tags": "the berserker's buckle 광전사의 죔쇠 rare b 피해를 받고 생존하면 +2|+2. 특정 챔피언/월간 도전 보조 은 성물함 / 2성 캠페인 / 상점"}, {"en": "The Bounty Hunter's Renown", "ko": "현상금 사냥꾼의 명성", "rarity": "Rare", "tier": "B", "use": "특정 챔피언/월간 도전 보조", "effect": "보유 골드 200당 +1|+1.", "source": "은 성물함 / 2성 캠페인 / 상점", "img": "https://lorrelics.com/assets/icons/relics/TheBountyHuntersRenown-_H8LaiT.webp", "tags": "the bounty hunter's renown 현상금 사냥꾼의 명성 rare b 보유 골드 200당 +1|+1. 특정 챔피언/월간 도전 보조 은 성물함 / 2성 캠페인 / 상점"}, {"en": "The Card Master's Gambit", "ko": "카드 명인의 책략", "rarity": "Rare", "tier": "B", "use": "특정 챔피언/월간 도전 보조", "effect": "+1|+1. 넥서스 피해 없이 승리하면 리롤 +1.", "source": "은 성물함 / 2성 캠페인 / 상점", "img": "https://lorrelics.com/assets/icons/relics/TheCardMastersGambit-T-B1JTq.webp", "tags": "the card master's gambit 카드 명인의 책략 rare b +1|+1. 넥서스 피해 없이 승리하면 리롤 +1. 특정 챔피언/월간 도전 보조 은 성물함 / 2성 캠페인 / 상점"}, {"en": "The Collector", "ko": "징수자", "rarity": "Rare", "tier": "B", "use": "특정 챔피언/월간 도전 보조", "effect": "+1|+1. 적 처치 시 골드 획득.", "source": "은 성물함 / 2성 캠페인 / 상점", "img": "https://lorrelics.com/assets/icons/relics/TheCollector-wga2OVI.webp", "tags": "the collector 징수자 rare b +1|+1. 적 처치 시 골드 획득. 특정 챔피언/월간 도전 보조 은 성물함 / 2성 캠페인 / 상점"}, {"en": "The Curator's Gatebreaker", "ko": "관리자의 관문파괴자", "rarity": "Rare", "tier": "B", "use": "특정 챔피언/월간 도전 보조", "effect": "-1|0. 플레이: 적 넥서스를 타격.", "source": "은 성물함 / 2성 캠페인 / 상점", "img": "https://lorrelics.com/assets/icons/relics/TheCuratorsGatebreaker-E-LRaQJ.webp", "tags": "the curator's gatebreaker 관리자의 관문파괴자 rare b -1|0. 플레이: 적 넥서스를 타격. 특정 챔피언/월간 도전 보조 은 성물함 / 2성 캠페인 / 상점"}, {"en": "The Deceiver's Crest", "ko": "기만자의 문장", "rarity": "Rare", "tier": "B", "use": "특정 챔피언/월간 도전 보조", "effect": "레벨업 시 0코 챔피언 주문 복사본 생성.", "source": "은 성물함 / 2성 캠페인 / 상점", "img": "https://lorrelics.com/assets/icons/relics/TheDeceiversCrest-sYCei-V.webp", "tags": "the deceiver's crest 기만자의 문장 rare b 레벨업 시 0코 챔피언 주문 복사본 생성. 특정 챔피언/월간 도전 보조 은 성물함 / 2성 캠페인 / 상점"}, {"en": "The Equalizer", "ko": "동등화 장치", "rarity": "Rare", "tier": "B", "use": "특정 챔피언/월간 도전 보조", "effect": "럼블/메카요들/버리기 계열 보조.", "source": "은 성물함 / 2성 캠페인 / 상점", "img": "https://lorrelics.com/assets/icons/relics/TheEqualizer-qlXI2YT.webp", "tags": "the equalizer 동등화 장치 rare b 럼블/메카요들/버리기 계열 보조. 특정 챔피언/월간 도전 보조 은 성물함 / 2성 캠페인 / 상점"}, {"en": "The Gravedigger's Spade", "ko": "무덤지기의 삽", "rarity": "Rare", "tier": "B", "use": "특정 챔피언/월간 도전 보조", "effect": "라운드 시작: 카드 1장 드로우 후 일회성 부여.", "source": "일라오이 2성 캠페인", "img": "https://lorrelics.com/assets/icons/relics/TheGravediggersSpade-pschPMI.webp", "tags": "the gravedigger's spade 무덤지기의 삽 rare b 라운드 시작: 카드 1장 드로우 후 일회성 부여. 특정 챔피언/월간 도전 보조 일라오이 2성 캠페인"}, {"en": "The Scourge's Stash", "ko": "천벌자리의 보물", "rarity": "Rare", "tier": "B", "use": "특정 챔피언/월간 도전 보조", "effect": "약탈: 내 비용 -2.", "source": "리 신 2성 캠페인", "img": "https://lorrelics.com/assets/icons/relics/TheScourgesStash-cQziE9J.webp", "tags": "the scourge's stash 천벌자리의 보물 rare b 약탈: 내 비용 -2. 특정 챔피언/월간 도전 보조 리 신 2성 캠페인"}, {"en": "Transmogulator", "ko": "변신 장치", "rarity": "Rare", "tier": "B", "use": "특정 챔피언/월간 도전 보조", "effect": "지원: 지원한 아군을 비용 +3 추종자로 변신.", "source": "은 성물함 / 2성 캠페인 / 상점", "img": "https://lorrelics.com/assets/icons/relics/Transmogulator-ubO_XKz.webp", "tags": "transmogulator 변신 장치 rare b 지원: 지원한 아군을 비용 +3 추종자로 변신. 특정 챔피언/월간 도전 보조 은 성물함 / 2성 캠페인 / 상점"}, {"en": "Troll King's Crown", "ko": "트롤 왕의 왕관", "rarity": "Rare", "tier": "B", "use": "특정 챔피언/월간 도전 보조", "effect": "아군 전체 압도.", "source": "은 성물함 / 2성 캠페인 / 상점", "img": "https://lorrelics.com/assets/icons/relics/TrollKingsCrown-HYoCuX7.webp", "tags": "troll king's crown 트롤 왕의 왕관 rare b 아군 전체 압도. 특정 챔피언/월간 도전 보조 은 성물함 / 2성 캠페인 / 상점"}, {"en": "Turret Plating", "ko": "포탑 도금", "rarity": "Rare", "tier": "B", "use": "특정 챔피언/월간 도전 보조", "effect": "내 넥서스 강인함.", "source": "은 성물함 / 2성 캠페인 / 상점", "img": "https://lorrelics.com/assets/icons/relics/TurretPlating-2j-T6F7.webp", "tags": "turret plating 포탑 도금 rare b 내 넥서스 강인함. 특정 챔피언/월간 도전 보조 은 성물함 / 2성 캠페인 / 상점"}, {"en": "Utmost Despair", "ko": "극도의 절망", "rarity": "Rare", "tier": "B", "use": "특정 챔피언/월간 도전 보조", "effect": "플레이: 적 전체 우울 부여.", "source": "은 성물함 / 2성 캠페인 / 상점", "img": "https://lorrelics.com/assets/icons/relics/UtmostDespair-AlGABIM.webp", "tags": "utmost despair 극도의 절망 rare b 플레이: 적 전체 우울 부여. 특정 챔피언/월간 도전 보조 은 성물함 / 2성 캠페인 / 상점"}, {"en": "Voidborne Carapace", "ko": "공허 태생 껍질", "rarity": "Rare", "tier": "B", "use": "특정 챔피언/월간 도전 보조", "effect": "진화. 아무 유닛이 죽으면 그 키워드를 획득.", "source": "은 성물함 / 2성 캠페인 / 상점", "img": "https://lorrelics.com/assets/icons/relics/VoidborneCarapace-s_u-E1K.webp", "tags": "voidborne carapace 공허 태생 껍질 rare b 진화. 아무 유닛이 죽으면 그 키워드를 획득. 특정 챔피언/월간 도전 보조 은 성물함 / 2성 캠페인 / 상점"}, {"en": "Wicked Harvest", "ko": "사악한 수확", "rarity": "Rare", "tier": "B", "use": "특정 챔피언/월간 도전 보조", "effect": "플레이: 다른 모든 유닛에게 3 피해.", "source": "은 성물함 / 2성 캠페인 / 상점", "img": "https://lorrelics.com/assets/icons/relics/WickedHarvest-JjLlAX1.webp", "tags": "wicked harvest 사악한 수확 rare b 플레이: 다른 모든 유닛에게 3 피해. 특정 챔피언/월간 도전 보조 은 성물함 / 2성 캠페인 / 상점"}, {"en": "Wriggle's Lantern", "ko": "리글의 랜턴", "rarity": "Rare", "tier": "B", "use": "특정 챔피언/월간 도전 보조", "effect": "라운드 종료: 손패에 있으면 임팩트 2회 부여, 최대 10.", "source": "은 성물함 / 2성 캠페인 / 상점", "img": "https://lorrelics.com/assets/icons/relics/WrigglesLantern--fa4rT1.webp", "tags": "wriggle's lantern 리글의 랜턴 rare b 라운드 종료: 손패에 있으면 임팩트 2회 부여, 최대 10. 특정 챔피언/월간 도전 보조 은 성물함 / 2성 캠페인 / 상점"}, {"en": "Armordillo Shell", "ko": "아르마딜로 껍질", "rarity": "Common", "tier": "C", "use": "초반 임시 장착 / 키워드 보강", "effect": "+0|+1 및 강인함.", "source": "동 성물함 / 일반 보상 / 상점", "img": "https://lorrelics.com/assets/icons/relics/ArmordilloShell-nkHnIAh.webp", "tags": "armordillo shell 아르마딜로 껍질 common c +0|+1 및 강인함. 초반 임시 장착 / 키워드 보강 동 성물함 / 일반 보상 / 상점"}, {"en": "Banshee's Veil", "ko": "밴시의 장막", "rarity": "Common", "tier": "C", "use": "초반 임시 장착 / 키워드 보강", "effect": "주문 방어막.", "source": "동 성물함 / 일반 보상 / 상점", "img": "https://lorrelics.com/assets/icons/relics/BansheesVeil-JZfCiVv.webp", "tags": "banshee's veil 밴시의 장막 common c 주문 방어막. 초반 임시 장착 / 키워드 보강 동 성물함 / 일반 보상 / 상점"}, {"en": "Dreams Of Yordles", "ko": "요들들의 꿈", "rarity": "Common", "tier": "C", "use": "초반 임시 장착 / 키워드 보강", "effect": "영혼 및 임팩트.", "source": "동 성물함 / 일반 보상 / 상점", "img": "https://lorrelics.com/assets/icons/relics/DreamsOfYordles-LIJGyqY.webp", "tags": "dreams of yordles 요들들의 꿈 common c 영혼 및 임팩트. 초반 임시 장착 / 키워드 보강 동 성물함 / 일반 보상 / 상점"}, {"en": "Everfrost", "ko": "영원한 서리", "rarity": "Common", "tier": "C", "use": "초반 임시 장착 / 키워드 보강", "effect": "소환 시 최강 적 기절.", "source": "동 성물함 / 일반 보상 / 상점", "img": "https://lorrelics.com/assets/icons/relics/Everfrost-WzGGYTZ.webp", "tags": "everfrost 영원한 서리 common c 소환 시 최강 적 기절. 초반 임시 장착 / 키워드 보강 동 성물함 / 일반 보상 / 상점"}, {"en": "Guinsoo's Rageblade", "ko": "구인수의 격노검", "rarity": "Common", "tier": "C", "use": "초반 임시 장착 / 키워드 보강", "effect": "공격: 나에게 +1|+1 부여.", "source": "동 성물함 / 일반 보상 / 상점", "img": "https://lorrelics.com/assets/icons/relics/GuinsoosRageblade-A4tgu5N.webp", "tags": "guinsoo's rageblade 구인수의 격노검 common c 공격: 나에게 +1|+1 부여. 초반 임시 장착 / 키워드 보강 동 성물함 / 일반 보상 / 상점"}, {"en": "Lost Chapter", "ko": "사라진 양피지", "rarity": "Common", "tier": "C", "use": "초반 임시 장착 / 키워드 보강", "effect": "플레이: 주문 마나 회복.", "source": "동 성물함 / 일반 보상 / 상점", "img": "https://lorrelics.com/assets/icons/relics/LostChapter-7E0RPi_.webp", "tags": "lost chapter 사라진 양피지 common c 플레이: 주문 마나 회복. 초반 임시 장착 / 키워드 보강 동 성물함 / 일반 보상 / 상점"}, {"en": "Ravenous Hydra", "ko": "굶주린 히드라", "rarity": "Common", "tier": "C", "use": "초반 임시 장착 / 키워드 보강", "effect": "소환 시 모든 적에게 1 피해.", "source": "동 성물함 / 일반 보상 / 상점", "img": "https://lorrelics.com/assets/icons/relics/RavenousHydra-tLUMugl.webp", "tags": "ravenous hydra 굶주린 히드라 common c 소환 시 모든 적에게 1 피해. 초반 임시 장착 / 키워드 보강 동 성물함 / 일반 보상 / 상점"}, {"en": "Soul Spear", "ko": "영혼 창", "rarity": "Common", "tier": "C", "use": "초반 임시 장착 / 키워드 보강", "effect": "+1|+0 및 공포.", "source": "동 성물함 / 일반 보상 / 상점", "img": "https://lorrelics.com/assets/icons/relics/SoulSpear-mcueXMg.webp", "tags": "soul spear 영혼 창 common c +1|+0 및 공포. 초반 임시 장착 / 키워드 보강 동 성물함 / 일반 보상 / 상점"}, {"en": "Stormrazor", "ko": "폭풍갈퀴", "rarity": "Common", "tier": "C", "use": "초반 임시 장착 / 키워드 보강", "effect": "선제공격.", "source": "동 성물함 / 일반 보상 / 상점", "img": "https://lorrelics.com/assets/icons/relics/Stormrazor-RO7geze.webp", "tags": "stormrazor 폭풍갈퀴 common c 선제공격. 초반 임시 장착 / 키워드 보강 동 성물함 / 일반 보상 / 상점"}, {"en": "The Chameleon's Necklace", "ko": "카멜레온의 목걸이", "rarity": "Common", "tier": "C", "use": "초반 임시 장착 / 키워드 보강", "effect": "게임 시작: 내 복사본 2장을 덱에 생성.", "source": "동 성물함 / 일반 보상 / 상점", "img": "https://lorrelics.com/assets/icons/relics/TheChameleonsNecklace-h4G1fog.webp", "tags": "the chameleon's necklace 카멜레온의 목걸이 common c 게임 시작: 내 복사본 2장을 덱에 생성. 초반 임시 장착 / 키워드 보강 동 성물함 / 일반 보상 / 상점"}, {"en": "The Grand Duelist's Blade", "ko": "대결투가의 검", "rarity": "Common", "tier": "C", "use": "초반 임시 장착 / 키워드 보강", "effect": "도전자.", "source": "동 성물함 / 일반 보상 / 상점", "img": "https://lorrelics.com/assets/icons/relics/TheGrandDuelistsBlade-EJepipG.webp", "tags": "the grand duelist's blade 대결투가의 검 common c 도전자. 초반 임시 장착 / 키워드 보강 동 성물함 / 일반 보상 / 상점"}, {"en": "The Starchild's Staff", "ko": "별의 아이의 지팡이", "rarity": "Common", "tier": "C", "use": "초반 임시 장착 / 키워드 보강", "effect": "게임 시작: 내 넥서스 5 회복.", "source": "동 성물함 / 일반 보상 / 상점", "img": "https://lorrelics.com/assets/icons/relics/TheStarchildsStaff-lU-yfB7.webp", "tags": "the starchild's staff 별의 아이의 지팡이 common c 게임 시작: 내 넥서스 5 회복. 초반 임시 장착 / 키워드 보강 동 성물함 / 일반 보상 / 상점"}, {"en": "The Troll King's Crusher", "ko": "트롤 왕의 둔기", "rarity": "Common", "tier": "C", "use": "초반 임시 장착 / 키워드 보강", "effect": "압도.", "source": "동 성물함 / 일반 보상 / 상점", "img": "https://lorrelics.com/assets/icons/relics/TheTrollKingsCrusher-o9m4GQm.webp", "tags": "the troll king's crusher 트롤 왕의 둔기 common c 압도. 초반 임시 장착 / 키워드 보강 동 성물함 / 일반 보상 / 상점"}, {"en": "True Ice Flail", "ko": "진정한 얼음 철퇴", "rarity": "Common", "tier": "C", "use": "초반 임시 장착 / 키워드 보강", "effect": "소환 시 모든 적에게 취약 부여.", "source": "동 성물함 / 일반 보상 / 상점", "img": "https://lorrelics.com/assets/icons/relics/TrueIceFlail-V34B_-n.webp", "tags": "true ice flail 진정한 얼음 철퇴 common c 소환 시 모든 적에게 취약 부여. 초반 임시 장착 / 키워드 보강 동 성물함 / 일반 보상 / 상점"}, {"en": "Warmog's Armor", "ko": "워모그의 갑옷", "rarity": "Common", "tier": "C", "use": "초반 임시 장착 / 키워드 보강", "effect": "재생.", "source": "동 성물함 / 일반 보상 / 상점", "img": "https://lorrelics.com/assets/icons/relics/WarmogsArmor-g0RfLNi.webp", "tags": "warmog's armor 워모그의 갑옷 common c 재생. 초반 임시 장착 / 키워드 보강 동 성물함 / 일반 보상 / 상점"}, {"en": "Z-Drive Prototype", "ko": "Z-드라이브 프로토타입", "rarity": "Common", "tier": "C", "use": "초반 임시 장착 / 키워드 보강", "effect": "모험 시작 리롤 +2.", "source": "동 성물함 / 일반 보상 / 상점", "img": "https://lorrelics.com/assets/icons/relics/ZDrivePrototype-E1dVPlv.webp", "tags": "z-drive prototype z-드라이브 프로토타입 common c 모험 시작 리롤 +2. 초반 임시 장착 / 키워드 보강 동 성물함 / 일반 보상 / 상점"}];
+
 const CHAMPS = [{"name": "스웨인", "en": "Swain", "tier": "SS", "role": "녹서스 · 번딜/광역 제압", "summary": "넥서스 피해를 누적해 스웨인을 빠르게 세우고, 광역 스턴과 포격으로 필드를 잠근다.", "base": "초반에는 적 넥서스에 작은 피해를 여러 번 넣는 선택지를 우선한다. 스웨인이 내려온 뒤에는 비전투 피해가 곧 제압 수단이 되므로 주문/스킬 피해 증가, 넥서스 핑, 약탈 비용 감소가 모두 좋다.", "sets": [{"rank": 1, "title": "전용 고점", "relics": ["Swain's Raven Army", "Packed Powder", "Searing Brilliance"], "strategy": "까마귀 군대로 시작 피해와 흡수를 확보하고, 장전된 화약으로 스웨인을 빠르게 낸다. 타오르는 광휘는 주문 밸류를 올려 장기전도 안정화한다."}, {"rank": 2, "title": "포격 압박", "relics": ["Swain's Raven Army", "Packed Powder", "Riptide Battery"], "strategy": "스웨인 조기 소환 후 역조 포대 포격으로 넥서스 피해와 필드 정리를 동시에 노린다. 빠른 클리어용."}, {"rank": 3, "title": "전용 대체", "relics": ["Riptide Battery", "Big Guns", "The Curator's Gatebreaker"], "strategy": "전용 유물이 없을 때 피해량과 등장 피해를 늘리는 세팅. 안정성은 낮지만 초반 압박이 빠르다."}]}, {"name": "피들스틱", "en": "Fiddlesticks", "tier": "SS", "role": "룬테라 · 공포 선사/악몽/밀", "summary": "상대 덱을 갈아 악몽을 터뜨리고, 덱사와 공짜 소환으로 이긴다.", "base": "공포 선사로 상대 덱 위 카드를 소멸시키고, 악몽이 붙은 카드를 처리해 내 추종자를 소환한다. 1코스트 유닛, 넥서스 핑, 함정/밀 보조 파워가 좋다.", "sets": [{"rank": 1, "title": "최고점 밀", "relics": ["Harmless Scarecrow", "Shock & Awe", "Spirit of the Buhru"], "strategy": "허수아비로 공포 선사 트리거를 늘리고, 충격과 공포/부흐루로 1코 유닛 공격을 넥서스 압박과 피니시로 전환한다."}, {"rank": 2, "title": "덱 압축/탐색", "relics": ["Harmless Scarecrow", "Echoing Spirit", "Loaded Dice"], "strategy": "피들 접근성과 파워 탐색을 올린다. 클리어 속도보다 고점 파워를 찾는 모험에 적합하다."}, {"rank": 3, "title": "함정 혼합", "relics": ["Harmless Scarecrow", "Mischiefmaker's Flute", "Hextech Rifle"], "strategy": "버섯/섬광탄과 공포 선사를 섞어 함정 발동을 빠르게 만든다. 티모식 함정 플랜을 섞고 싶을 때."}]}, {"name": "빅토르", "en": "Viktor", "tier": "SS", "role": "필트오버&자운 · 키워드 성장", "summary": "마공학 업그레이드로 키워드와 스탯을 누적해 압도 피니시를 만든다.", "base": "빅토르를 빨리 찾고 보호하는 것이 핵심이다. 업그레이드가 쌓이면 단일 챔피언이 피니셔가 되므로 키워드 보강, 주문 마나, 주문 방어막이 좋다.", "sets": [{"rank": 1, "title": "완성형 고점", "relics": ["Perfect Hex Core", "Echoing Spirit", "The Beast Within"], "strategy": "마공학 핵과 메아리로 업그레이드/챔피언 접근성을 높이고, 내면의 야수로 압도 피니시를 보장한다."}, {"rank": 2, "title": "안정형", "relics": ["Perfect Hex Core", "Black Shield", "Archangel's Staff"], "strategy": "빅토르를 보호하면서 주문 마나로 매턴 업그레이드와 주문을 안정적으로 굴린다."}, {"rank": 3, "title": "주문 밸류", "relics": ["Perfect Hex Core", "Chemtech Duplicator", "Searing Brilliance"], "strategy": "고비용 주문/생성 주문을 복사해 장기전 밸류를 극대화한다. 느리지만 고난도 안정성이 좋다."}]}, {"name": "비에고", "en": "Viego", "tier": "SS", "role": "그림자 군도 · 희생/안개 성장", "summary": "아군 사망을 통해 안개와 비에고를 키우고, 강한 유닛을 복사·흡수한다.", "base": "아군이 죽을수록 안개와 비에고가 커진다. 희생 가능한 유닛, 하루살이 복사, 타락한 별조각 흡수 시너지를 우선한다.", "sets": [{"rank": 1, "title": "희생 고점", "relics": ["Spectral Scissors", "Corrupted Star Fragment", "Disciple of Shadows"], "strategy": "그림자의 사도로 빠르게 비에고를 내고, 유령 가위 복사본을 별조각으로 흡수해 폭발적으로 성장한다."}, {"rank": 2, "title": "제거 안정형", "relics": ["Spectral Scissors", "Corrupted Star Fragment", "Stalker's Blade"], "strategy": "소환/플레이 시 제거기를 확보해 위험 유닛을 먼저 끊고 비에고 성장 시간을 번다."}, {"rank": 3, "title": "보호형", "relics": ["Spectral Scissors", "Black Shield", "Corrupted Star Fragment"], "strategy": "제압기가 많은 모험에서 비에고 보호를 우선한다. 속도는 낮지만 실패율이 줄어든다."}]}, {"name": "아리", "en": "Ahri", "tier": "SS", "role": "아이오니아 · 리콜/반복 소환", "summary": "리콜로 소환 효과와 버프를 반복하며 한 턴 폭발력을 만든다.", "base": "저비용 유닛을 내고 되돌리는 과정에서 밸류를 만든다. 아리 접근성, 주문 마나, 버프 주문, 리콜 반복이 핵심이다.", "sets": [{"rank": 1, "title": "콤보 고점", "relics": ["Packed Powder", "Hidden Tome", "Hymn of Valor"], "strategy": "비용을 낮춘 아리를 빠르게 내고, 숨겨진 고서와 용맹의 찬가로 한 턴에 큰 킬각을 만든다."}, {"rank": 2, "title": "반복 소환", "relics": ["Echoing Spirit", "Guardian's Orb", "Lost Chapter"], "strategy": "아리를 자주 찾고 반복 소환으로 보주 아이템을 누적한다. 유물이 부족할 때도 운영이 쉽다."}, {"rank": 3, "title": "아리 전용형", "relics": ["Essence Theft", "Echoing Spirit", "Hidden Tome"], "strategy": "리콜 횟수 자체를 공격력과 템포로 바꾼다. 아리 주력 계정이면 쓸 가치가 높다."}]}, {"name": "미스 포츈", "en": "Miss Fortune", "tier": "S", "role": "빌지워터 · 공격 횟수/토큰 번", "summary": "정찰과 추가 공격으로 미포 스킬을 여러 번 터뜨린다.", "base": "필드 교환보다 공격 횟수가 중요하다. 1코스트 유닛, 정찰, 넥서스 피해 트리거, 공격 시 피해 유물을 우선한다.", "sets": [{"rank": 1, "title": "정찰 고점", "relics": ["Ranger's Command", "Shock & Awe", "Spirit of the Buhru"], "strategy": "정찰과 1코 유닛 강화로 공격 횟수마다 넥서스 피해를 누적한다. 미포 고점 세팅."}, {"rank": 2, "title": "번 피해", "relics": ["Shock & Awe", "Spirit of the Buhru", "Searing Brilliance"], "strategy": "토큰 공격과 주문 밸류를 섞어 필드와 넥서스를 동시에 압박한다."}, {"rank": 3, "title": "희귀 대체", "relics": ["Riptide Battery", "Luden's Tempest", "Dreadway Chase Gun"], "strategy": "서사 유물이 부족할 때 포격/스킬 피해 중심으로 굴린다. 속도는 충분하다."}]}, {"name": "그웬", "en": "Gwen", "tier": "S", "role": "그림자 군도 · 흡혈/신성", "summary": "신성 스택과 흡혈로 안정적으로 버티고 큰 공격으로 마무리한다.", "base": "공격 타이밍의 신성 수치가 승패를 가른다. 그웬을 안전하게 공격시키고, 흡수/희생/사망 시너지를 키운다.", "sets": [{"rank": 1, "title": "안정 고점", "relics": ["Disciple of Shadows", "Corrupted Star Fragment", "Death's Foil"], "strategy": "빠른 소환, 흡수 성장, 공격 중 사망 방지로 그웬을 안정적인 피니셔로 만든다."}, {"rank": 2, "title": "복사 압박", "relics": ["Spectral Scissors", "Corrupted Star Fragment", "Death's Foil"], "strategy": "유령 가위 복사와 별조각 흡수로 공격 턴의 폭발력을 키운다."}, {"rank": 3, "title": "범용형", "relics": ["Spirit of the Buhru", "Corrupted Star Fragment", "Stalker's Blade"], "strategy": "저코스트 유닛과 전투 교환을 강화한다. 서사 풀이 적을 때 대체 가능하다."}]}, {"name": "릴리아", "en": "Lillia", "tier": "S", "role": "아이오니아 · 수면/재소환/보주", "summary": "수면으로 유닛을 다시 소환해 아이템과 소환 효과를 반복한다.", "base": "릴리아는 재소환 횟수가 곧 밸류다. 수호자의 보주, 챔피언 접근성, 소환 효과 반복을 중심으로 굴린다.", "sets": [{"rank": 1, "title": "보주 폭발", "relics": ["Echoing Spirit", "Guardian's Orb", "Guardian's Orb"], "strategy": "릴리아를 반복 소환하며 보주 아이템을 덱 전체에 뿌린다. 시간이 지날수록 카드 품질이 폭발한다."}, {"rank": 2, "title": "챔피언 밸류", "relics": ["Death's Foil", "Oath of the Guardians", "Star Gem"], "strategy": "레벨 2 챔피언 생성으로 밸류를 만든다. 재소환과 생성 챔피언이 잘 맞는다."}, {"rank": 3, "title": "저투자형", "relics": ["Guardian's Orb", "Guardian's Orb", "The Chameleon's Necklace"], "strategy": "서사 슬롯이 부족할 때 릴리아 복사본과 보주 반복으로 밸류를 확보한다."}]}, {"name": "야스오", "en": "Yasuo", "tier": "S", "role": "아이오니아 · 스턴/리콜 제어", "summary": "스턴과 리콜로 적 필드를 봉쇄하고 야스오 피해로 제거한다.", "base": "야스오가 살아 있으면 스턴/리콜이 제거기로 바뀐다. 야스오 보호, 스턴 반복, 챔피언 주문 반복이 핵심이다.", "sets": [{"rank": 1, "title": "전용 고점", "relics": ["Yasuo's Windblade", "Tempest Blade", "The Grand General's Counterplan"], "strategy": "야스오의 제어력을 극대화한다. 바람검과 대책으로 스턴/리콜 리듬을 유지한다."}, {"rank": 2, "title": "안정 제어", "relics": ["Tempest Blade", "The Grand General's Counterplan", "Black Shield"], "strategy": "야스오 생존을 우선한다. 제압기가 많은 모험에서 안정성이 높다."}, {"rank": 3, "title": "저투자형", "relics": ["Tempest Blade", "Everfrost", "The Grand General's Counterplan"], "strategy": "희귀/일반 유물 위주로 스턴을 추가한다. 초중반 계정에 적합하다."}]}, {"name": "암베사", "en": "Ambessa", "tier": "S", "role": "녹서스 · 전투/공격 토큰", "summary": "공격 토큰과 전투 주문으로 교환 이득을 만들고 빠르게 밀어붙인다.", "base": "공격을 많이 하고 전투 주문을 효율적으로 쓰는 덱이다. 정찰, 압도, 주문 마나 회복, 전투 보정 유물이 좋다.", "sets": [{"rank": 1, "title": "공격 고점", "relics": ["Ranger's Command", "The Beast Within", "Hidden Tome"], "strategy": "정찰과 압도로 공격 횟수와 피니시를 동시에 확보한다. 숨겨진 고서로 콤보 턴을 열어준다."}, {"rank": 2, "title": "키워드 안정", "relics": ["Chosen by the Stars", "The Beast Within", "Black Shield"], "strategy": "암베사를 안전하게 키우고 키워드로 전투를 지배한다."}, {"rank": 3, "title": "속도형", "relics": ["Packed Powder", "Ranger's Command", "Dreadway Chase Gun"], "strategy": "저비용 연쇄와 추가 공격으로 빠른 클리어를 노린다."}]}, {"name": "모르가나", "en": "Morgana", "tier": "S", "role": "타곤/데마시아 · 저주/제어", "summary": "족쇄와 저주로 적 행동을 제한하고 장기전 밸류로 이긴다.", "base": "속도는 느리지만 안정성이 높다. 주문 복사, 챔피언 주문 반복, 주문 방어막으로 장기전을 잠근다.", "sets": [{"rank": 1, "title": "장기전 고점", "relics": ["Echoing Spirit", "Chemtech Duplicator", "Found Fortune"], "strategy": "챔피언 주문 접근성과 주문 복사로 저주를 계속 누적한다. 느리지만 매우 안정적이다."}, {"rank": 2, "title": "안정 제어", "relics": ["Chemtech Duplicator", "The Grand General's Counterplan", "Black Shield"], "strategy": "챔피언 주문 반복과 보호를 동시에 잡는다. 제압기가 많은 모험에서 좋다."}, {"rank": 3, "title": "저투자형", "relics": ["The Grand General's Counterplan", "Archangel's Staff", "Banshee's Veil"], "strategy": "대장군의 대책과 주문 마나로 저주 루프를 유지한다."}]}, {"name": "징크스", "en": "Jinx", "tier": "S", "role": "필트오버&자운 · 패버림/직접 번", "summary": "패를 비워 폭탄을 만들고 넥서스를 직접 태운다.", "base": "징크스는 희귀 유물만으로도 강하다. 패를 빨리 비우고, 비용 감소로 조기 소환한 뒤 폭탄을 계속 생성한다.", "sets": [{"rank": 1, "title": "정석 희귀", "relics": ["The Loose Cannon's Payload", "The Scourge's Stash", "The Scourge's Stash"], "strategy": "징크스를 싸게 내고, 패를 버려 폭탄을 뽑는다. 초중반 최고 효율 세팅이다."}, {"rank": 2, "title": "포격형", "relics": ["The Loose Cannon's Payload", "The Scourge's Stash", "Riptide Battery"], "strategy": "소환 직후 포격으로 필드를 줄이고 넥서스를 압박한다."}, {"rank": 3, "title": "피해 증폭", "relics": ["The Loose Cannon's Payload", "Riptide Battery", "Big Guns"], "strategy": "직접 피해량을 높여 빠르게 끝내는 세팅. 손패 관리가 중요하다."}]}, {"name": "아우렐리온 솔", "en": "Aurelion Sol", "tier": "S", "role": "타곤 · 생성 챔피언/고밸류", "summary": "시작 마나와 레벨 2 챔피언 생성으로 밸류를 찍어누른다.", "base": "초반만 넘기면 생성 챔피언과 코스트 사기로 게임을 닫는다. 시작 마나 +1과 챔피언 생성 유물이 핵심이다.", "sets": [{"rank": 1, "title": "정석 고점", "relics": ["Starforged Gauntlets", "Oath of the Guardians", "Star Gem"], "strategy": "시작 마나와 레벨 2 챔피언 생성으로 빠르게 밸류를 폭발시킨다."}, {"rank": 2, "title": "초고밸류", "relics": ["Starforged Gauntlets", "Portal Pals", "Oath of the Guardians"], "strategy": "고코스트 유닛 생성까지 섞어 손패 품질을 극대화한다."}, {"rank": 3, "title": "챔피언 할인", "relics": ["Starforged Gauntlets", "Star Gem", "Star Gem"], "strategy": "생성 챔피언 비용을 낮춰 템포를 빠르게 잡는다."}]}, {"name": "카이사", "en": "Kai'Sa", "tier": "S", "role": "슈리마 · 키워드/진화", "summary": "키워드를 모아 진화 조건을 빠르게 채우고 압도로 마무리한다.", "base": "진화 조건을 빠르게 채우는 것이 핵심이다. 키워드 생성, 압도, 주문 방어막을 통해 카이사를 피니셔로 만든다.", "sets": [{"rank": 1, "title": "정석 키워드", "relics": ["Chosen by the Stars", "The Beast Within", "Black Shield"], "strategy": "키워드와 보호를 모두 챙긴다. 진화 후 압도로 안정적으로 끝낸다."}, {"rank": 2, "title": "마공학 고점", "relics": ["Perfect Hex Core", "The Beast Within", "Black Shield"], "strategy": "마공학 업그레이드로 키워드를 계속 붙인다. 빅토르식 성장 플랜."}, {"rank": 3, "title": "성장형", "relics": ["Chosen by the Stars", "Corrupted Star Fragment", "The Beast Within"], "strategy": "강한 유닛을 흡수해 카이사의 스탯과 키워드를 보강한다."}]}, {"name": "아지르", "en": "Azir", "tier": "S", "role": "슈리마 · 모래 병사/토큰 공격", "summary": "모래 병사와 토큰 공격으로 넥서스 피해를 빠르게 누적한다.", "base": "아지르는 유닛 하나의 크기보다 공격 횟수와 1코스트/토큰 시너지가 중요하다. 부흐루/충격과 공포 계열이 잘 맞는다.", "sets": [{"rank": 1, "title": "토큰 고점", "relics": ["Shock & Awe", "Spirit of the Buhru", "The Beast Within"], "strategy": "모래 병사와 저코스트 유닛이 공격할 때마다 넥서스 피해와 압도를 동시에 확보한다."}, {"rank": 2, "title": "정찰 압박", "relics": ["Shock & Awe", "Spirit of the Buhru", "Ranger's Command"], "strategy": "추가 공격 횟수를 늘려 병사 트리거를 반복한다."}, {"rank": 3, "title": "전용형", "relics": ["Azir's Staff of Office", "Spirit of the Buhru", "The Beast Within"], "strategy": "아지르 전용 유물을 활용해 슈리마식 토큰 운영을 강화한다."}]}, {"name": "영혼의 꽃 티모", "en": "Spirit Blossom Teemo", "tier": "S", "role": "밴들/아이오니아 · 함정/버섯", "summary": "피해를 버섯 설치로 전환하고 함정 발동으로 필드를 압박한다.", "base": "장난꾼의 피리가 핵심이다. 티모가 주는 피해를 독버섯으로 바꾸고, 공포 선사나 함정 보조로 상대 덱에서 버섯을 빨리 터뜨린다.", "sets": [{"rank": 1, "title": "함정 고점", "relics": ["Mischiefmaker's Flute", "Hextech Rifle", "Harmless Scarecrow"], "strategy": "버섯, 섬광탄, 공포 선사를 모두 섞는다. 함정이 빨리 발동되어 피해와 필드 압박이 동시에 나온다."}, {"rank": 2, "title": "폭발형", "relics": ["Mischiefmaker's Flute", "Harmless Scarecrow", "Wicked Harvest"], "strategy": "등장 광역 피해로 피리 효과를 여러 번 터뜨려 초반 버섯을 대량으로 심는다."}, {"rank": 3, "title": "정찰 반복", "relics": ["Mischiefmaker's Flute", "Galeforce", "Echoing Spirit"], "strategy": "티모를 자주 찾고 정찰로 여러 번 공격해 버섯 설치량을 늘린다."}]}, {"name": "티모", "en": "Teemo", "tier": "A", "role": "밴들/필트오버 · 버섯/정찰", "summary": "정찰과 반복 공격으로 독버섯을 심고 상대 드로우 피해로 이긴다.", "base": "기본 티모는 공격 횟수가 가장 중요하다. 정찰로 버섯을 두 배로 심고, 공포 선사/함정 보조로 버섯을 빨리 터뜨린다.", "sets": [{"rank": 1, "title": "정석 버섯", "relics": ["Echoing Spirit", "Galeforce", "Harmless Scarecrow"], "strategy": "티모 접근성과 정찰을 확보하고, 허수아비로 상대 덱을 갈아 함정을 터뜨린다."}, {"rank": 2, "title": "보주 밸류", "relics": ["Echoing Spirit", "Guardian's Orb", "Guardian's Orb"], "strategy": "티모 반복 소환으로 아이템을 덱에 뿌린다. 버섯보다 장기 밸류 쪽 세팅."}, {"rank": 3, "title": "저투자형", "relics": ["Galeforce", "Lost Chapter", "Banshee's Veil"], "strategy": "정찰, 주문 마나, 주문 방어막으로 초반 계정에서도 안정적으로 굴린다."}]}, {"name": "애쉬", "en": "Ashe", "tier": "A", "role": "프렐요드 · 동상/제어", "summary": "동상으로 적 공격을 막고 약한 적부터 정리한다.", "base": "느리지만 안정적이다. 챔피언 주문 반복과 주문 복사로 동상을 계속 걸어 필드를 잠근다.", "sets": [{"rank": 1, "title": "제어 고점", "relics": ["The Grand General's Counterplan", "Chemtech Duplicator", "Black Shield"], "strategy": "애쉬 주문을 반복·복사하고 보호해 적 필드를 지속적으로 얼린다."}, {"rank": 2, "title": "마나형", "relics": ["The Grand General's Counterplan", "Archangel's Staff", "Chemtech Duplicator"], "strategy": "주문 마나를 확보해 동상 루프를 유지한다."}, {"rank": 3, "title": "저투자형", "relics": ["The Grand General's Counterplan", "Everfrost", "Banshee's Veil"], "strategy": "일반/희귀 유물 위주로 안정적인 제어를 만든다."}]}, {"name": "벡스", "en": "Vex", "tier": "A", "role": "밴들/그림자 군도 · 우울/스킬 피해", "summary": "우울과 스킬 피해 증폭으로 적 필드를 약화시킨다.", "base": "피해 증폭 유물이 핵심이다. 적 유닛을 약화시키고 광역 피해로 천천히 말려 죽인다.", "sets": [{"rank": 1, "title": "피해 고점", "relics": ["Big Guns", "Luden's Tempest", "Echoing Spirit"], "strategy": "스킬 피해를 증폭하고 벡스를 자주 찾아 우울 운영을 이어간다."}, {"rank": 2, "title": "주문 복사", "relics": ["Big Guns", "Chemtech Duplicator", "Luden's Tempest"], "strategy": "고비용 주문을 복사해 광역 정리와 넥서스 압박을 강화한다."}, {"rank": 3, "title": "희귀형", "relics": ["Luden's Tempest", "Riptide Battery", "Utmost Despair"], "strategy": "서사 유물이 부족할 때 피해/우울 효과를 희귀 유물로 보강한다."}]}, {"name": "레오나", "en": "Leona", "tier": "A", "role": "타곤 · 일광/스턴", "summary": "일광과 스턴으로 적 턴을 끊고 안정적으로 필드를 장악한다.", "base": "레오나를 보호하고 매턴 일광을 발동해 스턴을 반복한다. 속도는 느려도 실패율은 낮다.", "sets": [{"rank": 1, "title": "스턴 고점", "relics": ["Tempest Blade", "The Grand General's Counterplan", "Black Shield"], "strategy": "레오나 보호와 스턴 반복을 동시에 잡는다."}, {"rank": 2, "title": "스턴 누적", "relics": ["Tempest Blade", "The Grand General's Counterplan", "Everfrost"], "strategy": "소환/레벨업/주문으로 스턴 횟수를 극대화한다."}, {"rank": 3, "title": "마나형", "relics": ["Tempest Blade", "Archangel's Staff", "Banshee's Veil"], "strategy": "주문 마나와 보호를 확보해 안정적으로 운영한다."}]}, {"name": "에코", "en": "Ekko", "tier": "A", "role": "슈리마/P&Z · 예언/드로우/아이템", "summary": "예언과 드로우로 핵심 카드를 찾고 보주/복제로 덱 밸류를 키운다.", "base": "예언으로 좋은 카드를 찾고 생성/복사로 밸류를 늘린다. 보주형 세팅이 잘 맞는다.", "sets": [{"rank": 1, "title": "밸류 고점", "relics": ["Echoing Spirit", "Guardian's Orb", "Chemtech Duplicator"], "strategy": "에코를 자주 찾고 보주/복제기로 덱 품질을 끌어올린다."}, {"rank": 2, "title": "보주 폭발", "relics": ["Guardian's Orb", "Guardian's Orb", "Echoing Spirit"], "strategy": "반복 소환으로 아이템을 빠르게 뿌린다."}, {"rank": 3, "title": "주문형", "relics": ["The Grand General's Counterplan", "Chemtech Duplicator", "Archangel's Staff"], "strategy": "챔피언 주문과 주문 복사로 예언/복제 밸류를 늘린다."}]}, {"name": "케이틀린", "en": "Caitlyn", "tier": "A", "role": "P&Z · 함정/섬광탄", "summary": "함정을 심고 피해 증폭으로 적 덱을 터뜨린다.", "base": "함정을 많이 심는 것과 초반 생존이 중요하다. 마공학 소총, 피해 증폭, 주문 복사가 핵심이다.", "sets": [{"rank": 1, "title": "함정 고점", "relics": ["Big Guns", "Hextech Rifle", "Chemtech Duplicator"], "strategy": "섬광탄 설치와 피해 증폭, 주문 복사를 함께 써 함정 피해를 키운다."}, {"rank": 2, "title": "함정 피해", "relics": ["Hextech Rifle", "Luden's Tempest", "Big Guns"], "strategy": "함정 피해량을 직접 올리는 세팅. 필드 정리력이 좋다."}, {"rank": 3, "title": "제어형", "relics": ["Hextech Rifle", "Chemtech Duplicator", "The Grand General's Counterplan"], "strategy": "케이틀린 주문과 함정 설치를 반복해 장기전을 안정화한다."}]}, {"name": "워윅", "en": "Warwick", "tier": "A", "role": "P&Z/녹서스 · 피해 추적/전투", "summary": "피해 입은 적을 추적하며 전투 교환과 회복으로 버틴다.", "base": "전투형 챔피언이라 키워드, 압도, 보호막이 중요하다. 큰 유닛 하나를 키워 밀어붙인다.", "sets": [{"rank": 1, "title": "키워드 안정", "relics": ["Chosen by the Stars", "The Beast Within", "Black Shield"], "strategy": "워윅을 키우고 보호한 뒤 압도로 마무리한다."}, {"rank": 2, "title": "흡수 성장", "relics": ["Corrupted Star Fragment", "The Beast Within", "Chosen by the Stars"], "strategy": "아군을 흡수해 스탯과 키워드를 키운다."}, {"rank": 3, "title": "전투형", "relics": ["Stalker's Blade", "The Beast Within", "Banshee's Veil"], "strategy": "위협 유닛을 제거하고 워윅의 전투 생존력을 보강한다."}]}, {"name": "사미라", "en": "Samira", "tier": "A", "role": "녹서스 · 저코스트 연쇄/스타일", "summary": "저코스트 카드를 연쇄로 써서 한 턴 폭발력을 만든다.", "base": "싸고 많은 카드를 한 턴에 몰아 쓰는 덱이다. 비용 감소, 주문 마나, 저코스트 생성이 중요하다.", "sets": [{"rank": 1, "title": "정석 폭발", "relics": ["Packed Powder", "Dreadway Chase Gun", "Lost Chapter"], "strategy": "사미라 비용을 낮추고 주문 마나로 한 턴 연쇄 플레이를 만든다."}, {"rank": 2, "title": "약탈 속도", "relics": ["Packed Powder", "The Scourge's Stash", "Dreadway Chase Gun"], "strategy": "약탈 비용 감소를 겹쳐 빠르게 사미라를 전개한다."}, {"rank": 3, "title": "저투자형", "relics": ["Dreadway Chase Gun", "Lost Chapter", "Banshee's Veil"], "strategy": "서사 없이도 카드를 계속 생성해 스타일을 채운다."}]}, {"name": "진", "en": "Jhin", "tier": "A", "role": "룬테라 · 스킬/스턴/번", "summary": "스킬 피해와 스턴을 반복해 필드와 넥서스를 동시에 압박한다.", "base": "스킬 피해를 여러 번 발동시키는 것이 핵심이다. 피해 증폭, 포격, 챔피언 주문 반복이 잘 맞는다.", "sets": [{"rank": 1, "title": "정석 스킬", "relics": ["Riptide Battery", "Luden's Tempest", "The Grand General's Counterplan"], "strategy": "포격과 루덴으로 스킬 피해를 늘리고, 진 주문으로 제어를 반복한다."}, {"rank": 2, "title": "피해 고점", "relics": ["Big Guns", "Riptide Battery", "Luden's Tempest"], "strategy": "피해 증폭을 최대로 올려 빠른 클리어를 노린다."}, {"rank": 3, "title": "마나 제어", "relics": ["Archangel's Staff", "The Grand General's Counterplan", "Luden's Tempest"], "strategy": "주문 마나와 챔피언 주문 반복으로 안정적으로 스턴/피해를 누적한다."}]}, {"name": "이블린", "en": "Evelynn", "tier": "A", "role": "룬테라 · 허스크/레벨업 랠리", "summary": "허스크를 먹고 레벨업 타이밍에 랠리로 끝낸다.", "base": "레벨업 시점이 가장 중요하다. 레벨업 후 즉시 공격 토큰을 얻거나 전체 스턴을 활용해 킬각을 잡는다.", "sets": [{"rank": 1, "title": "레벨업 랠리", "relics": ["Tempest Blade", "Crownguard Inheritance", "Echoing Spirit"], "strategy": "레벨업 때 전체 스턴과 랠리를 활용해 바로 게임을 끝낸다."}, {"rank": 2, "title": "흡수형", "relics": ["Tempest Blade", "Crownguard Inheritance", "Corrupted Star Fragment"], "strategy": "허스크/아군을 흡수해 이블린을 키우고 레벨업 타이밍에 공격한다."}, {"rank": 3, "title": "저투자형", "relics": ["Tempest Blade", "Crownguard Inheritance", "Banshee's Veil"], "strategy": "희귀 유물 중심으로도 레벨업 턴 폭발력을 만들 수 있다."}]}, {"name": "유미", "en": "Yuumi", "tier": "A", "role": "밴들/타곤 · 부착/단일 캐리", "summary": "부착으로 핵심 유닛 하나를 크게 키워 캐리한다.", "base": "유미는 직접 전개보다 붙는 대상이 중요하다. 주문 방어막, 정찰, 키워드 보강으로 한 유닛을 안전하게 키운다.", "sets": [{"rank": 1, "title": "단일 캐리", "relics": ["Chosen by the Stars", "Galeforce", "Banshee's Veil"], "strategy": "유미가 붙은 유닛을 보호하고 정찰로 공격 횟수를 늘린다."}, {"rank": 2, "title": "압도 피니시", "relics": ["Chosen by the Stars", "The Beast Within", "Galeforce"], "strategy": "키워드와 압도를 붙여 막히지 않는 피니시를 만든다."}, {"rank": 3, "title": "흡수형", "relics": ["Corrupted Star Fragment", "Chosen by the Stars", "Banshee's Veil"], "strategy": "강한 부착 대상을 더 키우는 방식. 속도는 느리지만 안정적이다."}]}, {"name": "케일", "en": "Kayle", "tier": "A", "role": "타곤 · 성장/압도", "summary": "아군 성장을 누적하고 케일이 커진 뒤 압도로 마무리한다.", "base": "초반을 버티고 아군 전체 공격력 증가를 누적해야 한다. 압도, 키워드, 시작 마나 유물이 잘 맞는다.", "sets": [{"rank": 1, "title": "성장 고점", "relics": ["Chosen by the Stars", "The Beast Within", "Starforged Gauntlets"], "strategy": "시작 마나와 키워드로 케일 성장을 빠르게 앞당긴다."}, {"rank": 2, "title": "압도형", "relics": ["Chosen by the Stars", "The Beast Within", "Troll King's Crown"], "strategy": "전체 압도와 키워드로 성장한 필드를 그대로 넥서스 피해로 전환한다."}, {"rank": 3, "title": "보호형", "relics": ["Chosen by the Stars", "Black Shield", "Banshee's Veil"], "strategy": "케일 생존을 우선해 긴 모험에서 실패율을 낮춘다."}]}, {"name": "일라오이", "en": "Illaoi", "tier": "A", "role": "빌지워터 · 촉수/버프 배율", "summary": "촉수를 크게 키우고 버프 배율로 밀어붙인다.", "base": "촉수 하나가 죽지 않는 것이 중요하다. 촉수 복사, 저코스트 유닛 키워드, 버프 2배 효과가 핵심이다.", "sets": [{"rank": 1, "title": "촉수 고점", "relics": ["Spirit of the Buhru", "Spectral Scissors", "Secret Technique"], "strategy": "촉수와 저코스트 유닛을 강화하고, 비밀 기술로 버프 효율을 크게 올린다."}, {"rank": 2, "title": "흡수/복사", "relics": ["Spirit of the Buhru", "Spectral Scissors", "Corrupted Star Fragment"], "strategy": "복사된 촉수나 강한 유닛을 흡수해 일라오이/촉수 스탯을 키운다."}, {"rank": 3, "title": "압도형", "relics": ["Secret Technique", "Corrupted Star Fragment", "The Beast Within"], "strategy": "버프와 압도를 합쳐 큰 한 번의 공격으로 끝내는 방식."}]}, {"name": "잭스", "en": "Jax", "tier": "B", "role": "장비/공격", "summary": "장비와 공격 키워드로 전투 교환을 이긴다.", "base": "장비 시너지와 압도를 확보해 직접 전투로 밀어붙인다.", "sets": [{"rank": 1, "title": "장비 고점", "relics": ["Living Weapon", "The Beast Within", "Chosen by the Stars"], "strategy": "제련/키워드/압도를 합쳐 장비 전투력을 높인다."}, {"rank": 2, "title": "흡수형", "relics": ["Corrupted Star Fragment", "The Beast Within", "Troll King's Crown"], "strategy": "강한 유닛을 흡수해 압도 피니시를 만든다."}, {"rank": 3, "title": "저투자형", "relics": ["Guinsoo's Rageblade", "The Troll King's Crusher", "Stormrazor"], "strategy": "키워드를 직접 보강하는 초반형."}]}, {"name": "바루스", "en": "Varus", "tier": "B", "role": "주문/버프", "summary": "버프 주문으로 한 유닛을 크게 키운다.", "base": "주문으로 공격력을 키우고 압도/복사로 한 턴 킬각을 만든다.", "sets": [{"rank": 1, "title": "버프 고점", "relics": ["Secret Technique", "Hymn of Valor", "Chemtech Duplicator"], "strategy": "버프량을 늘리고 복사해 폭발력을 만든다."}, {"rank": 2, "title": "마나형", "relics": ["Archangel's Staff", "Secret Technique", "The Grand General's Counterplan"], "strategy": "주문 마나와 반복 주문을 안정적으로 굴린다."}, {"rank": 3, "title": "키워드형", "relics": ["Chosen by the Stars", "The Beast Within", "Secret Technique"], "strategy": "단일 유닛을 키우고 압도로 끝낸다."}]}, {"name": "니달리", "en": "Nidalee", "tier": "B", "role": "변신/매복", "summary": "매복과 변신으로 템포 이득을 본다.", "base": "저비용 전개 후 변신 타이밍에 공격 템포를 잡는다.", "sets": [{"rank": 1, "title": "복사 압박", "relics": ["Spectral Scissors", "Corrupted Star Fragment", "Lost Chapter"], "strategy": "복사/흡수로 주력 유닛을 키운다."}, {"rank": 2, "title": "키워드형", "relics": ["Chosen by the Stars", "The Beast Within", "Black Shield"], "strategy": "키워드와 보호를 붙여 안정성을 높인다."}, {"rank": 3, "title": "저투자형", "relics": ["Lost Chapter", "Banshee's Veil", "Guinsoo's Rageblade"], "strategy": "초반 임시 장착용."}]}, {"name": "니코", "en": "Neeko", "tier": "B", "role": "하위타입/소환 밸류", "summary": "하위타입과 소환 밸류를 쌓는다.", "base": "소환 반복과 보주로 덱 아이템을 늘리는 운영이 무난하다.", "sets": [{"rank": 1, "title": "보주형", "relics": ["Guardian's Orb", "Guardian's Orb", "Echoing Spirit"], "strategy": "반복 소환으로 아이템을 누적한다."}, {"rank": 2, "title": "챔피언 밸류", "relics": ["Oath of the Guardians", "Star Gem", "Guardian's Orb"], "strategy": "생성 챔피언과 보주를 섞어 밸류를 만든다."}, {"rank": 3, "title": "키워드형", "relics": ["The Beast Within", "Black Shield", "Guardian's Orb"], "strategy": "넓은 필드에 압도와 보호를 더한다."}]}, {"name": "노라", "en": "Norra", "tier": "B", "role": "차원문/생성 유닛", "summary": "차원문과 생성 유닛으로 넓은 필드를 만든다.", "base": "생성 유닛의 임팩트와 보주 밸류로 압박한다.", "sets": [{"rank": 1, "title": "전용 고점", "relics": ["Norra's Portal Accelerator", "Oath of the Guardians", "Star Gem"], "strategy": "노라 전용 유물로 생성 유닛 압박을 강화한다."}, {"rank": 2, "title": "보주형", "relics": ["Echoing Spirit", "Guardian's Orb", "Guardian's Orb"], "strategy": "반복 소환으로 아이템을 누적한다."}, {"rank": 3, "title": "덱 밸류", "relics": ["Stacked Deck", "The Beast Within", "Black Shield"], "strategy": "덱 장수와 넓은 필드 압도를 활용한다."}]}, {"name": "아트록스", "en": "Aatrox", "tier": "B", "role": "다르킨/장비", "summary": "장비와 다르킨 비용 감소로 후반을 강하게 만든다.", "base": "초반을 버티고 다르킨 변신/장비 밸류로 밀어붙인다.", "sets": [{"rank": 1, "title": "전용형", "relics": ["The Darkin Blade", "Starforged Gauntlets", "Corrupted Star Fragment"], "strategy": "시작 마나와 장비/흡수로 고비용 구간을 앞당긴다."}, {"rank": 2, "title": "키워드형", "relics": ["The Beast Within", "Chosen by the Stars", "Black Shield"], "strategy": "아트록스를 보호하고 압도로 끝낸다."}, {"rank": 3, "title": "장비형", "relics": ["Living Weapon", "Corrupted Star Fragment", "Troll King's Crown"], "strategy": "제련과 압도로 장비 밸류를 피니시로 전환한다."}]}, {"name": "포로 왕", "en": "Poro King", "tier": "B", "role": "포로/넓은 필드", "summary": "포로를 넓게 깔고 전체 버프로 압박한다.", "base": "작은 유닛을 많이 전개한 뒤 압도/키워드를 붙여 넥서스를 민다.", "sets": [{"rank": 1, "title": "전용형", "relics": ["Royal Nibbles", "The Beast Within", "Spirit of the Buhru"], "strategy": "포로와 저코스트 유닛에게 키워드/압도를 붙인다."}, {"rank": 2, "title": "넓은 필드", "relics": ["The Beast Within", "Troll King's Crown", "Stacked Deck"], "strategy": "전체 압도로 피니시를 보장한다."}, {"rank": 3, "title": "챔피언 밸류", "relics": ["Oath of the Guardians", "Star Gem", "The Beast Within"], "strategy": "장기전 밸류를 보강한다."}]}, {"name": "아크샨", "en": "Akshan", "tier": "B", "role": "버프/카운트다운", "summary": "아크샨 유물 카운트다운을 빠르게 돌린다.", "base": "버프 주문과 키워드로 유물을 빠르게 완성한다.", "sets": [{"rank": 1, "title": "키워드 고점", "relics": ["Perfect Hex Core", "Chosen by the Stars", "Secret Technique"], "strategy": "키워드/버프를 동시에 확보한다."}, {"rank": 2, "title": "버프형", "relics": ["Hidden Tome", "Hymn of Valor", "Chemtech Duplicator"], "strategy": "버프 주문과 복사로 카운트다운을 빠르게 줄인다."}, {"rank": 3, "title": "보호형", "relics": ["The Beast Within", "Black Shield", "Chosen by the Stars"], "strategy": "아크샨 생존과 압도 피니시를 잡는다."}]}, {"name": "파이크", "en": "Pyke", "tier": "B", "role": "잠복/제거", "summary": "잠복으로 공격력을 키우고 제거 효과로 필드를 정리한다.", "base": "공격형이지만 안정성이 낮아 제거/키워드 보강이 필요하다.", "sets": [{"rank": 1, "title": "전용형", "relics": ["Deadly Harpoon", "Stalker's Blade", "The Beast Within"], "strategy": "도전자/제거/압도를 합쳐 공격성을 높인다."}, {"rank": 2, "title": "복사형", "relics": ["Spectral Scissors", "Corrupted Star Fragment", "Stalker's Blade"], "strategy": "복사와 제거로 필드를 정리한다."}, {"rank": 3, "title": "보호형", "relics": ["Chosen by the Stars", "The Beast Within", "Black Shield"], "strategy": "파이크 생존과 압도를 보강한다."}]}, {"name": "트위스티드 페이트", "en": "Twisted Fate", "tier": "B", "role": "드로우/카드 선택", "summary": "드로우와 카드 효과로 상황 대응한다.", "base": "카드 뽑기와 골드/상점 보조로 장기 밸류를 노린다.", "sets": [{"rank": 1, "title": "전용형", "relics": ["Deck of Destiny", "Fate's Hand", "Champion's Purse"], "strategy": "TF 전용 유물로 드로우/경제 운영을 강화한다."}, {"rank": 2, "title": "탐색형", "relics": ["Loaded Dice", "The Grand General's Counterplan", "Archangel's Staff"], "strategy": "파워 탐색과 주문 반복으로 유연하게 대응한다."}, {"rank": 3, "title": "주문 피해", "relics": ["Echoing Spirit", "The Grand General's Counterplan", "Luden's Tempest"], "strategy": "챔피언 주문과 피해 증폭으로 제어한다."}]}, {"name": "볼리베어", "en": "Volibear", "tier": "B", "role": "고코스트/원소 피해", "summary": "원소 피해와 고코스트 유닛으로 밀어붙인다.", "base": "시작 마나와 원소 피해 증폭이 중요하다.", "sets": [{"rank": 1, "title": "원소 고점", "relics": ["Icon of Valhir", "Starforged Gauntlets", "The Beast Within"], "strategy": "원소 피해와 시작 마나, 압도로 고점을 높인다."}, {"rank": 2, "title": "고코스트형", "relics": ["Starforged Gauntlets", "Portal Pals", "Troll King's Crown"], "strategy": "고비용 유닛을 빠르게 전개한다."}, {"rank": 3, "title": "피해형", "relics": ["Icon of Valhir", "Big Guns", "Luden's Tempest"], "strategy": "주문/스킬 피해를 극대화한다."}]}, {"name": "세트", "en": "Sett", "tier": "B", "role": "코인/고비용 주문", "summary": "코인과 주문 마나로 큰 턴을 만든다.", "base": "주문 마나 회복과 고비용 밸류가 중요하다.", "sets": [{"rank": 1, "title": "주문 고점", "relics": ["Starforged Gauntlets", "Searing Brilliance", "Hidden Tome"], "strategy": "시작 마나와 주문 밸류로 큰 턴을 만든다."}, {"rank": 2, "title": "전투형", "relics": ["The Beast Within", "Chosen by the Stars", "Black Shield"], "strategy": "세트를 키워 전투 피니시를 만든다."}, {"rank": 3, "title": "복사형", "relics": ["Archangel's Staff", "Chemtech Duplicator", "Hidden Tome"], "strategy": "고비용 주문을 복사한다."}]}, {"name": "쓰레쉬", "en": "Thresh", "tier": "B", "role": "사망/부활", "summary": "아군 사망과 영혼 시너지로 밸류를 만든다.", "base": "희생/복사/흡수 유물이 잘 맞지만 속도는 낮다.", "sets": [{"rank": 1, "title": "전용형", "relics": ["Soul Lantern", "Spectral Scissors", "Corrupted Star Fragment"], "strategy": "사망/복사/흡수 시너지로 밸류를 만든다."}, {"rank": 2, "title": "희생형", "relics": ["Disciple of Shadows", "Corrupted Star Fragment", "Spectral Scissors"], "strategy": "희생으로 빠르게 전개하고 강한 유닛을 키운다."}, {"rank": 3, "title": "챔피언 밸류", "relics": ["Oath of the Guardians", "Star Gem", "Guardian's Orb"], "strategy": "장기전 밸류를 확보한다."}]}, {"name": "엘리스", "en": "Elise", "tier": "B", "role": "거미/저코스트 토큰", "summary": "거미와 저코스트 유닛을 넓게 깐다.", "base": "1코스트/토큰 공격 유물과 잘 맞는다.", "sets": [{"rank": 1, "title": "전용 토큰", "relics": ["Queen's Embrace", "Spirit of the Buhru", "Shock & Awe"], "strategy": "거미와 1코 유닛의 공격 가치를 극대화한다."}, {"rank": 2, "title": "압도형", "relics": ["Spirit of the Buhru", "The Beast Within", "Spectral Scissors"], "strategy": "넓은 필드에 압도와 복사를 더한다."}, {"rank": 3, "title": "저투자형", "relics": ["Banshee's Veil", "The Troll King's Crusher", "Stormrazor"], "strategy": "초반 키워드 보강형."}]}, {"name": "제이스", "en": "Jayce", "tier": "B", "role": "6코 주문/복사", "summary": "고비용 주문과 레벨업 후 마나 회복으로 밸류를 만든다.", "base": "주문 피해, 주문 복사, 마나 회복 유물이 핵심이다.", "sets": [{"rank": 1, "title": "전용형", "relics": ["Jayce's Hextech Battery", "Archangel's Staff", "Chemtech Duplicator"], "strategy": "제이스 레벨업 후 주문을 연속 사용한다."}, {"rank": 2, "title": "피해형", "relics": ["Big Guns", "Searing Brilliance", "Archangel's Staff"], "strategy": "고비용 주문 피해를 강화한다."}, {"rank": 3, "title": "제어형", "relics": ["The Grand General's Counterplan", "Chemtech Duplicator", "Luden's Tempest"], "strategy": "챔피언 주문과 복사로 제어한다."}]}, {"name": "바이", "en": "Vi", "tier": "B", "role": "고공격력/제거", "summary": "바이를 키워 큰 한 방으로 끝낸다.", "base": "10공 이상 피니시와 보호막, 압도 보강이 중요하다.", "sets": [{"rank": 1, "title": "전용형", "relics": ["Cease and Desist", "Pack-A-Punch", "Chosen by the Stars"], "strategy": "바이 공격력을 올려 자유 공격 피니시를 노린다."}, {"rank": 2, "title": "제거형", "relics": ["Stalker's Blade", "The Beast Within", "Black Shield"], "strategy": "위협 유닛을 제거하고 압도로 끝낸다."}, {"rank": 3, "title": "성장형", "relics": ["The Beast Within", "Chosen by the Stars", "Black Shield"], "strategy": "키워드와 보호 중심의 안정형."}]}, {"name": "탈리야", "en": "Taliyah", "tier": "B", "role": "랜드마크/스킬 피해", "summary": "랜드마크와 스킬 피해로 필드를 압박한다.", "base": "피해 증폭이 있으면 클리어 속도가 오른다.", "sets": [{"rank": 1, "title": "피해형", "relics": ["Big Guns", "Luden's Tempest", "Chemtech Duplicator"], "strategy": "스킬 피해와 복사를 활용한다."}, {"rank": 2, "title": "압도형", "relics": ["The Beast Within", "Troll King's Crown", "Black Shield"], "strategy": "넓은 필드에 압도와 보호를 더한다."}, {"rank": 3, "title": "저투자형", "relics": ["Lost Chapter", "Luden's Tempest", "Archangel's Staff"], "strategy": "주문 마나와 피해 보강으로 운영한다."}]}, {"name": "노틸러스", "en": "Nautilus", "tier": "B", "role": "딥/고코스트", "summary": "딥 도달 후 고스탯 유닛으로 압박한다.", "base": "느린 덱이라 시작 마나와 딥 보조가 중요하다.", "sets": [{"rank": 1, "title": "딥 전용", "relics": ["Starforged Gauntlets", "Treasures of the Deep", "Frozen Tomb"], "strategy": "시작 마나와 딥 유물로 느린 구간을 보정한다."}, {"rank": 2, "title": "키워드형", "relics": ["The Beast Within", "Chosen by the Stars", "Black Shield"], "strategy": "큰 유닛의 압도 피니시를 보장한다."}, {"rank": 3, "title": "고밸류형", "relics": ["Portal Pals", "Starforged Gauntlets", "Oath of the Guardians"], "strategy": "고코스트 생성으로 밸류를 키운다."}]}, {"name": "오른", "en": "Ornn", "tier": "B", "role": "장비/제련", "summary": "장비를 제련하고 큰 유닛으로 공격한다.", "base": "장비 덱이라 살아있는 무기와 압도 보강이 잘 맞는다.", "sets": [{"rank": 1, "title": "장비 고점", "relics": ["Living Weapon", "Starforged Gauntlets", "The Beast Within"], "strategy": "시작 마나와 제련/압도로 장비 피니시를 만든다."}, {"rank": 2, "title": "흡수형", "relics": ["Corrupted Star Fragment", "Living Weapon", "Chosen by the Stars"], "strategy": "장비 유닛을 흡수해 스탯을 키운다."}, {"rank": 3, "title": "보호형", "relics": ["Troll King's Crown", "The Beast Within", "Black Shield"], "strategy": "큰 필드에 압도와 보호를 더한다."}]}];
+
 const PAID_PRODUCTS = [{"rank": 1, "name": "별벼림 건틀릿 단품/번들", "en": "Starforged Gauntlets", "relics": ["Starforged Gauntlets"], "tier": "SS", "versatility": "5/5", "value": "최상", "priceBand": "1,000~1,500코인권이면 최우선 / 2,000코인권도 고려", "goodFor": "아우렐리온 솔, 엘더 드래곤, 볼리베어, 노틸러스, 고코스트·거대 챔피언", "reason": "시작 마나 +1은 대체가 거의 없는 효과다. 고코스트 챔피언을 자주 쓴다면 계정 전체 체감이 가장 크다.", "caution": "거대 조건을 못 맞추는 저코스트 챔피언만 키운다면 우선순위가 내려간다."}, {"rank": 2, "name": "스웨인의 까마귀 군대 상품", "en": "Swain's Raven Army", "relics": ["Swain's Raven Army"], "tier": "SS", "versatility": "4.5/5", "value": "최상", "priceBand": "1,000~1,500코인권이면 강추 / 2,000코인 이상은 스웨인 주력일 때", "goodFor": "스웨인, 약탈 비용 감소 빌드, 넥서스 선피해가 필요한 고코스트 챔피언", "reason": "게임 시작 넥서스 피해로 약탈 조건을 켜기 쉽고 스웨인 고점을 크게 올린다.", "caution": "스웨인을 키우지 않으면 범용성은 별벼림보다 낮다."}, {"rank": 3, "name": "완성형 마공학 핵 상품", "en": "Perfect Hex Core", "relics": ["Perfect Hex Core"], "tier": "S", "versatility": "4/5", "value": "높음", "priceBand": "1,000~1,500코인권이면 추천 / 2,000코인 이상은 빅토르 주력일 때", "goodFor": "빅토르, 카이사, 다이애나, 키워드 성장 덱", "reason": "매 라운드 업그레이드 생성으로 키워드와 스탯이 누적된다. 빅토르에게는 사실상 핵심 고점 유물이다.", "caution": "빅토르·키워드 덱을 안 쓰면 범용성은 제한적이다."}, {"rank": 4, "name": "충격과 공포 상품", "en": "Shock & Awe", "relics": ["Shock & Awe"], "tier": "S", "versatility": "4/5", "value": "높음", "priceBand": "1,000코인권이면 추천 / 1,500~2,000코인은 토큰 덱 주력일 때", "goodFor": "피들스틱, 미스 포츈, 아지르, 애니, 엘리스, 1코스트·토큰 공격 덱", "reason": "1코스트 이하 유닛의 공격을 넥서스 피해로 바꿔 속도를 크게 올린다.", "caution": "저코스트 유닛을 많이 쓰지 않는 챔피언에게는 효율이 낮다."}, {"rank": 5, "name": "타오르는 광휘 상품", "en": "Searing Brilliance", "relics": ["Searing Brilliance"], "tier": "S", "versatility": "4/5", "value": "높음", "priceBand": "1,000~1,500코인권이면 추천 / 주문 덱이 아니면 보류", "goodFor": "스웨인, 멜, 빅토르, 세트, 주문 엔진 덱", "reason": "주문 비용 감소와 복사/드로우 계열 밸류로 콤보 턴을 만든다.", "caution": "공격형·토큰형 챔피언만 키우는 계정에서는 체감이 작다."}, {"rank": 6, "name": "레인저의 명령 상품", "en": "Ranger's Command", "relics": ["Ranger's Command"], "tier": "S", "versatility": "4/5", "value": "높음", "priceBand": "1,000코인권이면 추천 / 미포·정찰 덱 없으면 보류", "goodFor": "미스 포츈, 암베사, 카이사, 베인, 공격 횟수 기반 챔피언", "reason": "정찰/추가 공격 구조와 결합하면 챔피언 스킬을 여러 번 터뜨릴 수 있다.", "caution": "이미 유물 풀에 풀린 경우가 있어 비싸게 뜨면 금 성물함/로테이션을 기다리는 것도 방법이다."}, {"rank": 7, "name": "무해한 허수아비 상품", "en": "Harmless Scarecrow", "relics": ["Harmless Scarecrow"], "tier": "A", "versatility": "3.5/5", "value": "중상", "priceBand": "피들스틱 주력이라면 1,000~1,500코인권 추천 / 아니면 보류", "goodFor": "피들스틱, 티모, 함정·공포 선사 계열", "reason": "공포 선사/악몽/함정 발동을 가속한다. 피들스틱 성능 체감이 크다.", "caution": "피들스틱을 안 키우면 범용 S급보다는 우선순위가 낮다."}, {"rank": 8, "name": "마공학 소총 상품", "en": "Hextech Rifle", "relics": ["Hextech Rifle"], "tier": "A", "versatility": "3/5", "value": "중간", "priceBand": "케이틀린·티모 주력일 때만 1,000코인권 고려", "goodFor": "케이틀린, 티모, 함정 덱", "reason": "섬광탄·함정 플랜을 안정적으로 시작하게 만든다.", "caution": "함정 덱 외에는 거의 전용 유물에 가깝다."}, {"rank": 9, "name": "발히르의 상징 상품", "en": "Icon of Valhir", "relics": ["Icon of Valhir"], "tier": "B+", "versatility": "3/5", "value": "취향", "priceBand": "볼리베어·애니비아 주력이면 할인권 고려 / 일반 계정은 후순위", "goodFor": "볼리베어, 애니비아, 원소 주문·스킬 덱", "reason": "원소 주문/스킬 피해를 크게 올린다.", "caution": "원소 덱을 자주 쓰지 않으면 계정 전체 효율은 낮다."}, {"rank": 10, "name": "야스오의 바람검 상품", "en": "Yasuo's Windblade", "relics": ["Yasuo's Windblade"], "tier": "B+", "versatility": "3/5", "value": "조건부", "priceBand": "야스오 6성 주력일 때만 고려", "goodFor": "야스오, 스턴/리콜 제어 덱", "reason": "야스오 제어 플랜의 고점을 올린다.", "caution": "야스오를 자주 쓰지 않으면 대장군의 대책/폭풍의 검으로도 충분하다."}, {"rank": 11, "name": "제이스의 마공학 배터리 상품", "en": "Jayce's Hextech Battery", "relics": ["Jayce's Hextech Battery"], "tier": "B", "versatility": "2.5/5", "value": "조건부", "priceBand": "제이스 주력 계정만 고려", "goodFor": "제이스, 6코 주문 덱", "reason": "레벨업 이후 마나 회복으로 주문 연쇄를 만든다.", "caution": "제이스 외 범용성은 낮다."}, {"rank": 12, "name": "노라의 차원문 가속기 상품", "en": "Norra's Portal Accelerator", "relics": ["Norra's Portal Accelerator"], "tier": "B", "versatility": "2.5/5", "value": "조건부", "priceBand": "노라 애정픽이면 고려 / 일반 계정은 후순위", "goodFor": "노라, 생성 유닛 덱", "reason": "생성 유닛과 임팩트 플랜을 강화한다.", "caution": "노라를 안 키우면 거의 쓸 일이 적다."}];
-const rarityKo = {Epic:'서사', Rare:'희귀', Common:'일반'};
-const rarityEmoji = {Epic:'🟪', Rare:'🟦', Common:'🟩'};
-const relicByEn = Object.fromEntries(DATA.map(r=>[r.en,r]));
-const champByEn = Object.fromEntries(CHAMPS.map(c=>[c.en,c]));
-const q = document.getElementById('q'), rarity = document.getElementById('rarity'), tier = document.getElementById('tier'), source = document.getElementById('source');
-const grid = document.getElementById('grid'), tbody = document.getElementById('tbody'), count = document.getElementById('count'), tableWrap = document.getElementById('tableWrap'), toggle = document.getElementById('toggle'), reset = document.getElementById('reset');
-const relicSection = document.getElementById('relicSection'), champSection = document.getElementById('champSection'), paidSection = document.getElementById('paidSection'), champGrid = document.getElementById('champGrid'), tierGroups = document.getElementById('tierGroups'), paidGrid = document.getElementById('paidGrid'), paidTbody = document.getElementById('paidTbody'), paidTableWrap = document.getElementById('paidTableWrap');
-const tabRelics = document.getElementById('tabRelics'), tabChamps = document.getElementById('tabChamps'), tabPaid = document.getElementById('tabPaid');
-let tableMode = false, mode='relics';
-function e(s){return String(s??'').replace(/[&<>'"]/g,ch=>({'&':'&amp;','<':'&lt;','>':'&gt;',"'":'&#39;','"':'&quot;'}[ch]));}
-function slug(s){return String(s).toLowerCase().replace(/[^a-z0-9]+/g,'-').replace(/(^-|-$)/g,'')}
-function imgHtml(r, cls='icon'){ return r && r.img ? `<img class="${cls}" src="${r.img}" alt="${e(r.ko)}" loading="lazy" onerror="this.outerHTML='<div class=&quot;noimg&quot;>이미지<br>없음</div>'">` : '<div class="noimg">이미지<br>없음</div>'; }
-function textMatch(hay){const s=(q.value||'').trim().toLowerCase();return !s || String(hay).toLowerCase().includes(s)}
-function matchRelic(r){
-  if(!textMatch([r.en,r.ko,r.rarity,r.tier,r.effect,r.use,r.source].join(' '))) return false;
-  if(rarity.value && r.rarity!==rarity.value) return false;
-  if(tier.value && !['S','A','B','C','B+'].includes(tier.value)) return false;
-  if(tier.value && r.tier!==tier.value) return false;
-  if(source.value && !r.source.includes(source.value)) return false;
+const rarityKo = { Epic: '서사', Rare: '희귀', Common: '일반' };
+const rarityEmoji = { Epic: '🟪', Rare: '🟦', Common: '🟩' };
+
+// =============================================================
+// 1. 빠른 조회용 매핑
+// =============================================================
+const relicByEn = Object.fromEntries(DATA.map(r => [r.en, r]));
+const champByEn = Object.fromEntries(CHAMPS.map(c => [c.en, c]));
+
+// =============================================================
+// 2. DOM 참조
+// =============================================================
+const q = document.getElementById('q');
+const rarity = document.getElementById('rarity');
+const tier = document.getElementById('tier');
+const source = document.getElementById('source');
+
+const grid = document.getElementById('grid');
+const tbody = document.getElementById('tbody');
+const count = document.getElementById('count');
+const tableWrap = document.getElementById('tableWrap');
+const toggle = document.getElementById('toggle');
+const reset = document.getElementById('reset');
+
+const relicSection = document.getElementById('relicSection');
+const champSection = document.getElementById('champSection');
+const paidSection = document.getElementById('paidSection');
+const champGrid = document.getElementById('champGrid');
+const tierGroups = document.getElementById('tierGroups');
+const paidGrid = document.getElementById('paidGrid');
+const paidTbody = document.getElementById('paidTbody');
+const paidTableWrap = document.getElementById('paidTableWrap');
+
+const tabRelics = document.getElementById('tabRelics');
+const tabChamps = document.getElementById('tabChamps');
+const tabPaid = document.getElementById('tabPaid');
+
+const modalBg = document.getElementById('modalBg');
+const modal = document.getElementById('modal');
+
+let tableMode = false;
+let mode = 'relics';
+
+// =============================================================
+// 3. 공통 헬퍼
+// =============================================================
+function e(s) {
+  return String(s ?? '').replace(/[&<>'"]/g, ch => ({
+    '&': '&amp;', '<': '&lt;', '>': '&gt;', "'": '&#39;', '"': '&quot;'
+  }[ch]));
+}
+
+function slug(s) {
+  return String(s).toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/(^-|-$)/g, '');
+}
+
+function imgHtml(r, cls = 'icon') {
+  if (!r || !r.img) return '<div class="noimg">이미지<br>없음</div>';
+  // 이미지 로드 실패 시 대체 표시 (data-fallback 속성으로 처리, 인라인 onerror 대신 위임)
+  return `<img class="${cls}" src="${r.img}" alt="${e(r.ko)}" loading="lazy" data-fallback="img">`;
+}
+
+function textMatch(hay) {
+  const s = (q.value || '').trim().toLowerCase();
+  return !s || String(hay).toLowerCase().includes(s);
+}
+
+// =============================================================
+// 4. 검색/필터 매칭 함수
+// =============================================================
+function matchRelic(r) {
+  if (!textMatch([r.en, r.ko, r.rarity, r.tier, r.effect, r.use, r.source].join(' '))) return false;
+  if (rarity.value && r.rarity !== rarity.value) return false;
+  if (tier.value && r.tier !== tier.value) return false;
+  if (source.value && !r.source.includes(source.value)) return false;
   return true;
 }
-function matchChamp(c){
-  const relText = c.sets.flatMap(s=>s.relics.map(x=>{let r=relicByEn[x];return r ? `${r.ko} ${r.en}` : x})).join(' ');
-  if(!textMatch([c.name,c.en,c.tier,c.role,c.summary,c.base,relText].join(' '))) return false;
-  if(tier.value && c.tier!==tier.value) return false;
-  if(rarity.value){
-    const has = c.sets.some(s=>s.relics.some(x=>relicByEn[x]?.rarity===rarity.value));
-    if(!has) return false;
+
+function matchChamp(c) {
+  const relText = c.sets
+    .flatMap(s => s.relics.map(x => {
+      const r = relicByEn[x];
+      return r ? `${r.ko} ${r.en}` : x;
+    }))
+    .join(' ');
+
+  if (!textMatch([c.name, c.en, c.tier, c.role, c.summary, c.base, relText].join(' '))) return false;
+  if (tier.value && c.tier !== tier.value) return false;
+
+  if (rarity.value) {
+    const has = c.sets.some(s => s.relics.some(x => relicByEn[x]?.rarity === rarity.value));
+    if (!has) return false;
   }
-  if(source.value){
-    const has = c.sets.some(s=>s.relics.some(x=>(relicByEn[x]?.source||'').includes(source.value)));
-    if(!has) return false;
-  }
-  return true;
-}
-function matchPaid(p){
-  const relText = p.relics.map(x=>{let r=relicByEn[x];return r ? `${r.ko} ${r.en}` : x}).join(' ');
-  if(!textMatch([p.name,p.en,p.tier,p.value,p.versatility,p.priceBand,p.goodFor,p.reason,p.caution,relText].join(' '))) return false;
-  if(tier.value && p.tier!==tier.value) return false;
-  if(rarity.value){
-    const has = p.relics.some(x=>relicByEn[x]?.rarity===rarity.value);
-    if(!has) return false;
-  }
-  if(source.value){
-    const has = [p.name,p.priceBand,p.reason,p.caution].join(' ').includes(source.value) || p.relics.some(x=>(relicByEn[x]?.source||'').includes(source.value));
-    if(!has) return false;
+  if (source.value) {
+    const has = c.sets.some(s => s.relics.some(x => (relicByEn[x]?.source || '').includes(source.value)));
+    if (!has) return false;
   }
   return true;
 }
-function relicChip(en){
+
+function matchPaid(p) {
+  const relText = p.relics.map(x => {
+    const r = relicByEn[x];
+    return r ? `${r.ko} ${r.en}` : x;
+  }).join(' ');
+
+  if (!textMatch([p.name, p.en, p.tier, p.value, p.versatility, p.priceBand, p.goodFor, p.reason, p.caution, relText].join(' '))) return false;
+  if (tier.value && p.tier !== tier.value) return false;
+
+  if (rarity.value) {
+    const has = p.relics.some(x => relicByEn[x]?.rarity === rarity.value);
+    if (!has) return false;
+  }
+  if (source.value) {
+    const haystack = [p.name, p.priceBand, p.reason, p.caution].join(' ');
+    const has = haystack.includes(source.value) ||
+      p.relics.some(x => (relicByEn[x]?.source || '').includes(source.value));
+    if (!has) return false;
+  }
+  return true;
+}
+
+// =============================================================
+// 5. 공통 마크업 조각 (relicChip / 추천 챔피언 링크)
+//    클릭 동작은 onclick 대신 data-action 속성 + 이벤트 위임으로 처리한다.
+// =============================================================
+function relicChip(en) {
   const r = relicByEn[en];
-  if(!r) return `<span class="relicChip missing">${e(en)}</span>`;
-  return `<button type="button" class="relicChip ${r.rarity}" title="${e(r.en)}\n${e(r.effect)}" onclick="openRelic('${e(r.en)}')">${rarityEmoji[r.rarity]}${r.img?`<img class="tinyIcon" src="${r.img}" alt="" loading="lazy">`:''}<b>${e(r.ko)}</b></button>`;
+  if (!r) return `<span class="relicChip missing">${e(en)}</span>`;
+  const icon = r.img ? `<img class="tinyIcon" src="${r.img}" alt="" loading="lazy">` : '';
+  return `<button type="button" class="relicChip ${r.rarity}" title="${e(r.en)}\n${e(r.effect)}" data-action="open-relic" data-en="${e(r.en)}">${rarityEmoji[r.rarity]}${icon}<b>${e(r.ko)}</b></button>`;
 }
-function championForText(part){
+
+function championForText(part) {
   const clean = part.trim().toLowerCase();
-  return CHAMPS.find(c=>clean===c.name.toLowerCase() || clean===c.en.toLowerCase() || clean.startsWith(c.name.toLowerCase()) || clean.includes(c.name.toLowerCase()) || clean.includes(c.en.toLowerCase()));
+  return CHAMPS.find(c =>
+    clean === c.name.toLowerCase() ||
+    clean === c.en.toLowerCase() ||
+    clean.startsWith(c.name.toLowerCase()) ||
+    clean.includes(c.name.toLowerCase()) ||
+    clean.includes(c.en.toLowerCase())
+  );
 }
-function linkUse(useText){
-  return String(useText||'').split(/,\s*/).map(raw=>{
-    const part=raw.trim(); if(!part) return '';
-    const c=championForText(part);
-    return c ? `<button class="champLink" onclick="openChamp('${e(c.en)}')">${e(part)}</button>` : `<span>${e(part)}</span>`;
+
+function linkUse(useText) {
+  return String(useText || '').split(/,\s*/).map(raw => {
+    const part = raw.trim();
+    if (!part) return '';
+    const c = championForText(part);
+    return c
+      ? `<button type="button" class="champLink" data-action="open-champ" data-en="${e(c.en)}">${e(part)}</button>`
+      : `<span>${e(part)}</span>`;
   }).join(' · ');
 }
-function renderRelics(){
-  const arr=DATA.filter(matchRelic);
-  count.textContent=`유물 ${arr.length} / ${DATA.length}개 표시`;
-  grid.innerHTML=arr.map(r=>`<article class="card relicCard">
-    ${imgHtml(r)}<div><div class="title">${rarityEmoji[r.rarity]} ${e(r.ko)}</div><div class="en">${e(r.en)}</div>
-    <div class="meta"><span class="rarity ${r.rarity}">${rarityKo[r.rarity]} / ${r.rarity}</span><span class="tierPill ${r.tier}">티어 ${r.tier}</span></div>
-    <p class="small"><span class="label">효과</span> · ${e(r.effect)}</p><p class="small"><span class="label">추천 챔피언</span> · ${linkUse(r.use)}</p><p class="small"><span class="label">획득</span> · ${e(r.source)}</p></div>
-  </article>`).join('') || '<div class="empty">검색 결과가 없습니다.</div>';
-  tbody.innerHTML=arr.map(r=>`<tr><td>${imgHtml(r,'')}</td><td><b>${e(r.ko)}</b></td><td>${e(r.en)}</td><td>${rarityEmoji[r.rarity]} ${rarityKo[r.rarity]}</td><td>${e(r.tier)}</td><td>${e(r.effect)}</td><td>${linkUse(r.use)}</td><td>${e(r.source)}</td></tr>`).join('');
+
+// =============================================================
+// 6. 렌더링
+// =============================================================
+function renderRelics() {
+  const arr = DATA.filter(matchRelic);
+  count.textContent = `유물 ${arr.length} / ${DATA.length}개 표시`;
+
+  grid.innerHTML = arr.map(r => `
+    <article class="card relicCard">
+      ${imgHtml(r)}
+      <div>
+        <div class="title">${rarityEmoji[r.rarity]} ${e(r.ko)}</div>
+        <div class="en">${e(r.en)}</div>
+        <div class="meta">
+          <span class="rarity ${r.rarity}">${rarityKo[r.rarity]} / ${r.rarity}</span>
+          <span class="tierPill ${r.tier}">티어 ${r.tier}</span>
+        </div>
+        <p class="small"><span class="label">효과</span> · ${e(r.effect)}</p>
+        <p class="small"><span class="label">추천 챔피언</span> · ${linkUse(r.use)}</p>
+        <p class="small"><span class="label">획득</span> · ${e(r.source)}</p>
+      </div>
+    </article>
+  `).join('') || '<div class="empty">검색 결과가 없습니다.</div>';
+
+  tbody.innerHTML = arr.map(r => `
+    <tr>
+      <td>${imgHtml(r, '')}</td>
+      <td><b>${e(r.ko)}</b></td>
+      <td>${e(r.en)}</td>
+      <td>${rarityEmoji[r.rarity]} ${rarityKo[r.rarity]}</td>
+      <td>${e(r.tier)}</td>
+      <td>${e(r.effect)}</td>
+      <td>${linkUse(r.use)}</td>
+      <td>${e(r.source)}</td>
+    </tr>
+  `).join('');
 }
-function renderTierGroups(arr){
-  const order=['SS','S','A','B','C'];
-  tierGroups.innerHTML=order.map(t=>{const list=arr.filter(c=>c.tier===t); if(!list.length) return ''; return `<div class="tierGroup"><b><span class="tierPill ${t}">${t}</span></b><div class="tierNames">${list.map(c=>`<button class="champName" style="font-size:12.5px" onclick="openChamp('${e(c.en)}')">${e(c.name)}</button>`).join(' · ')}</div></div>`}).join('');
+
+function renderTierGroups(arr) {
+  const order = ['SS', 'S', 'A', 'B', 'C'];
+  tierGroups.innerHTML = order.map(t => {
+    const list = arr.filter(c => c.tier === t);
+    if (!list.length) return '';
+    const names = list
+      .map(c => `<button type="button" class="champName" style="font-size:12.5px" data-action="open-champ" data-en="${e(c.en)}">${e(c.name)}</button>`)
+      .join(' · ');
+    return `<div class="tierGroup"><b><span class="tierPill ${t}">${t}</span></b><div class="tierNames">${names}</div></div>`;
+  }).join('');
 }
-function renderChamps(){
-  const arr=CHAMPS.filter(matchChamp);
-  count.textContent=`챔피언 ${arr.length} / ${CHAMPS.length}명 표시`;
+
+function renderChamps() {
+  const arr = CHAMPS.filter(matchChamp);
+  count.textContent = `챔피언 ${arr.length} / ${CHAMPS.length}명 표시`;
   renderTierGroups(arr);
-  champGrid.innerHTML=arr.map(c=>`<article class="card champCard" id="champ-${slug(c.en)}"><div class="champHead"><div><button class="champName" onclick="openChamp('${e(c.en)}')">${e(c.name)}</button><div class="role">${e(c.en)} · ${e(c.role)}</div></div><span class="tierPill ${c.tier}">${c.tier}</span></div><p class="small">${e(c.summary)}</p>${c.sets.map(s=>`<div class="setBox"><div class="setTop"><span class="rank">${s.rank}순위</span><b>${e(s.title)}</b></div><div>${s.relics.map(relicChip).join('')}</div><div class="champOps">${e(s.strategy)}</div></div>`).join('')}</article>`).join('') || '<div class="empty">검색 결과가 없습니다.</div>';
+
+  champGrid.innerHTML = arr.map(c => `
+    <article class="card champCard" id="champ-${slug(c.en)}">
+      <div class="champHead">
+        <div>
+          <button type="button" class="champName" data-action="open-champ" data-en="${e(c.en)}">${e(c.name)}</button>
+          <div class="role">${e(c.en)} · ${e(c.role)}</div>
+        </div>
+        <span class="tierPill ${c.tier}">${c.tier}</span>
+      </div>
+      <p class="small">${e(c.summary)}</p>
+      ${c.sets.map(s => `
+        <div class="setBox">
+          <div class="setTop"><span class="rank">${s.rank}순위</span><b>${e(s.title)}</b></div>
+          <div>${s.relics.map(relicChip).join('')}</div>
+          <div class="champOps">${e(s.strategy)}</div>
+        </div>
+      `).join('')}
+    </article>
+  `).join('') || '<div class="empty">검색 결과가 없습니다.</div>';
 }
-function renderPaid(){
-  const arr=PAID_PRODUCTS.filter(matchPaid);
-  count.textContent=`과금 상품 ${arr.length} / ${PAID_PRODUCTS.length}개 표시`;
-  paidGrid.innerHTML=arr.map(p=>`<article class="card paidCard"><div class="paidTop"><div><div class="title">${e(p.name)}</div><div class="en">${e(p.en)}</div></div><div class="paidRank">${p.rank}위</div></div><div class="meta"><span class="tierPill ${p.tier}">${p.tier}</span><span class="chip">범용성 ${e(p.versatility)}</span><span class="chip">가성비 ${e(p.value)}</span></div><div>${p.relics.map(relicChip).join('')}</div><div class="priceLine"><b>추천 가격선</b><br>${e(p.priceBand)}</div><p class="small"><span class="label">주요 사용처</span> · ${linkUse(p.goodFor)}</p><p class="small"><span class="label">구매 이유</span> · ${e(p.reason)}</p><p class="small warn"><span class="label">주의</span> · ${e(p.caution)}</p></article>`).join('') || '<div class="empty">검색 결과가 없습니다.</div>';
-  paidTbody.innerHTML=arr.map(p=>`<tr><td>${p.rank}위</td><td><b>${e(p.name)}</b><br><span class="en">${e(p.en)}</span><br>${p.relics.map(relicChip).join('')}</td><td>${e(p.tier)}</td><td>${e(p.versatility)}</td><td>${e(p.priceBand)}</td><td>${linkUse(p.goodFor)}</td><td>${e(p.reason)}<br><span class="warn">주의: ${e(p.caution)}</span></td></tr>`).join('');
+
+function renderPaid() {
+  const arr = PAID_PRODUCTS.filter(matchPaid);
+  count.textContent = `과금 상품 ${arr.length} / ${PAID_PRODUCTS.length}개 표시`;
+
+  paidGrid.innerHTML = arr.map(p => `
+    <article class="card paidCard">
+      <div class="paidTop">
+        <div>
+          <div class="title">${e(p.name)}</div>
+          <div class="en">${e(p.en)}</div>
+        </div>
+        <div class="paidRank">${p.rank}위</div>
+      </div>
+      <div class="meta">
+        <span class="tierPill ${p.tier}">${p.tier}</span>
+        <span class="chip">범용성 ${e(p.versatility)}</span>
+        <span class="chip">가성비 ${e(p.value)}</span>
+      </div>
+      <div>${p.relics.map(relicChip).join('')}</div>
+      <div class="priceLine"><b>추천 가격선</b><br>${e(p.priceBand)}</div>
+      <p class="small"><span class="label">주요 사용처</span> · ${linkUse(p.goodFor)}</p>
+      <p class="small"><span class="label">구매 이유</span> · ${e(p.reason)}</p>
+      <p class="small warn"><span class="label">주의</span> · ${e(p.caution)}</p>
+    </article>
+  `).join('') || '<div class="empty">검색 결과가 없습니다.</div>';
+
+  paidTbody.innerHTML = arr.map(p => `
+    <tr>
+      <td>${p.rank}위</td>
+      <td><b>${e(p.name)}</b><br><span class="en">${e(p.en)}</span><br>${p.relics.map(relicChip).join('')}</td>
+      <td>${e(p.tier)}</td>
+      <td>${e(p.versatility)}</td>
+      <td>${e(p.priceBand)}</td>
+      <td>${linkUse(p.goodFor)}</td>
+      <td>${e(p.reason)}<br><span class="warn">주의: ${e(p.caution)}</span></td>
+    </tr>
+  `).join('');
 }
-function render(){ if(mode==='relics') renderRelics(); else if(mode==='champs') renderChamps(); else renderPaid(); }
-function setMode(m){mode=m; const isRelic=m==='relics', isChamp=m==='champs', isPaid=m==='paid'; relicSection.classList.toggle('hidden',!isRelic); champSection.classList.toggle('hidden',!isChamp); paidSection.classList.toggle('hidden',!isPaid); tabRelics.classList.toggle('active',isRelic); tabChamps.classList.toggle('active',isChamp); tabPaid.classList.toggle('active',isPaid); toggle.style.display=isRelic||isPaid?'block':'none'; if(isPaid){tableWrap.style.display='none'; grid.style.display='grid'; paidTableWrap.style.display=tableMode?'block':'none';} else {paidTableWrap.style.display='none';} render(); }
-function goChamp(en){
+
+function render() {
+  if (mode === 'relics') renderRelics();
+  else if (mode === 'champs') renderChamps();
+  else renderPaid();
+}
+
+// =============================================================
+// 7. 탭 / 표·카드 보기 전환
+// =============================================================
+function setMode(m) {
+  mode = m;
+  const isRelic = m === 'relics';
+  const isChamp = m === 'champs';
+  const isPaid = m === 'paid';
+
+  relicSection.classList.toggle('hidden', !isRelic);
+  champSection.classList.toggle('hidden', !isChamp);
+  paidSection.classList.toggle('hidden', !isPaid);
+
+  tabRelics.classList.toggle('active', isRelic);
+  tabChamps.classList.toggle('active', isChamp);
+  tabPaid.classList.toggle('active', isPaid);
+
+  toggle.style.display = (isRelic || isPaid) ? 'block' : 'none';
+
+  if (isPaid) {
+    tableWrap.style.display = 'none';
+    grid.style.display = 'grid';
+    paidTableWrap.style.display = tableMode ? 'block' : 'none';
+  } else {
+    paidTableWrap.style.display = 'none';
+  }
+
+  render();
+}
+
+function resetViewState() {
+  tableMode = false;
+  tableWrap.style.display = 'none';
+  grid.style.display = 'grid';
+  paidTableWrap.style.display = 'none';
+  toggle.textContent = '표 보기';
+}
+
+// =============================================================
+// 8. 상세 이동 (검색창에 채워서 해당 탭으로 스크롤)
+// =============================================================
+function goChamp(en) {
   closeModal();
-  const c=champByEn[en]; if(!c) return;
-  q.value=c.name; rarity.value=''; source.value=''; tier.value='';
-  tableMode=false; tableWrap.style.display='none'; grid.style.display='grid'; paidTableWrap.style.display='none'; toggle.textContent='표 보기';
+  const c = champByEn[en];
+  if (!c) return;
+
+  q.value = c.name;
+  rarity.value = '';
+  source.value = '';
+  tier.value = '';
+  resetViewState();
   setMode('champs');
-  setTimeout(()=>{const el=document.getElementById('champ-'+slug(c.en)); if(el){el.scrollIntoView({behavior:'smooth',block:'center'}); el.classList.add('flash'); setTimeout(()=>el.classList.remove('flash'),1400);}},80);
-}
-[q,rarity,tier,source].forEach(el=>el.addEventListener('input',render));
-toggle.addEventListener('click',()=>{tableMode=!tableMode; if(mode==='relics'){grid.style.display=tableMode?'none':'grid';tableWrap.style.display=tableMode?'block':'none';paidTableWrap.style.display='none';} else if(mode==='paid'){paidGrid.style.display=tableMode?'none':'grid';paidTableWrap.style.display=tableMode?'block':'none';tableWrap.style.display='none';} toggle.textContent=tableMode?'카드 보기':'표 보기'});
-reset.addEventListener('click',()=>{q.value='';rarity.value='';tier.value='';source.value='';render();q.focus();});
-tabRelics.addEventListener('click',()=>setMode('relics')); tabChamps.addEventListener('click',()=>setMode('champs')); tabPaid.addEventListener('click',()=>setMode('paid'));
 
-function goRelic(en){
-  const r=relicByEn[en]; if(!r) return;
+  setTimeout(() => {
+    const el = document.getElementById('champ-' + slug(c.en));
+    if (el) {
+      el.scrollIntoView({ behavior: 'smooth', block: 'center' });
+      el.classList.add('flash');
+      setTimeout(() => el.classList.remove('flash'), 1400);
+    }
+  }, 80);
+}
+
+function goRelic(en) {
+  const r = relicByEn[en];
+  if (!r) return;
   closeModal();
-  q.value=r.ko; rarity.value=''; source.value=''; tier.value='';
-  tableMode=false; tableWrap.style.display='none'; grid.style.display='grid'; paidTableWrap.style.display='none'; toggle.textContent='표 보기';
-  setMode('relics');
-  setTimeout(()=>{const cards=[...grid.querySelectorAll('.card')]; const target=cards.find(card=>card.textContent.includes(r.ko)); if(target){target.scrollIntoView({behavior:'smooth',block:'center'}); target.classList.add('flash'); setTimeout(()=>target.classList.remove('flash'),1400);}},120);
-}
-function openRelic(en){
-  const r=relicByEn[en]; if(!r) return;
-  const modalBg=document.getElementById('modalBg'), modal=document.getElementById('modal');
-  modal.innerHTML=`<div class="modalTop"><div><h3>${rarityEmoji[r.rarity]} ${e(r.ko)} <span class="tierPill ${r.tier}">티어 ${e(r.tier)}</span></h3><div class="role">${e(r.en)} · ${rarityKo[r.rarity]} / ${e(r.rarity)}</div></div><button class="close" onclick="closeModal()">닫기</button></div>
-  <div style="display:grid;grid-template-columns:82px 1fr;gap:14px;align-items:start">${imgHtml(r)}<div><h4>효과</h4><p class="small">${e(r.effect)}</p><h4>추천 챔피언</h4><p class="small">${linkUse(r.use)}</p><h4>획득처</h4><p class="small">${e(r.source)}</p><div class="detailBtns"><button class="detailBtn" onclick="goRelic('${e(r.en)}')">자세히보기 · 유물탭으로 이동</button><button class="detailBtn secondary" onclick="closeModal()">닫기</button></div></div></div>`;
-  modalBg.style.display='block';
-}
-function openChamp(en){
-  const c=CHAMPS.find(x=>x.en===en); if(!c) return;
-  const modalBg=document.getElementById('modalBg'), modal=document.getElementById('modal');
-  modal.innerHTML=`<div class="modalTop"><div><h3>${e(c.name)} <span class="tierPill ${c.tier}">${c.tier}</span></h3><div class="role">${e(c.en)} · ${e(c.role)}</div></div><button class="close" onclick="closeModal()">닫기</button></div><h4>기본 운영방법</h4><p class="small">${e(c.base)}</p><div class="detailBtns"><button class="detailBtn" onclick="goChamp('${e(c.en)}')">자세히보기 · 챔피언 티어표로 이동</button><button class="detailBtn secondary" onclick="closeModal()">닫기</button></div>${c.sets.map(s=>`<div class="setBox"><div class="setTop"><span class="rank">${s.rank}순위</span><b>${e(s.title)}</b></div><div>${s.relics.map(relicChip).join('')}</div><h4>세트 운영방법</h4><p class="small">${e(s.strategy)}</p></div>`).join('')}`;
-  modalBg.style.display='block';
-}
-function closeModal(){document.getElementById('modalBg').style.display='none'}
-document.getElementById('modalBg').addEventListener('click',e=>{if(e.target.id==='modalBg') closeModal();});
-document.addEventListener('keydown',e=>{if(e.key==='Escape') closeModal();});
 
-// 모바일 상단 GNB/검색 영역 자동 숨김: 최상단에서는 보이고, 아래로 스크롤하면 숨김, 위로 일정 거리 스크롤하면 다시 표시
-(function(){
-  const headerEl=document.querySelector('header');
-  if(!headerEl) return;
-  let lastY=window.scrollY||0;
-  let accUp=0;
-  let ticking=false;
-  const isMobile=()=>window.matchMedia('(max-width: 720px)').matches;
-  const keepShown=()=>{
-    const active=document.activeElement;
+  q.value = r.ko;
+  rarity.value = '';
+  source.value = '';
+  tier.value = '';
+  resetViewState();
+  setMode('relics');
+
+  setTimeout(() => {
+    const cards = [...grid.querySelectorAll('.card')];
+    const target = cards.find(card => card.textContent.includes(r.ko));
+    if (target) {
+      target.scrollIntoView({ behavior: 'smooth', block: 'center' });
+      target.classList.add('flash');
+      setTimeout(() => target.classList.remove('flash'), 1400);
+    }
+  }, 120);
+}
+
+// =============================================================
+// 9. 모달 (유물 상세 / 챔피언 상세)
+// =============================================================
+function openRelic(en) {
+  const r = relicByEn[en];
+  if (!r) return;
+
+  modal.innerHTML = `
+    <div class="modalTop">
+      <div>
+        <h3>${rarityEmoji[r.rarity]} ${e(r.ko)} <span class="tierPill ${r.tier}">티어 ${e(r.tier)}</span></h3>
+        <div class="role">${e(r.en)} · ${rarityKo[r.rarity]} / ${e(r.rarity)}</div>
+      </div>
+      <button type="button" class="close" data-action="close-modal">닫기</button>
+    </div>
+    <div style="display:grid;grid-template-columns:82px 1fr;gap:14px;align-items:start">
+      ${imgHtml(r)}
+      <div>
+        <h4>효과</h4><p class="small">${e(r.effect)}</p>
+        <h4>추천 챔피언</h4><p class="small">${linkUse(r.use)}</p>
+        <h4>획득처</h4><p class="small">${e(r.source)}</p>
+        <div class="detailBtns">
+          <button type="button" class="detailBtn" data-action="go-relic" data-en="${e(r.en)}">자세히보기 · 유물탭으로 이동</button>
+          <button type="button" class="detailBtn secondary" data-action="close-modal">닫기</button>
+        </div>
+      </div>
+    </div>
+  `;
+  modalBg.style.display = 'block';
+}
+
+function openChamp(en) {
+  const c = CHAMPS.find(x => x.en === en);
+  if (!c) return;
+
+  const setsHtml = c.sets.map(s => `
+    <div class="setBox">
+      <div class="setTop"><span class="rank">${s.rank}순위</span><b>${e(s.title)}</b></div>
+      <div>${s.relics.map(relicChip).join('')}</div>
+      <h4>세트 운영방법</h4><p class="small">${e(s.strategy)}</p>
+    </div>
+  `).join('');
+
+  modal.innerHTML = `
+    <div class="modalTop">
+      <div>
+        <h3>${e(c.name)} <span class="tierPill ${c.tier}">${c.tier}</span></h3>
+        <div class="role">${e(c.en)} · ${e(c.role)}</div>
+      </div>
+      <button type="button" class="close" data-action="close-modal">닫기</button>
+    </div>
+    <h4>기본 운영방법</h4><p class="small">${e(c.base)}</p>
+    <div class="detailBtns">
+      <button type="button" class="detailBtn" data-action="go-champ" data-en="${e(c.en)}">자세히보기 · 챔피언 티어표로 이동</button>
+      <button type="button" class="detailBtn secondary" data-action="close-modal">닫기</button>
+    </div>
+    ${setsHtml}
+  `;
+  modalBg.style.display = 'block';
+}
+
+function closeModal() {
+  modalBg.style.display = 'none';
+}
+
+// =============================================================
+// 10. 이벤트 바인딩
+//     동적으로 생성되는 카드/칩/버튼은 onclick 대신
+//     document 레벨 이벤트 위임(data-action)으로 처리한다.
+// =============================================================
+
+// 검색/필터 입력
+[q, rarity, tier, source].forEach(el => el.addEventListener('input', render));
+
+// 표 보기 ↔ 카드 보기 토글
+toggle.addEventListener('click', () => {
+  tableMode = !tableMode;
+  if (mode === 'relics') {
+    grid.style.display = tableMode ? 'none' : 'grid';
+    tableWrap.style.display = tableMode ? 'block' : 'none';
+    paidTableWrap.style.display = 'none';
+  } else if (mode === 'paid') {
+    paidGrid.style.display = tableMode ? 'none' : 'grid';
+    paidTableWrap.style.display = tableMode ? 'block' : 'none';
+    tableWrap.style.display = 'none';
+  }
+  toggle.textContent = tableMode ? '카드 보기' : '표 보기';
+});
+
+// 초기화
+reset.addEventListener('click', () => {
+  q.value = '';
+  rarity.value = '';
+  tier.value = '';
+  source.value = '';
+  render();
+  q.focus();
+});
+
+// 탭 전환
+tabRelics.addEventListener('click', () => setMode('relics'));
+tabChamps.addEventListener('click', () => setMode('champs'));
+tabPaid.addEventListener('click', () => setMode('paid'));
+
+// 모달 바깥 클릭 시 닫기
+modalBg.addEventListener('click', evt => {
+  if (evt.target.id === 'modalBg') closeModal();
+});
+
+// ESC 키로 모달 닫기
+document.addEventListener('keydown', evt => {
+  if (evt.key === 'Escape') closeModal();
+});
+
+// 이미지 로드 실패 시 대체 표시 (캡처 단계 위임 — error 이벤트는 버블링되지 않음)
+document.addEventListener('error', evt => {
+  const img = evt.target;
+  if (img.tagName === 'IMG' && img.dataset.fallback === 'img') {
+    img.outerHTML = '<div class="noimg">이미지<br>없음</div>';
+  }
+}, true);
+
+// 카드/칩/버튼 클릭 위임: data-action 속성으로 분기
+document.addEventListener('click', evt => {
+  const target = evt.target.closest('[data-action]');
+  if (!target) return;
+
+  const action = target.dataset.action;
+  const en = target.dataset.en;
+
+  switch (action) {
+    case 'open-relic': openRelic(en); break;
+    case 'open-champ': openChamp(en); break;
+    case 'go-relic': goRelic(en); break;
+    case 'go-champ': goChamp(en); break;
+    case 'close-modal': closeModal(); break;
+  }
+});
+
+// =============================================================
+// 11. 모바일 상단 GNB/검색 영역 자동 숨김
+//     최상단에서는 보이고, 아래로 스크롤하면 숨기고,
+//     위로 일정 거리 스크롤하면 다시 표시한다.
+// =============================================================
+(function () {
+  const headerEl = document.querySelector('header');
+  if (!headerEl) return;
+
+  let lastY = window.scrollY || 0;
+  let accUp = 0;
+  let ticking = false;
+
+  const isMobile = () => window.matchMedia('(max-width: 720px)').matches;
+  const keepShown = () => {
+    const active = document.activeElement;
     return active && headerEl.contains(active);
   };
-  function show(){headerEl.classList.remove('headerHidden');headerEl.classList.add('headerShown');}
-  function hide(){headerEl.classList.add('headerHidden');headerEl.classList.remove('headerShown');}
-  function update(){
-    const y=window.scrollY||0;
-    const dy=y-lastY;
-    if(!isMobile()) { show(); lastY=y; accUp=0; ticking=false; return; }
-    if(y<=8 || keepShown()) { show(); accUp=0; }
-    else if(dy>6 && y>110) { hide(); accUp=0; }
-    else if(dy<0) { accUp += Math.abs(dy); if(accUp>42) show(); }
-    else if(dy>=0) { accUp=0; }
-    lastY=y;
-    ticking=false;
+
+  function show() {
+    headerEl.classList.remove('headerHidden');
+    headerEl.classList.add('headerShown');
   }
-  window.addEventListener('scroll',()=>{ if(!ticking){ requestAnimationFrame(update); ticking=true; } },{passive:true});
-  window.addEventListener('resize',update,{passive:true});
-  ['focusin','focusout'].forEach(evt=>headerEl.addEventListener(evt,()=>setTimeout(update,40)));
+  function hide() {
+    headerEl.classList.add('headerHidden');
+    headerEl.classList.remove('headerShown');
+  }
+
+  function update() {
+    const y = window.scrollY || 0;
+    const dy = y - lastY;
+
+    if (!isMobile()) {
+      show();
+      lastY = y;
+      accUp = 0;
+      ticking = false;
+      return;
+    }
+
+    if (y <= 8 || keepShown()) {
+      show();
+      accUp = 0;
+    } else if (dy > 6 && y > 110) {
+      hide();
+      accUp = 0;
+    } else if (dy < 0) {
+      accUp += Math.abs(dy);
+      if (accUp > 42) show();
+    } else if (dy >= 0) {
+      accUp = 0;
+    }
+
+    lastY = y;
+    ticking = false;
+  }
+
+  window.addEventListener('scroll', () => {
+    if (!ticking) {
+      requestAnimationFrame(update);
+      ticking = true;
+    }
+  }, { passive: true });
+
+  window.addEventListener('resize', update, { passive: true });
+  ['focusin', 'focusout'].forEach(evt => headerEl.addEventListener(evt, () => setTimeout(update, 40)));
+
   show();
 })();
+
+// 초기 렌더
 render();
 </script>
 </body>
