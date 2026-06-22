@@ -48,7 +48,7 @@ header {
   background: rgba(8, 11, 18, .95);
   backdrop-filter: blur(10px);
   border-bottom: 1px solid var(--line);
-  transition: transform .22s ease, box-shadow .22s ease;
+  transition: transform .32s cubic-bezier(.25,.1,.25,1), box-shadow .32s cubic-bezier(.25,.1,.25,1);
 }
 header.headerHidden { transform: translateY(-105%); box-shadow: none; pointer-events: none; }
 header.headerShown   { transform: translateY(0); box-shadow: 0 10px 30px rgba(0,0,0,.24); }
@@ -94,6 +94,11 @@ button:hover { border-color: #64748b; }
 .badge.s  { border-color: #f59e0b; color: #fef3c7; }
 .badge.a  { border-color: #6366f1; color: #e0e7ff; }
 .badge.b  { border-color: #64748b; color: #d1d5db; }
+
+/* 등급 배지 필터 버튼 (서사/희귀/일반) */
+.badge[data-rarity-filter] { cursor: pointer; transition: transform .12s ease, background .12s ease; }
+.badge[data-rarity-filter]:active { transform: scale(.96); }
+.badge[data-rarity-filter].active { background: #1e1b4b; box-shadow: inset 0 0 0 1.5px currentColor; }
 
 /* =========================================================
    3. 카드 그리드 공통
@@ -144,16 +149,6 @@ button:hover { border-color: #64748b; }
 .small { font-size: 12.5px; color: #cbd5e1; line-height: 1.45; margin: 5px 0; }
 .label { color: #94a3b8; }
 .hidden { display: none !important; }
-
-/* 표 보기 */
-.tableWrap {
-  display: none; overflow: auto;
-  border: 1px solid var(--line); border-radius: 14px; background: #0f172a;
-}
-table { border-collapse: collapse; width: 100%; font-size: 13px; min-width: 1160px; }
-th, td { padding: 10px; border-bottom: 1px solid #243044; text-align: left; vertical-align: top; }
-th { position: sticky; top: 0; background: #111827; color: #cbd5e1; }
-td img { width: 44px; height: 44px; object-fit: contain; }
 
 .sectionTitle {
   display: flex; align-items: center; justify-content: space-between;
@@ -300,7 +295,6 @@ td img { width: 44px; height: 44px; object-fit: contain; }
   .title { font-size: 15px; }
   .small { font-size: 12px; }
   .meta { margin: 6px 0; }
-  .tableWrap { border-radius: 12px; }
   .mobileHint { display: block; }
   .tierGroups { grid-template-columns: 1fr; gap: 8px; }
   .setBox { padding: 9px; }
@@ -339,31 +333,17 @@ td img { width: 44px; height: 44px; object-fit: contain; }
 
   <div class="controls">
     <input id="q" type="search" placeholder="검색: 피들스틱, 공포, 악몽, 장난꾼, 버섯, 스웨인, 금 성물함, Echoing..." />
-    <select id="rarity">
-      <option value="">전체 등급</option>
-      <option>Epic</option><option>Rare</option><option>Common</option>
-    </select>
     <select id="tier">
       <option value="">전체 티어</option>
       <option>SS</option><option>S</option><option>A</option><option>B+</option><option>B</option><option>C</option>
     </select>
-    <select id="source">
-      <option value="">전체 획득처</option>
-      <option value="금 성물함">금 성물함</option>
-      <option value="은 성물함">은 성물함</option>
-      <option value="동 성물함">동 성물함</option>
-      <option value="2성 캠페인">2성 캠페인</option>
-      <option value="상점">상점</option>
-      <option value="번들">번들</option>
-    </select>
-    <button id="toggle">표 보기</button>
     <button id="reset">초기화</button>
   </div>
 
   <div class="summary">
-    <span class="badge epic">🟪 서사 Epic</span>
-    <span class="badge rare">🟦 희귀 Rare</span>
-    <span class="badge common">🟩 일반 Common</span>
+    <button type="button" class="badge epic" data-rarity-filter="Epic">🟪 서사 Epic</button>
+    <button type="button" class="badge rare" data-rarity-filter="Rare">🟦 희귀 Rare</button>
+    <button type="button" class="badge common" data-rarity-filter="Common">🟩 일반 Common</button>
     <span class="badge ss">SS 최우선</span>
     <span class="badge s">S 상위권</span>
     <span class="badge a">A 실전권</span>
@@ -381,14 +361,6 @@ td img { width: 44px; height: 44px; object-fit: contain; }
       <span class="note">검색 대상: 한글명, 영문명, 효과, 추천 챔피언, 획득처. 추천 챔피언 이름 클릭 시 챔피언 티어표로 이동.</span>
     </div>
     <section id="grid" class="grid"></section>
-    <section id="tableWrap" class="tableWrap">
-      <table>
-        <thead>
-          <tr><th>이미지</th><th>한글명</th><th>영문명</th><th>등급</th><th>티어</th><th>효과 요약</th><th>추천 챔피언</th><th>획득처</th></tr>
-        </thead>
-        <tbody id="tbody"></tbody>
-      </table>
-    </section>
   </section>
 
   <section id="champSection" class="hidden">
@@ -407,14 +379,6 @@ td img { width: 44px; height: 44px; object-fit: contain; }
       <span class="note">가격은 인게임 표시가 기준입니다. 아래 가격선은 "이 정도 코인대면 살 만한가"를 비교하기 위한 판단표입니다.</span>
     </div>
     <section id="paidGrid" class="grid"></section>
-    <section id="paidTableWrap" class="tableWrap">
-      <table>
-        <thead>
-          <tr><th>순위</th><th>상품/유물</th><th>티어</th><th>범용성</th><th>추천 가격선</th><th>주요 사용처</th><th>판단</th></tr>
-        </thead>
-        <tbody id="paidTbody"></tbody>
-      </table>
-    </section>
     <div class="sourceNote">과금 상품은 상점 로테이션, 번들 구성, 지역별 코인 가격에 따라 달라집니다. 3,000코인 이상 대형 번들은 유물 하나만 보고 사기엔 효율이 낮으므로, 챔피언 파편·별 수정·노바 파편까지 필요한 경우에만 고려하는 쪽이 안전합니다.</div>
   </section>
 </main>
@@ -444,15 +408,10 @@ const champByEn = Object.fromEntries(CHAMPS.map(c => [c.en, c]));
 // 2. DOM 참조
 // =============================================================
 const q = document.getElementById('q');
-const rarity = document.getElementById('rarity');
 const tier = document.getElementById('tier');
-const source = document.getElementById('source');
 
 const grid = document.getElementById('grid');
-const tbody = document.getElementById('tbody');
 const count = document.getElementById('count');
-const tableWrap = document.getElementById('tableWrap');
-const toggle = document.getElementById('toggle');
 const reset = document.getElementById('reset');
 
 const relicSection = document.getElementById('relicSection');
@@ -461,18 +420,18 @@ const paidSection = document.getElementById('paidSection');
 const champGrid = document.getElementById('champGrid');
 const tierGroups = document.getElementById('tierGroups');
 const paidGrid = document.getElementById('paidGrid');
-const paidTbody = document.getElementById('paidTbody');
-const paidTableWrap = document.getElementById('paidTableWrap');
 
 const tabRelics = document.getElementById('tabRelics');
 const tabChamps = document.getElementById('tabChamps');
 const tabPaid = document.getElementById('tabPaid');
 
+const rarityFilterButtons = [...document.querySelectorAll('[data-rarity-filter]')];
+
 const modalBg = document.getElementById('modalBg');
 const modal = document.getElementById('modal');
 
-let tableMode = false;
 let mode = 'relics';
+let activeRarity = ''; // '' | 'Epic' | 'Rare' | 'Common' — 하단 등급 배지로 토글
 
 // =============================================================
 // 3. 공통 헬퍼
@@ -503,9 +462,8 @@ function textMatch(hay) {
 // =============================================================
 function matchRelic(r) {
   if (!textMatch([r.en, r.ko, r.rarity, r.tier, r.effect, r.use, r.source].join(' '))) return false;
-  if (rarity.value && r.rarity !== rarity.value) return false;
+  if (activeRarity && r.rarity !== activeRarity) return false;
   if (tier.value && r.tier !== tier.value) return false;
-  if (source.value && !r.source.includes(source.value)) return false;
   return true;
 }
 
@@ -520,12 +478,8 @@ function matchChamp(c) {
   if (!textMatch([c.name, c.en, c.tier, c.role, c.summary, c.base, relText].join(' '))) return false;
   if (tier.value && c.tier !== tier.value) return false;
 
-  if (rarity.value) {
-    const has = c.sets.some(s => s.relics.some(x => relicByEn[x]?.rarity === rarity.value));
-    if (!has) return false;
-  }
-  if (source.value) {
-    const has = c.sets.some(s => s.relics.some(x => (relicByEn[x]?.source || '').includes(source.value)));
+  if (activeRarity) {
+    const has = c.sets.some(s => s.relics.some(x => relicByEn[x]?.rarity === activeRarity));
     if (!has) return false;
   }
   return true;
@@ -540,14 +494,8 @@ function matchPaid(p) {
   if (!textMatch([p.name, p.en, p.tier, p.value, p.versatility, p.priceBand, p.goodFor, p.reason, p.caution, relText].join(' '))) return false;
   if (tier.value && p.tier !== tier.value) return false;
 
-  if (rarity.value) {
-    const has = p.relics.some(x => relicByEn[x]?.rarity === rarity.value);
-    if (!has) return false;
-  }
-  if (source.value) {
-    const haystack = [p.name, p.priceBand, p.reason, p.caution].join(' ');
-    const has = haystack.includes(source.value) ||
-      p.relics.some(x => (relicByEn[x]?.source || '').includes(source.value));
+  if (activeRarity) {
+    const has = p.relics.some(x => relicByEn[x]?.rarity === activeRarity);
     if (!has) return false;
   }
   return true;
@@ -609,19 +557,6 @@ function renderRelics() {
       </div>
     </article>
   `).join('') || '<div class="empty">검색 결과가 없습니다.</div>';
-
-  tbody.innerHTML = arr.map(r => `
-    <tr>
-      <td>${imgHtml(r, '')}</td>
-      <td><b>${e(r.ko)}</b></td>
-      <td>${e(r.en)}</td>
-      <td>${rarityEmoji[r.rarity]} ${rarityKo[r.rarity]}</td>
-      <td>${e(r.tier)}</td>
-      <td>${e(r.effect)}</td>
-      <td>${linkUse(r.use)}</td>
-      <td>${e(r.source)}</td>
-    </tr>
-  `).join('');
 }
 
 function renderTierGroups(arr) {
@@ -687,18 +622,6 @@ function renderPaid() {
       <p class="small warn"><span class="label">주의</span> · ${e(p.caution)}</p>
     </article>
   `).join('') || '<div class="empty">검색 결과가 없습니다.</div>';
-
-  paidTbody.innerHTML = arr.map(p => `
-    <tr>
-      <td>${p.rank}위</td>
-      <td><b>${e(p.name)}</b><br><span class="en">${e(p.en)}</span><br>${p.relics.map(relicChip).join('')}</td>
-      <td>${e(p.tier)}</td>
-      <td>${e(p.versatility)}</td>
-      <td>${e(p.priceBand)}</td>
-      <td>${linkUse(p.goodFor)}</td>
-      <td>${e(p.reason)}<br><span class="warn">주의: ${e(p.caution)}</span></td>
-    </tr>
-  `).join('');
 }
 
 function render() {
@@ -724,25 +647,20 @@ function setMode(m) {
   tabChamps.classList.toggle('active', isChamp);
   tabPaid.classList.toggle('active', isPaid);
 
-  toggle.style.display = (isRelic || isPaid) ? 'block' : 'none';
+  render();
+}
 
-  if (isPaid) {
-    tableWrap.style.display = 'none';
-    grid.style.display = 'grid';
-    paidTableWrap.style.display = tableMode ? 'block' : 'none';
-  } else {
-    paidTableWrap.style.display = 'none';
-  }
-
+function setActiveRarity(value) {
+  activeRarity = activeRarity === value ? '' : value;
+  rarityFilterButtons.forEach(btn => {
+    btn.classList.toggle('active', btn.dataset.rarityFilter === activeRarity);
+  });
   render();
 }
 
 function resetViewState() {
-  tableMode = false;
-  tableWrap.style.display = 'none';
-  grid.style.display = 'grid';
-  paidTableWrap.style.display = 'none';
-  toggle.textContent = '표 보기';
+  activeRarity = '';
+  rarityFilterButtons.forEach(btn => btn.classList.remove('active'));
 }
 
 // =============================================================
@@ -754,8 +672,6 @@ function goChamp(en) {
   if (!c) return;
 
   q.value = c.name;
-  rarity.value = '';
-  source.value = '';
   tier.value = '';
   resetViewState();
   setMode('champs');
@@ -776,8 +692,6 @@ function goRelic(en) {
   closeModal();
 
   q.value = r.ko;
-  rarity.value = '';
-  source.value = '';
   tier.value = '';
   resetViewState();
   setMode('relics');
@@ -791,6 +705,7 @@ function goRelic(en) {
       setTimeout(() => target.classList.remove('flash'), 1400);
     }
   }, 120);
+
 }
 
 // =============================================================
@@ -865,29 +780,18 @@ function closeModal() {
 // =============================================================
 
 // 검색/필터 입력
-[q, rarity, tier, source].forEach(el => el.addEventListener('input', render));
+[q, tier].forEach(el => el.addEventListener('input', render));
 
-// 표 보기 ↔ 카드 보기 토글
-toggle.addEventListener('click', () => {
-  tableMode = !tableMode;
-  if (mode === 'relics') {
-    grid.style.display = tableMode ? 'none' : 'grid';
-    tableWrap.style.display = tableMode ? 'block' : 'none';
-    paidTableWrap.style.display = 'none';
-  } else if (mode === 'paid') {
-    paidGrid.style.display = tableMode ? 'none' : 'grid';
-    paidTableWrap.style.display = tableMode ? 'block' : 'none';
-    tableWrap.style.display = 'none';
-  }
-  toggle.textContent = tableMode ? '카드 보기' : '표 보기';
+// 등급 배지(서사/희귀/일반) 클릭 → 필터 토글
+rarityFilterButtons.forEach(btn => {
+  btn.addEventListener('click', () => setActiveRarity(btn.dataset.rarityFilter));
 });
 
 // 초기화
 reset.addEventListener('click', () => {
   q.value = '';
-  rarity.value = '';
   tier.value = '';
-  source.value = '';
+  resetViewState();
   render();
   q.focus();
 });
@@ -972,15 +876,15 @@ document.addEventListener('click', evt => {
       return;
     }
 
-    if (y <= 8 || keepShown()) {
+    if (y <= 16 || keepShown()) {
       show();
       accUp = 0;
-    } else if (dy > 6 && y > 110) {
+    } else if (dy > 24 && y > 140) {
       hide();
       accUp = 0;
     } else if (dy < 0) {
       accUp += Math.abs(dy);
-      if (accUp > 42) show();
+      if (accUp > 64) show();
     } else if (dy >= 0) {
       accUp = 0;
     }
