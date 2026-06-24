@@ -886,14 +886,14 @@ tabRelics.addEventListener('click', () => setMode('relics'));
 tabChamps.addEventListener('click', () => setMode('champs'));
 tabPaid.addEventListener('click', () => setMode('paid'));
 
-// 모달 바깥 클릭 시 완전히 닫기
+// 모달 바깥 클릭 시 한 단계만 닫기 (쌓여있으면 이전 모달로 복귀)
 modalBg.addEventListener('click', evt => {
-  if (evt.target.id === 'modalBg') closeModalFully();
+  if (evt.target.id === 'modalBg') closeModal();
 });
 
-// ESC 키로 모달 완전히 닫기
+// ESC 키로 한 단계만 닫기
 document.addEventListener('keydown', evt => {
-  if (evt.key === 'Escape') closeModalFully();
+  if (evt.key === 'Escape') closeModal();
 });
 
 // 이미지 로드 실패 시 대체 표시 (캡처 단계 위임 — error 이벤트는 버블링되지 않음)
