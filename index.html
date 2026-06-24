@@ -592,7 +592,7 @@ function renderRelics() {
 function renderTierGroups(arr) {
   const order = ['SS', 'S', 'A', 'B', 'C'];
   tierGroups.innerHTML = order.map(t => {
-    const list = arr.filter(c => c.tier === t);
+    const list = arr.filter(c => c.tier === t).sort((a, b) => a.name.localeCompare(b.name, 'ko'));
     if (!list.length) return '';
     const names = list
       .map(c => `<button type="button" class="champName" style="font-size:12.5px" data-action="open-champ" data-en="${e(c.en)}">${e(c.name)}</button>`)
