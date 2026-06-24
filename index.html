@@ -230,7 +230,19 @@ button:hover { border-color: #64748b; }
 }
 .tierGroup { border: 1px solid #243044; background: #0f172a; border-radius: 14px; padding: 12px; }
 .tierGroup b { font-size: 15px; }
-.tierNames { font-size: 12.5px; color: #cbd5e1; line-height: 1.6; margin-top: 6px; }
+.tierNames {
+  font-size: 12.5px; color: #cbd5e1; margin-top: 8px;
+  display: flex; flex-wrap: wrap; gap: 6px;
+}
+.champBadge {
+  display: inline-flex; align-items: center; gap: 3px;
+  background: #16213a; border: 1px solid #2c3b56; border-radius: 999px;
+  padding: 5px 10px; font-size: 12.5px; font-weight: 600; color: #e2e8f0;
+  cursor: pointer; transition: background .12s ease, border-color .12s ease, transform .08s ease;
+  white-space: nowrap;
+}
+.champBadge:hover { background: #1e2c4a; border-color: #3b4f72; }
+.champBadge:active { transform: scale(.96); }
 
 .empty { border: 1px dashed #475569; border-radius: 14px; padding: 20px; color: #94a3b8; text-align: center; }
 .sourceNote {
@@ -622,8 +634,8 @@ function renderTierGroups(arr) {
     const list = arr.filter(c => c.tier === t).sort((a, b) => a.name.localeCompare(b.name, 'ko'));
     if (!list.length) return '';
     const names = list
-      .map(c => `<button type="button" class="champName" style="font-size:12.5px" data-action="open-champ" data-en="${e(c.en)}">${regionIconsHtml(c.region)}${e(c.name)}</button>`)
-      .join(' · ');
+      .map(c => `<button type="button" class="champBadge" data-action="open-champ" data-en="${e(c.en)}">${regionIconsHtml(c.region)}${e(c.name)}</button>`)
+      .join('');
     return `<div class="tierGroup"><b><span class="tierPill ${t}">${t}</span></b><div class="tierNames">${names}</div></div>`;
   }).join('');
 }
