@@ -232,8 +232,15 @@ button:hover { border-color: #64748b; }
 }
 .tierGroup { border: 1px solid #243044; background: #0f172a; border-radius: 14px; padding: 12px; }
 .tierGroup b { font-size: 15px; }
+.tierRegionGroup { margin-top: 10px; }
+.tierRegionGroup:first-of-type { margin-top: 10px; }
+.tierRegionLabel {
+  display: flex; align-items: center; gap: 5px;
+  font-size: 12px; font-weight: 700; color: #8092b3;
+  margin-bottom: 6px;
+}
 .tierNames {
-  font-size: 12.5px; color: #cbd5e1; margin-top: 8px;
+  font-size: 12.5px; color: #cbd5e1;
   display: flex; flex-wrap: wrap; gap: 6px;
 }
 .champBadge {
@@ -326,7 +333,10 @@ button:hover { border-color: #64748b; }
   .controls input { font-size: 14px; padding: 10px 12px; }
   .controls select { width: 68px; font-size: 12px; padding: 10px 4px; }
   .controls button { font-size: 12px; padding: 10px 10px; }
-  .useGroupGrid { grid-template-columns: 1fr; gap: 14px; }
+  .useGroupGrid { grid-template-columns: 1fr 1fr; gap: 10px 8px; }
+  .useRegionLabel { font-size: 11.5px; }
+  .useBadgeRow { gap: 4px; }
+  .useBadgeRow .champBadge { font-size: 11px; padding: 4px 7px; }
   .summary {
     gap: 6px; margin-top: 8px; overflow-x: auto; flex-wrap: nowrap;
     padding-bottom: 2px; scrollbar-width: none;
@@ -715,12 +725,35 @@ function renderRelics() {
 function renderTierGroups(arr) {
   const order = ['SS', 'S', 'A', 'B', 'C'];
   tierGroups.innerHTML = order.map(t => {
-    const list = arr.filter(c => c.tier === t).sort((a, b) => a.name.localeCompare(b.name, 'ko'));
+    const list = arr.filter(c => c.tier === t);
     if (!list.length) return '';
-    const names = list
-      .map(c => `<button type="button" class="champBadge" data-action="open-champ" data-en="${e(c.en)}">${regionIconsHtml(c.region)}${e(c.name)}</button>`)
-      .join('');
-    return `<div class="tierGroup"><b><span class="tierPill ${t}">${t}</span></b><div class="tierNames">${names}</div></div>`;
+    const sorted = sortChampsByRegion(list);
+
+    // 지역별로 그룹화
+    const regionGroups = [];
+    let lastRegion = null;
+    for (const c of sorted) {
+      const r = primaryRegionOf(c);
+      if (r !== lastRegion) {
+        regionGroups.push({ region: r, champs: [] });
+        lastRegion = r;
+      }
+      regionGroups[regionGroups.length - 1].champs.push(c);
+    }
+
+    const groupsHtml = regionGroups.map(g => `
+      <div class="tierRegionGroup">
+        <div class="tierRegionLabel">${regionIconsHtml([g.region])}${e(g.region)}</div>
+        <div class="tierNames">
+          ${g.champs.map(c => {
+            const otherRegions = (c.region || []).filter(r => r !== g.region);
+            return `<button type="button" class="champBadge" data-action="open-champ" data-en="${e(c.en)}">${regionIconsHtml(otherRegions)}${e(c.name)}</button>`;
+          }).join('')}
+        </div>
+      </div>
+    `).join('');
+
+    return `<div class="tierGroup"><b><span class="tierPill ${t}">${t}</span></b>${groupsHtml}</div>`;
   }).join('');
 }
 
