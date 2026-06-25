@@ -85,6 +85,17 @@ button { cursor: pointer; }
 button:hover { border-color: #64748b; }
 
 .summary { display: flex; gap: 10px; flex-wrap: wrap; margin-top: 12px; }
+.regionFilterRow { display: flex; gap: 7px; flex-wrap: wrap; margin-top: 12px; }
+.regionFilterBadge {
+  display: inline-flex; align-items: center; justify-content: center;
+  width: 34px; height: 34px; border-radius: 10px;
+  border: 1px solid #334155; background: #0f172a; padding: 0;
+  cursor: pointer; transition: background .12s ease, border-color .12s ease, transform .08s ease;
+}
+.regionFilterBadge img { width: 20px; height: 20px; object-fit: contain; }
+.regionFilterBadge:hover { background: #1e2c4a; border-color: #3b4f72; }
+.regionFilterBadge:active { transform: scale(.92); }
+.regionFilterBadge.active { background: #1e1b4b; border-color: #8b5cf6; box-shadow: 0 0 0 1.5px #8b5cf6; }
 .badge {
   display: inline-flex; align-items: center; gap: 6px;
   border: 1px solid #334155; background: #0f172a;
@@ -396,23 +407,10 @@ button:hover { border-color: #64748b; }
       <option value="">전체 티어</option>
       <option>SS</option><option>S</option><option>A</option><option>B+</option><option>B</option><option>C</option>
     </select>
-    <select id="region" class="hidden">
-      <option value="">전체 지역</option>
-      <option>녹서스</option>
-      <option>데마시아</option>
-      <option>그림자 군도</option>
-      <option>아이오니아</option>
-      <option>빌지워터</option>
-      <option>슈리마</option>
-      <option>밴들 시티</option>
-      <option>프렐요드</option>
-      <option>타곤</option>
-      <option>필트오버&자운</option>
-      <option>룬테라</option>
-      <option>영혼의 꽃</option>
-    </select>
     <button id="reset">초기화</button>
   </div>
+
+  <div class="regionFilterRow hidden" id="regionFilterRow"></div>
 
   <div class="summary">
     <button type="button" class="badge ss" data-tier-filter="SS">SS 최우선</button>
@@ -506,7 +504,8 @@ const champByEn = Object.fromEntries(CHAMPS.map(c => [c.en, c]));
 // =============================================================
 const q = document.getElementById('q');
 const tier = document.getElementById('tier');
-const region = document.getElementById('region');
+const regionFilterRow = document.getElementById('regionFilterRow');
+let activeRegions = new Set(); // 지역 아이콘 뱃지로 토글되는 다중 선택 필터 (챔피언탭 전용)
 
 const grid = document.getElementById('grid');
 const count = document.getElementById('count');
@@ -579,7 +578,7 @@ function matchChamp(c) {
 
   if (!textMatch([c.name, c.en, c.tier, c.role, c.summary, c.base, relText].join(' '))) return false;
   if (tier.value && c.tier !== tier.value) return false;
-  if (region.value && !(c.region || []).includes(region.value)) return false;
+  if (activeRegions.size > 0 && !(c.region || []).some(r => activeRegions.has(r))) return false;
 
   if (activeRarity) {
     const has = c.sets.some(s => s.relics.some(x => relicByEn[x]?.rarity === activeRarity));
@@ -833,8 +832,13 @@ function setMode(m) {
   tabChamps.classList.toggle('active', isChamp);
   tabPaid.classList.toggle('active', isPaid);
 
-  region.classList.toggle('hidden', !isChamp);
-  if (!isChamp) region.value = '';
+  // 지역 아이콘 필터 행: 챔피언탭에서만 노출
+  regionFilterRow.classList.toggle('hidden', !isChamp);
+  if (!isChamp && activeRegions.size > 0) { activeRegions = new Set(); renderRegionFilterRow(); }
+
+  // 등급(서사/희귀/일반) 배지: 유물탭에서만 노출 (챔피언 티어표에는 의미가 없음)
+  rarityFilterButtons.forEach(btn => btn.classList.toggle('hidden', !isRelic));
+  if (!isRelic) { activeRarity = ''; rarityFilterButtons.forEach(btn => btn.classList.remove('active')); }
 
   tierFilterButtons.forEach(btn => btn.classList.toggle('hidden', !isRelic));
   if (!isRelic) { activeTier = ''; tierFilterButtons.forEach(btn => btn.classList.remove('active')); }
@@ -858,11 +862,32 @@ function setActiveTier(value) {
   render();
 }
 
+function renderRegionFilterRow() {
+  const allRegions = Object.keys(regionIcon);
+  regionFilterRow.innerHTML = allRegions.map(r => `
+    <button type="button" class="regionFilterBadge${activeRegions.has(r) ? ' active' : ''}" data-region-filter="${e(r)}" title="${e(r)}">
+      <img src="${regionIcon[r]}" alt="${e(r)}" loading="lazy">
+    </button>
+  `).join('');
+}
+
+function setActiveRegion(value) {
+  if (activeRegions.has(value)) {
+    activeRegions.delete(value);
+  } else {
+    activeRegions.add(value);
+  }
+  renderRegionFilterRow();
+  render();
+}
+
 function resetViewState() {
   activeRarity = '';
   activeTier = '';
+  activeRegions = new Set();
   rarityFilterButtons.forEach(btn => btn.classList.remove('active'));
   tierFilterButtons.forEach(btn => btn.classList.remove('active'));
+  renderRegionFilterRow();
 }
 
 // =============================================================
@@ -875,7 +900,6 @@ function goChamp(en) {
 
   q.value = c.name;
   tier.value = '';
-  region.value = '';
   resetViewState();
   setMode('champs');
 
@@ -1012,7 +1036,13 @@ function closeModalFully() {
 // =============================================================
 
 // 검색/필터 입력
-[q, tier, region].forEach(el => el.addEventListener('input', render));
+[q, tier].forEach(el => el.addEventListener('input', render));
+
+// 지역 아이콘 배지 클릭 → 다중 선택 필터 토글 (이벤트 위임, regionFilterRow는 동적으로 다시 그려지므로)
+regionFilterRow.addEventListener('click', evt => {
+  const btn = evt.target.closest('[data-region-filter]');
+  if (btn) setActiveRegion(btn.dataset.regionFilter);
+});
 
 // 등급 배지(서사/희귀/일반) 클릭 → 필터 토글
 rarityFilterButtons.forEach(btn => {
@@ -1028,7 +1058,6 @@ tierFilterButtons.forEach(btn => {
 reset.addEventListener('click', () => {
   q.value = '';
   tier.value = '';
-  region.value = '';
   resetViewState();
   render();
   q.focus();
@@ -1147,6 +1176,7 @@ document.addEventListener('click', evt => {
 })();
 
 // 초기 렌더
+renderRegionFilterRow();
 render();
 </script>
 </body>
