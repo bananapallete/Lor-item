@@ -280,9 +280,12 @@ button:hover { border-color: #64748b; }
 
 .useListBody { margin-top: 10px; }
 .useGroupGrid {
-  display: grid; grid-template-columns: 1fr 1fr; gap: 14px 18px;
+  display: grid; grid-template-columns: 1fr 1fr; gap: 12px;
 }
-.useRegionGroup { margin-bottom: 0; }
+.useRegionGroup {
+  border: 1px solid #1e293b; border-radius: 12px; padding: 10px 12px;
+  background: rgba(255,255,255,.012);
+}
 .useRegionLabel {
   display: flex; align-items: center; gap: 5px;
   font-size: 13px; font-weight: 700; color: #93a3c2;
@@ -667,13 +670,13 @@ function sortChampsByRegion(champs) {
   });
 }
 
-function linkUse(useText) {
+function linkUse(useText, labelName) {
   const text = String(useText || '').trim();
   if (!text) return '<span class="label">추천 챔피언 없음</span>';
   const parts = text.split(/,\s*/).map(s => s.trim()).filter(Boolean);
   const matched = parts.map(part => ({ part, c: championForText(part) }));
   const count = matched.length;
-  return `<button type="button" class="useShowBtn" data-action="open-use-list" data-use="${e(text)}">추천 챔피언 보기 (${count}명)</button>`;
+  return `<button type="button" class="useShowBtn" data-action="open-use-list" data-use="${e(text)}" data-label="${e(labelName || '')}">추천 챔피언 보기 (${count}명)</button>`;
 }
 
 function renderUseListModalBody(useText) {
@@ -728,7 +731,7 @@ function renderRelics() {
           ${r.paid ? '<span class="chip paidBadge">유료</span>' : ''}
         </div>
         <p class="small"><span class="label">효과</span> · ${e(r.effect)}</p>
-        <div class="small"><span class="label">추천 챔피언</span> ${linkUse(r.use)}</div>
+        <div class="small"><span class="label">추천 챔피언</span> ${linkUse(r.use, r.ko)}</div>
         <p class="small"><span class="label">획득</span> · ${e(r.source)}</p>
       </div>
     </article>
@@ -816,7 +819,7 @@ function renderPaid() {
       </div>
       <div>${p.relics.map(relicChip).join('')}</div>
       <div class="priceLine"><b>추천 가격선</b><br>${e(p.priceBand)}</div>
-      <p class="small"><span class="label">주요 사용처</span> · ${linkUse(p.goodFor)}</p>
+      <p class="small"><span class="label">주요 사용처</span> · ${linkUse(p.goodFor, p.name)}</p>
       <p class="small"><span class="label">구매 이유</span> · ${e(p.reason)}</p>
       <p class="small warn"><span class="label">주의</span> · ${e(p.caution)}</p>
     </article>
@@ -966,7 +969,7 @@ function openRelic(en) {
       ${imgHtml(r)}
       <div>
         <h4>효과</h4><p class="small">${e(r.effect)}</p>
-        <h4>추천 챔피언</h4><div class="small">${linkUse(r.use)}</div>
+        <h4>추천 챔피언</h4><div class="small">${linkUse(r.use, r.ko)}</div>
         <h4>획득처</h4><p class="small">${e(r.source)}</p>
         <div class="detailBtns">
           <button type="button" class="detailBtn" data-action="go-relic" data-en="${e(r.en)}">자세히보기 · 유물탭으로 이동</button>
@@ -1070,14 +1073,16 @@ function openChamp(en) {
   modalBg.style.display = 'block';
 }
 
-function openUseList(useText) {
+function openUseList(useText, labelName) {
   if (modalBg.style.display === 'block') modalStack.push(modal.innerHTML);
+
+  const label = String(labelName || '').trim();
 
   modal.innerHTML = `
     <div class="modalTop">
       <div>
         <h3>추천 챔피언</h3>
-        <div class="role">지역별로 묶어서 표시합니다</div>
+        ${label ? `<div class="role">${e(label)}</div>` : ''}
       </div>
       <button type="button" class="close" data-action="close-modal">닫기</button>
     </div>
@@ -1168,12 +1173,13 @@ document.addEventListener('click', evt => {
   const action = target.dataset.action;
   const en = target.dataset.en;
   const useData = target.dataset.use;
+  const labelData = target.dataset.label;
   const starData = target.dataset.star;
 
   switch (action) {
     case 'open-relic': openRelic(en); break;
     case 'open-champ': openChamp(en); break;
-    case 'open-use-list': openUseList(useData); break;
+    case 'open-use-list': openUseList(useData, labelData); break;
     case 'select-const-star': selectConstStar(en, starData); break;
     case 'go-relic': goRelic(en); break;
     case 'go-champ': goChamp(en); break;
