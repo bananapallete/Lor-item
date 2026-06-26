@@ -243,12 +243,17 @@ button:hover { border-color: #64748b; }
 }
 .tierGroup { border: 1px solid #243044; background: #0f172a; border-radius: 14px; padding: 12px; }
 .tierGroup b { font-size: 15px; }
-.tierRegionGroup { margin-top: 10px; }
-.tierRegionGroup:first-of-type { margin-top: 10px; }
+.tierRegionGrid {
+  display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-top: 10px;
+}
+.tierRegionGroup {
+  border: 1px solid #1e293b; border-radius: 12px; padding: 10px 12px;
+  background: rgba(255,255,255,.012);
+}
 .tierRegionLabel {
   display: flex; align-items: center; gap: 5px;
   font-size: 12px; font-weight: 700; color: #8092b3;
-  margin-bottom: 6px;
+  margin-bottom: 6px; padding-bottom: 5px; border-bottom: 1px solid #243044;
 }
 .tierNames {
   font-size: 12.5px; color: #cbd5e1;
@@ -351,6 +356,10 @@ button:hover { border-color: #64748b; }
   .useRegionLabel { font-size: 11.5px; }
   .useBadgeRow { gap: 4px; }
   .useBadgeRow .champBadge { font-size: 11px; padding: 4px 7px; }
+  .tierRegionGrid { grid-template-columns: 1fr 1fr; gap: 8px; }
+  .tierRegionLabel { font-size: 11px; }
+  .tierNames { gap: 4px; }
+  .tierNames .champBadge { font-size: 11px; padding: 4px 7px; }
   .summary {
     gap: 6px; margin-top: 8px; overflow-x: auto; flex-wrap: nowrap;
     padding-bottom: 2px; scrollbar-width: none;
@@ -757,7 +766,7 @@ function renderTierGroups(arr) {
       regionGroups[regionGroups.length - 1].champs.push(c);
     }
 
-    const groupsHtml = regionGroups.map(g => `
+    const groupsHtml = `<div class="tierRegionGrid">` + regionGroups.map(g => `
       <div class="tierRegionGroup">
         <div class="tierRegionLabel">${regionIconsHtml([g.region])}${e(g.region)}</div>
         <div class="tierNames">
@@ -767,7 +776,7 @@ function renderTierGroups(arr) {
           }).join('')}
         </div>
       </div>
-    `).join('');
+    `).join('') + `</div>`;
 
     return `<div class="tierGroup"><b><span class="tierPill ${t}">${t}</span></b>${groupsHtml}</div>`;
   }).join('');
