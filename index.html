@@ -400,6 +400,7 @@ button:hover { border-color: #64748b; }
 .constPanelInner b { color: #fbbf24; }
 .tipList { margin: 6px 0 0; padding-left: 0; list-style: none; display: flex; flex-direction: column; gap: 8px; }
 .tipList li { font-size: 12.5px; color: #cbd5e1; line-height: 1.55; border-left: 2px solid #334155; padding-left: 9px; }
+.tipTitle { color: #e2e8f0; font-weight: 800; }
 </style>
 </head>
 <body>
@@ -1007,6 +1008,15 @@ function selectConstStar(en, starNum) {
   if (panel) panel.classList.add('open');
 }
 
+function renderTip(text, en) {
+  // 팁은 "제목: 본문" 형태로 저장되어 있다. 첫 콜론으로 나눠 제목에 볼드를 입혀 구분한다.
+  const idx = text.indexOf(':');
+  if (idx === -1) return linkStarTags(text, en);
+  const title = text.slice(0, idx).trim();
+  const body = text.slice(idx + 1).trim();
+  return `<b class="tipTitle">${e(title)}:</b> ${linkStarTags(body, en)}`;
+}
+
 function openChamp(en) {
   const c = CHAMPS.find(x => x.en === en);
   if (!c) return;
@@ -1037,7 +1047,7 @@ function openChamp(en) {
   const tipsHtml = (c.tips && c.tips.length) ? `
     <h4>게임플레이 팁</h4>
     <ul class="tipList">
-      ${c.tips.map(t => `<li>${linkStarTags(t, c.en)}</li>`).join('')}
+      ${c.tips.map(t => `<li>${renderTip(t, c.en)}</li>`).join('')}
     </ul>
   ` : '';
 
