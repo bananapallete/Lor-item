@@ -400,10 +400,6 @@ button:hover { border-color: #64748b; }
 .constPanelInner b { color: #fbbf24; }
 .tipList { margin: 6px 0 0; padding-left: 0; list-style: none; display: flex; flex-direction: column; gap: 8px; }
 .tipList li { font-size: 12.5px; color: #cbd5e1; line-height: 1.55; border-left: 2px solid #334155; padding-left: 9px; }
-.starTagLink { display: inline; background: #1e1b4b; border: 1px solid #6366f1; color: #e0e7ff; border-radius: 6px; padding: 1px 6px; font-size: inherit; font-weight: 800; cursor: pointer; white-space: nowrap; }
-.starTagLink:hover { background: #312e81; }
-.constBox.highlight { animation: constBoxPulse 1s ease; }
-@keyframes constBoxPulse { 0%, 100% { box-shadow: none; } 30% { box-shadow: 0 0 0 3px rgba(99,102,241,.55); } }
 </style>
 </head>
 <body>
@@ -549,7 +545,6 @@ let mode = 'relics';
 let activeRarity = ''; // '' | 'Epic' | 'Rare' | 'Common' — 하단 등급 배지로 토글
 let activeTier = ''; // '' | 'SS' | 'S' | 'A' | 'B' | 'D' — 하단 티어 배지로 토글
 let modalStack = []; // 모달 위에 다른 모달을 열었을 때, 이전 모달 내용을 기억해 '닫기'가 한 단계씩만 닫히게 한다
-let activeConstTip = null; // 현재 떠 있는 별자리 말풍선(툴팁)
 
 // =============================================================
 // 3. 공통 헬퍼
@@ -981,67 +976,9 @@ function openRelic(en) {
   modalBg.style.display = 'block';
 }
 
-function starTagHtml(en, n, label) {
-  // 별자리 능력은 최대 6성. 1~6만 클릭 가능한 말풍선 태그로, 그 외(예: 조이맵 난이도 '별 10개')는 일반 텍스트로 둔다.
-  const num = parseInt(n, 10);
-  if (!(num >= 1 && num <= 6)) return null;
-  return `<button type="button" class="starTag" data-action="show-const-tip" data-en="${e(en)}" data-star="${num}">${e(label)}</button>`;
-}
 function linkStarTags(text, en) {
-  // "6-star", "6 star", "6성", "Level 2", "레벨 2", "C6" 등 1~6성 별자리 단계 언급만 클릭 가능한 말풍선 태그로 변환
-  let out = e(text);
-  out = out.replace(/\b(\d{1,2})[\s-]?star(s)?\b/gi, (m, n) => starTagHtml(en, n, `${n}성`) || m);
-  out = out.replace(/\bC(\d{1,2})\b/g, (m, n) => starTagHtml(en, n, `${n}성`) || m);
-  out = out.replace(/(\d{1,2})성/g, (m, n) => starTagHtml(en, n, `${n}성`) || m);
-  out = out.replace(/\bLevel\s?(\d{1,2})\b/gi, (m, n) => starTagHtml(en, n, `레벨 ${n}`) || m);
-  return out;
-}
-
-function showConstTip(anchorEl, en, starNum) {
-  const c = champByEn[en];
-  if (!c || !c.constellation) return;
-  hideConstTip();
-
-  const num = parseInt(starNum, 10);
-  const star = (c.constellation.stars || []).find(s => String(s.n) === String(num));
-  let bodyHtml;
-  if (star) {
-    bodyHtml = `<b>${e(num)}성 · ${e(star.name || '')}</b><br>${e(star.effect)}`;
-  } else {
-    bodyHtml = `<b>${e(num)}성</b> · ${e(c.name)} 별자리<br>${e(c.constellation.summary)}`;
-  }
-
-  const tip = document.createElement('div');
-  tip.className = 'constTip';
-  tip.innerHTML = `
-    <button type="button" class="constTipClose" data-action="hide-const-tip" aria-label="닫기">×</button>
-    <div class="constTipBody">${bodyHtml}</div>
-    <div class="constTipArrow"></div>
-  `;
-  document.body.appendChild(tip);
-
-  // 위치 계산: 앵커 위쪽 중앙에 말풍선, 화면 밖으로 나가지 않게 보정
-  const r = anchorEl.getBoundingClientRect();
-  const margin = 8;
-  const tw = tip.offsetWidth, th = tip.offsetHeight;
-  let left = r.left + r.width / 2 - tw / 2;
-  left = Math.max(margin, Math.min(left, window.innerWidth - tw - margin));
-  let top = r.top - th - 10;
-  let below = false;
-  if (top < margin) { top = r.bottom + 10; below = true; } // 위 공간 부족하면 아래로
-  tip.style.left = `${left + window.scrollX}px`;
-  tip.style.top = `${top + window.scrollY}px`;
-
-  // 화살표를 앵커 중앙에 맞춤
-  const arrow = tip.querySelector('.constTipArrow');
-  const arrowLeft = (r.left + r.width / 2) - left;
-  arrow.style.left = `${Math.max(12, Math.min(arrowLeft, tw - 12))}px`;
-  tip.classList.toggle('below', below);
-
-  activeConstTip = tip;
-}
-function hideConstTip() {
-  if (activeConstTip) { activeConstTip.remove(); activeConstTip = null; }
+  // 게임플레이 팁 안의 별 단계 언급은 더 이상 클릭 가능한 말풍선 태그로 만들지 않고, 그냥 텍스트로 둔다.
+  return e(text);
 }
 
 function renderConstPanel(en, starNum) {
@@ -1142,7 +1079,6 @@ function openUseList(useText) {
 }
 
 function closeModal() {
-  hideConstTip();
   if (modalStack.length) {
     modal.innerHTML = modalStack.pop();
   } else {
@@ -1199,16 +1135,11 @@ modalBg.addEventListener('click', evt => {
   if (evt.target.id === 'modalBg') closeModal();
 });
 
-// ESC 키로 한 단계만 닫기 (말풍선이 떠 있으면 말풍선부터)
+// ESC 키로 모달 닫기
 document.addEventListener('keydown', evt => {
   if (evt.key !== 'Escape') return;
-  if (activeConstTip) { hideConstTip(); return; }
   closeModal();
 });
-
-// 스크롤하면 말풍선 위치가 어긋나므로 닫는다 (모달 내부 스크롤 포함)
-window.addEventListener('scroll', () => { if (activeConstTip) hideConstTip(); }, true);
-window.addEventListener('resize', () => { if (activeConstTip) hideConstTip(); });
 
 // 이미지 로드 실패 시 대체 표시 (캡처 단계 위임 — error 이벤트는 버블링되지 않음)
 document.addEventListener('error', evt => {
@@ -1222,13 +1153,6 @@ document.addEventListener('error', evt => {
 document.addEventListener('click', evt => {
   const target = evt.target.closest('[data-action]');
 
-  // 별자리 말풍선이 떠 있을 때: 말풍선 자신/별 태그/핀이 아닌 곳을 누르면 닫는다
-  if (activeConstTip) {
-    const insideTip = evt.target.closest('.constTip');
-    const isStarTrigger = target && target.dataset.action === 'show-const-tip';
-    if (!insideTip && !isStarTrigger) hideConstTip();
-  }
-
   if (!target) return;
 
   const action = target.dataset.action;
@@ -1240,8 +1164,6 @@ document.addEventListener('click', evt => {
     case 'open-relic': openRelic(en); break;
     case 'open-champ': openChamp(en); break;
     case 'open-use-list': openUseList(useData); break;
-    case 'show-const-tip': showConstTip(target, en, starData); break;
-    case 'hide-const-tip': hideConstTip(); break;
     case 'select-const-star': selectConstStar(en, starData); break;
     case 'go-relic': goRelic(en); break;
     case 'go-champ': goChamp(en); break;
