@@ -239,15 +239,15 @@ button:hover { border-color: #64748b; }
 
 .tierGroups {
   display: grid; grid-template-columns: repeat(auto-fit, minmax(210px, 1fr));
-  gap: 10px; margin-bottom: 16px;
+  gap: 10px; margin-bottom: 16px; align-items: start;
 }
-.tierGroup { border: 1px solid #243044; background: #0f172a; border-radius: 14px; padding: 12px; }
+.tierGroup { border: 1px solid #243044; background: #0f172a; border-radius: 14px; padding: 12px; min-width: 0; overflow: hidden; }
 .tierGroup b { font-size: 15px; }
 .tierRegionGrid {
-  display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-top: 10px;
+  display: grid; grid-template-columns: repeat(auto-fit, minmax(140px, 1fr)); gap: 12px; margin-top: 10px;
 }
 .tierRegionGroup {
-  border: 1px solid #1e293b; border-radius: 12px; padding: 10px 12px;
+  border: 1px solid #1e293b; border-radius: 12px; padding: 10px 12px; min-width: 0;
   background: rgba(255,255,255,.012);
 }
 .tierRegionLabel {
